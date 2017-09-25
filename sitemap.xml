@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2017-09-25T09:12:32.959Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/board/index.html</loc>
+    
+    <lastmod>2017-09-25T09:12:30.365Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2017-09-25T09:12:17.017Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/09/25/hello-world/</loc>
     
     <lastmod>2017-09-25T08:35:10.034Z</lastmod>
@@ -9,23 +30,9 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/board/index.html</loc>
+    <loc>http://yoursite.com/about/index.html</loc>
     
-    <lastmod>2017-09-25T07:56:33.472Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
-    
-    <lastmod>2017-09-25T06:41:34.934Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
-    
-    <lastmod>2017-09-25T06:41:25.906Z</lastmod>
+    <lastmod>2017-09-25T06:41:45.865Z</lastmod>
     
   </url>
   
