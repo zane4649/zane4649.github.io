@@ -4,7 +4,14 @@
   <url>
     <loc>http://yoursite.com/2017/09/25/hello-world/</loc>
     
-    <lastmod>2017-09-25T07:03:40.414Z</lastmod>
+    <lastmod>2017-09-25T08:35:10.034Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/board/index.html</loc>
+    
+    <lastmod>2017-09-25T07:56:33.472Z</lastmod>
     
   </url>
   
@@ -26,6 +33,13 @@
     <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2017-09-25T06:41:25.906Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/09/25/ntp-server/</loc>
+    
+    <lastmod>2017-04-25T09:50:22.067Z</lastmod>
     
   </url>
   

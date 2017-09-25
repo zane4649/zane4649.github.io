@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Ntp Server," />
 
 
 
@@ -69,16 +69,18 @@
 
 
 
-<meta name="description" content="zane4649@gmail.com">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zane的个人站">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+<meta name="description" content="目的：解决实验环境中时间的一致性NTP是Network Time Protocol的简写，即网络时间协议。多个主机可以通过NTP同步系统时间。下面我们搭建一个NTP服务器，其他服务器都可以通过NTP服务器实现时间同步。首先需要确保服务器时区设置是否正确，使用timedatectl查看设置时区（Asia/Shanghai）.">
+<meta name="keywords" content="Ntp Server">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos7 搭建ntp时间服务器">
+<meta property="og:url" content="http://yoursite.com/2017/09/25/ntp-server/index.html">
 <meta property="og:site_name" content="Zane的个人站">
-<meta property="og:description" content="zane4649@gmail.com">
+<meta property="og:description" content="目的：解决实验环境中时间的一致性NTP是Network Time Protocol的简写，即网络时间协议。多个主机可以通过NTP同步系统时间。下面我们搭建一个NTP服务器，其他服务器都可以通过NTP服务器实现时间同步。首先需要确保服务器时区设置是否正确，使用timedatectl查看设置时区（Asia/Shanghai）.">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-04-25T09:50:22.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zane的个人站">
-<meta name="twitter:description" content="zane4649@gmail.com">
+<meta name="twitter:title" content="Centos7 搭建ntp时间服务器">
+<meta name="twitter:description" content="目的：解决实验环境中时间的一致性NTP是Network Time Protocol的简写，即网络时间协议。多个主机可以通过NTP同步系统时间。下面我们搭建一个NTP服务器，其他服务器都可以通过NTP服务器实现时间同步。首先需要确保服务器时区设置是否正确，使用timedatectl查看设置时区（Asia/Shanghai）.">
 
 
 
@@ -108,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/25/ntp-server/"/>
 
 
 
 
 
-  <title>归档 | Zane的个人站</title>
+  <title>Centos7 搭建ntp时间服务器 | Zane的个人站</title>
   
 
 
@@ -133,7 +135,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,111 +283,204 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 2 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/25/ntp-server/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zane">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zane的个人站">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/09/25/ntp-server/" itemprop="url">
-              
-                <span itemprop="name">Centos7 搭建ntp时间服务器</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Centos7 搭建ntp时间服务器</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-09-25T16:40:50+08:00"
-              content="2017-09-25" >
-          09-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T16:40:50+08:00">
+                2017-09-25
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/09/25/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-09-25T13:52:19+08:00"
-              content="2017-09-25" >
-          09-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <p>目的：解决实验环境中时间的一致性<br>NTP是Network Time Protocol的简写，即网络时间协议。多个主机可以通过NTP同步系统时间。<br>下面我们搭建一个NTP服务器，其他服务器都可以通过NTP服务器实现时间同步。<br>首先需要确保服务器时区设置是否正确，使用timedatectl查看设置时区（Asia/Shanghai）.</p>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作:"></a><strong>准备工作</strong>:</h2><pre><code>NTP服务器地址：    
+服务器：192.168.1.50
+客户端：192.168.1.51
+</code></pre><h2 id="RPM包检查："><a href="#RPM包检查：" class="headerlink" title="RPM包检查："></a><strong>RPM包检查</strong>：</h2><pre><code>[root@ntp server ~]# rpm -ql |grep ntp 
+没有安装就直接yum安装  
+[root@ntp server ~]# yum -y install ntp
+</code></pre><h2 id="开机启动ntp服务"><a href="#开机启动ntp服务" class="headerlink" title="开机启动ntp服务"></a><strong>开机启动ntp服务</strong></h2><pre><code>systemctl enable ntpd
+systemctl start  ntpd
+</code></pre><h2 id="获取免费时间服务器地址"><a href="#获取免费时间服务器地址" class="headerlink" title="获取免费时间服务器地址"></a><strong>获取免费时间服务器地址</strong></h2><pre><code>http://www.pool.ntp.org/zone/cn
+</code></pre><h2 id="配置时间服务器"><a href="#配置时间服务器" class="headerlink" title="配置时间服务器:"></a><strong>配置时间服务器:</strong></h2><pre><code>[root@ntp server ~]# vim /etc/ntp.conf     
+server 0.cn.pool.ntp.org
+server 1.cn.pool.ntp.org    
+server 2.cn.pool.ntp.org    
+server 3.cn.pool.ntp.org    
+fudge 127.127.0.1 stratum 3     ##设置自身为3级Ntp server
+NTPserver server 127.127.1.0 iburst  local clock  ##外部不可用时，使用本地时间    
+restrict 192.168.1.0 mask 255.255.255.0 nomodify  ## 设置客户端的限制，nomodify允许来自哪个段的IP来同步时间但不允许改ntp服务器参数
+</code></pre><h2 id="重启服务并防火墙放行"><a href="#重启服务并防火墙放行" class="headerlink" title="重启服务并防火墙放行"></a><strong>重启服务并防火墙放行</strong></h2><pre><code>systemctl restart ntpd
+firewall-cmd --permanent--add-port=123/udp 
+firewall-cmd --reload
+</code></pre><h2 id="检查-ntpq-p查看ntpd"><a href="#检查-ntpq-p查看ntpd" class="headerlink" title="检查 ntpq -p查看ntpd"></a><strong>检查 ntpq -p查看ntpd</strong></h2><h2 id="客户端测试"><a href="#客户端测试" class="headerlink" title="客户端测试  "></a><strong>客户端测试  </strong></h2><pre><code>[root@test ~]# ntpdate 192.168.1.50
+29 Mar 15:13:01 ntpdate[3895]: adjust time server 192.168.1.50 offset -0.019419 sec ##同步时间成功
+[root@test ~]# hwclock -w  ##重新写入硬件时钟
+</code></pre>
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ntp-Server/" rel="tag"># Ntp Server</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/25/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -393,6 +488,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
 
         </div>
         
@@ -413,8 +514,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -501,6 +611,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPM包检查："><span class="nav-number">2.</span> <span class="nav-text">RPM包检查：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机启动ntp服务"><span class="nav-number">3.</span> <span class="nav-text">开机启动ntp服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取免费时间服务器地址"><span class="nav-number">4.</span> <span class="nav-text">获取免费时间服务器地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置时间服务器"><span class="nav-number">5.</span> <span class="nav-text">配置时间服务器:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启服务并防火墙放行"><span class="nav-number">6.</span> <span class="nav-text">重启服务并防火墙放行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查-ntpq-p查看ntpd"><span class="nav-number">7.</span> <span class="nav-text">检查 ntpq -p查看ntpd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端测试"><span class="nav-number">8.</span> <span class="nav-text">客户端测试  </span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -673,6 +799,10 @@
   
     
 
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2143688"></script>
+      <!-- UY END -->
     
   
 

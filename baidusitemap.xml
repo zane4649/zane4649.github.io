@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://yoursite.com/2017/09/25/hello-world/</loc>
-    <lastmod>2017-09-25T07:03:40.414Z</lastmod>
+    <lastmod>2017-09-25T08:35:10.034Z</lastmod>
     <data>
         <display>
         <title>Hello World</title>
@@ -20,4 +20,25 @@
     
     
     
+    
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/25/ntp-server/</loc>
+    <lastmod>2017-04-25T09:50:22.067Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 搭建ntp时间服务器</title>
+        <pubTime>2017-09-25T08:40:50.803Z</pubTime>
+        
+        <tag>Ntp Server</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://yoursite.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
 </urlset>
