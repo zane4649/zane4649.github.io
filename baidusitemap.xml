@@ -3,6 +3,146 @@
 
 
     
+  <url>
+    <loc>http://yoursite.com/2017/09/26/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85mysql/</loc>
+    <lastmod>2017-09-26T03:29:26.637Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 编译安装MariaDB-10.1.22</title>
+        <pubTime>2017-09-26T03:21:41.441Z</pubTime>
+        
+        <tag>编译安装Mariadb-10.1</tag>
+         
+         
+           
+             
+              <breadCrumb title="Mysql" url="http://yoursite.com/categories/Mysql/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/haproxy/</loc>
+    <lastmod>2017-09-26T03:25:49.311Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 HAproxy实现反向代理和资源动静分离</title>
+        <pubTime>2017-09-26T03:21:39.129Z</pubTime>
+        
+        <tag>HAproxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="HAproxy" url="http://yoursite.com/categories/HAproxy/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/pacemaker+corosync/</loc>
+    <lastmod>2017-09-26T03:25:20.417Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 HA集群之Corosync+Pacemaker+NFS+Http+Ansible</title>
+        <pubTime>2017-09-26T03:21:34.078Z</pubTime>
+        
+        <tag>HA之Corosync+Pacemaker</tag>
+         
+         
+           
+             
+              <breadCrumb title="Cluster" url="http://yoursite.com/categories/Cluster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</loc>
+    <lastmod>2017-09-26T03:24:40.599Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7  Nginx利用“反向代理”实现“动静分离”</title>
+        <pubTime>2017-09-26T03:21:18.046Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="Nginx" url="http://yoursite.com/categories/Nginx/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2017-09-26T03:23:58.145Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 Mysql双主模型</title>
+        <pubTime>2017-09-26T03:21:13.704Z</pubTime>
+        
+        <tag>Mysql双主模型</tag>
+         
+         
+           
+             
+              <breadCrumb title="Mysql" url="http://yoursite.com/categories/Mysql/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/LVS+NAT/</loc>
+    <lastmod>2017-09-26T03:23:30.659Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 LB集群之LVS（一）</title>
+        <pubTime>2017-09-26T03:20:59.030Z</pubTime>
+        
+        <tag>Lvs+NAT</tag>
+         
+         
+           
+             
+              <breadCrumb title="Cluster" url="http://yoursite.com/categories/Cluster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/lamp+weordpress/</loc>
+    <lastmod>2017-09-26T03:18:32.366Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 LAMP黄金组合之wordpress</title>
+        <pubTime>2017-09-26T03:16:48.489Z</pubTime>
+        
+        <tag>LAMP+Wordpress</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://yoursite.com/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
     
     
@@ -21,6 +161,66 @@
     </url>
 
     
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/tomcat/</loc>
+    <lastmod>2017-04-25T10:07:55.772Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 Jdk+Tomcat的安装</title>
+        <pubTime>2017-09-26T03:17:02.929Z</pubTime>
+        
+        <tag>Tomcat</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tomcat" url="http://yoursite.com/categories/Tomcat/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/LVS+Keepalived/</loc>
+    <lastmod>2017-04-25T09:52:28.287Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 LVS集群+Keepalived（二）</title>
+        <pubTime>2017-09-26T03:21:06.304Z</pubTime>
+        
+        <tag>Lvs+Keepalived</tag>
+         
+         
+           
+             
+              <breadCrumb title="Cluster" url="http://yoursite.com/categories/Cluster/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/09/26/Mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</loc>
+    <lastmod>2017-04-25T09:51:14.801Z</lastmod>
+    <data>
+        <display>
+        <title>Centos7 Mysql主从同步</title>
+        <pubTime>2017-09-26T03:21:11.727Z</pubTime>
+        
+        <tag>Mysql主从同步</tag>
+         
+         
+           
+             
+              <breadCrumb title="Mysql" url="http://yoursite.com/categories/Mysql/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://yoursite.com/2017/09/25/ntp-server/</loc>
