@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/09/27/python%E7%AC%AC%E4%BA%94%E5%A4%A9/</loc>
+    <lastmod>2017-09-27T10:35:06.533Z</lastmod>
+    <data>
+        <display>
+        <title>Python学习之第五天</title>
+        <pubTime>2017-09-27T09:49:08.869Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/09/26/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85mysql/</loc>
-    <lastmod>2017-09-26T03:29:26.637Z</lastmod>
+    <lastmod>2017-09-27T06:25:44.876Z</lastmod>
     <data>
         <display>
         <title>Centos7 编译安装MariaDB-10.1.22</title>

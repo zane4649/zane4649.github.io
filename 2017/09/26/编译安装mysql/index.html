@@ -78,7 +78,7 @@
 <meta property="og:description" content="目的：使用源码包编译安装Mariadb">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://i.imgur.com/GKr7XTn.jpg">
-<meta property="og:updated_time" content="2017-09-26T03:29:26.637Z">
+<meta property="og:updated_time" content="2017-09-27T06:25:44.876Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos7 编译安装MariaDB-10.1.22">
 <meta name="twitter:description" content="目的：使用源码包编译安装Mariadb">
@@ -395,7 +395,7 @@
       
         <p><img src="http://i.imgur.com/GKr7XTn.jpg" alt=""></p>
 <p><strong>目的</strong>：使用源码包编译安装Mariadb <a id="more"></a></p>
-<h2 id="卸载系统安装的mariadb"><a href="#卸载系统安装的mariadb" class="headerlink" title="卸载系统安装的mariadb"></a>卸载系统安装的mariadb</h2><pre><code>[root@localhost /]# rpm -qa | grep mariadb
+<h2 id="卸载安装的mariadb"><a href="#卸载安装的mariadb" class="headerlink" title="卸载安装的mariadb"></a>卸载安装的mariadb</h2><pre><code>[root@localhost /]# rpm -qa | grep mariadb
 mariadb-libs-5.5.44-2.el7.centos.x86_64
 [root@localhost /]# rpm -e mariadb-libs-5.5.44-2.el7.centos.x86_64
 </code></pre><h2 id="创建用户和组"><a href="#创建用户和组" class="headerlink" title="创建用户和组"></a>创建用户和组</h2><pre><code>[root@localhost /]# groupadd  mysql
@@ -505,6 +505,10 @@ chown mysql.mysql /var/log/mariadb/ -R
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/09/27/python第五天/" rel="prev" title="Python学习之第五天">
+                Python学习之第五天 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -591,7 +595,7 @@ chown mysql.mysql /var/log/mariadb/ -R
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -602,7 +606,7 @@ chown mysql.mysql /var/log/mariadb/ -R
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -613,7 +617,7 @@ chown mysql.mysql /var/log/mariadb/ -R
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -670,7 +674,7 @@ chown mysql.mysql /var/log/mariadb/ -R
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载系统安装的mariadb"><span class="nav-number">1.</span> <span class="nav-text">卸载系统安装的mariadb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户和组"><span class="nav-number">2.</span> <span class="nav-text">创建用户和组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件目录"><span class="nav-number">3.</span> <span class="nav-text">创建文件目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装依赖包"><span class="nav-number">4.</span> <span class="nav-text">安装依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译准备"><span class="nav-number">5.</span> <span class="nav-text">编译准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始编译"><span class="nav-number">6.</span> <span class="nav-text">开始编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化数据库"><span class="nav-number">7.</span> <span class="nav-text">初始化数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建配置文件"><span class="nav-number">8.</span> <span class="nav-text">创建配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建服务脚本"><span class="nav-number">9.</span> <span class="nav-text">创建服务脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量"><span class="nav-number">10.</span> <span class="nav-text">设置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接Mysql"><span class="nav-number">11.</span> <span class="nav-text">连接Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">12.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载安装的mariadb"><span class="nav-number">1.</span> <span class="nav-text">卸载安装的mariadb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户和组"><span class="nav-number">2.</span> <span class="nav-text">创建用户和组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件目录"><span class="nav-number">3.</span> <span class="nav-text">创建文件目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装依赖包"><span class="nav-number">4.</span> <span class="nav-text">安装依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译准备"><span class="nav-number">5.</span> <span class="nav-text">编译准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始编译"><span class="nav-number">6.</span> <span class="nav-text">开始编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化数据库"><span class="nav-number">7.</span> <span class="nav-text">初始化数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建配置文件"><span class="nav-number">8.</span> <span class="nav-text">创建配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建服务脚本"><span class="nav-number">9.</span> <span class="nav-text">创建服务脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量"><span class="nav-number">10.</span> <span class="nav-text">设置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接Mysql"><span class="nav-number">11.</span> <span class="nav-text">连接Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">12.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
             
 
           </div>
