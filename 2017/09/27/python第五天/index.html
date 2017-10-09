@@ -78,7 +78,7 @@
 <meta property="og:description" content="最近这段时间，利用业余时间学习了一下Python,写篇博客算是记录一下相关的知识点，方便以后查询，也算做个小总结！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/RYTHJeH.jpg">
-<meta property="og:updated_time" content="2017-09-27T10:35:06.533Z">
+<meta property="og:updated_time" content="2017-09-27T10:42:25.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python学习之第五天">
 <meta name="twitter:description" content="最近这段时间，利用业余时间学习了一下Python,写篇博客算是记录一下相关的知识点，方便以后查询，也算做个小总结！">
@@ -401,11 +401,13 @@
 包：用来从逻辑上组织模块的，本质就是一个目录（必须要有一个__init__.py文件）
 </code></pre><h2 id="导入方法"><a href="#导入方法" class="headerlink" title="导入方法"></a><strong>导入方法</strong></h2><pre><code>import module_name
 import module1_name,module2_name
+
 #import module1_name 相当于把整个模块的代码复制给当前一个变量，然后调用
 
 from module_zane frome * #导入module_zane模块的所有，一般不建议这么用 
 from module_zane import m1,m2 #导入module_zane模块的方法
 from module_zane import name as new_name #从module_zane模块下导入一个模块（赋给另一个变量）
+
 #from 相当于只打开了module_name的一个方法
 </code></pre><h2 id="import本质"><a href="#import本质" class="headerlink" title="import本质"></a><strong>import本质</strong></h2><pre><code>导入&quot;模块&quot;的本质就是把python文件解释一遍
 导入&quot;包&quot;的本质就是执行该包下的__init__.py文件）
@@ -463,7 +465,7 @@ for i in range(4):
     tmp = random.randint(0,9)
 checkcode+=str(tmp)\
 print(checkcode)
-</code></pre><h2 id="OS模块"><a href="#OS模块" class="headerlink" title="OS模块"></a><strong>OS模块</strong></h2><pre><code>&quot;os&quot;模块是提供对操作系统进行调用的接口
+</code></pre><h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a><strong>os模块</strong></h2><pre><code>&quot;os&quot;模块是提供对操作系统进行调用的接口
 import os
 os.getcwd() #获取当前工作目录
 os.chdir(r&quot;C:\User&quot;) #切换目录
@@ -631,6 +633,10 @@ ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/10/09/windows安装rabbitmq/" rel="prev" title="windows下安装RabbitMQ">
+                windows下安装RabbitMQ <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -717,7 +723,7 @@ ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -728,7 +734,7 @@ ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -739,7 +745,7 @@ ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -796,7 +802,7 @@ ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入方法"><span class="nav-number">2.</span> <span class="nav-text">导入方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#import本质"><span class="nav-number">3.</span> <span class="nav-text">import本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time和datetime模块"><span class="nav-number">4.</span> <span class="nav-text">time和datetime模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#random模块"><span class="nav-number">5.</span> <span class="nav-text">random模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OS模块"><span class="nav-number">6.</span> <span class="nav-text">OS模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sys模块"><span class="nav-number">7.</span> <span class="nav-text">sys模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shutil模块"><span class="nav-number">8.</span> <span class="nav-text">shutil模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json序列化"><span class="nav-number">9.</span> <span class="nav-text">json序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json反序列化"><span class="nav-number">10.</span> <span class="nav-text">json反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#configparser模块"><span class="nav-number">11.</span> <span class="nav-text">configparser模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashlib模块"><span class="nav-number">12.</span> <span class="nav-text">hashlib模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hmac模块"><span class="nav-number">13.</span> <span class="nav-text">hmac模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re模块"><span class="nav-number">14.</span> <span class="nav-text">re模块</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入方法"><span class="nav-number">2.</span> <span class="nav-text">导入方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#import本质"><span class="nav-number">3.</span> <span class="nav-text">import本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#time和datetime模块"><span class="nav-number">4.</span> <span class="nav-text">time和datetime模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#random模块"><span class="nav-number">5.</span> <span class="nav-text">random模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#os模块"><span class="nav-number">6.</span> <span class="nav-text">os模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sys模块"><span class="nav-number">7.</span> <span class="nav-text">sys模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shutil模块"><span class="nav-number">8.</span> <span class="nav-text">shutil模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json序列化"><span class="nav-number">9.</span> <span class="nav-text">json序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json反序列化"><span class="nav-number">10.</span> <span class="nav-text">json反序列化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#configparser模块"><span class="nav-number">11.</span> <span class="nav-text">configparser模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashlib模块"><span class="nav-number">12.</span> <span class="nav-text">hashlib模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hmac模块"><span class="nav-number">13.</span> <span class="nav-text">hmac模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re模块"><span class="nav-number">14.</span> <span class="nav-text">re模块</span></a></li></ol></div>
             
 
           </div>
