@@ -1,0 +1,330 @@
+---
+title: Centos7 HA集群之Corosync+Pacemaker+NFS+Http+Ansible
+categories: Cluster
+tag: HA之Corosync+Pacemaker
+---
+Corosync是OpenAIS发展到Wilson版本后衍生出来的开放性集群引擎工程。可以说Corosync是OpenAIS工程的一部分。OpenAIS从openais0.90开始独立成两部分，一个是Corosync；另一个是AIS标准接口Wilson。Corosync包含OpenAIS的核心框架用来对Wilson的标准接口的使用、管理。它为商用的或开源性的集群提供集群执行框架。Corosync执行高可用应用程序的通信组系统，它有以下特征：
+（1）一个封闭的程序组（A closed process group communication model）通信模式<!--more-->，这个模式提供一种虚拟的同步方式来保证能够复制服务器的状态。
+（2）一个简单可用性管理组件（A simple availability manager），这个管理组件可以重新启动应用程序的进程当它失败后。
+（3）一个配置和内存数据的统计（A configuration and statistics in-memory database），内存数据能够被设置，回复，接受通知的更改信息。
+（4）一个定额的系统（A quorum  system）,定额完成或者丢失时通知应用程序。
+**总结**：Corosync是整合底层节点服务器，提供API个pacemaker的一个中间层
+
+Pacemaker，是一个群集资源管理器。它实现最大可用性群集服务（亦称资源管理）的节点和资源级故障检测和恢复使用您的首选集群基础设施（OpenAIS的或Heaerbeat）提供的消息和成员能力。
+它可以做乎任何规模的集群，并配备了一个强大的依赖模型，使管理员能够准确地表达群集资源之间的关系（包括顺序和位置）。几乎任何可以编写脚本，可以管理作为心脏起搏器集群的一部分。
+pacemaker支持超过16个节点的控制
+
+目的：利用Corosyn+Packemaker+NFS+Http实现Web高可用集群
+
+**工作原理图**
+（图片来源于网络）：
+![](http://i.imgur.com/SQ2c1OJ.png)
+
+
+**架构图：**
+
+![](http://i.imgur.com/sNG4kIJ.jpg)
+
+
+
+准备四台机器和一个虚拟IP：
+	
+	虚拟IP:192.168.1.60		
+	node1:192.168.1.51  node1.com
+	node2:192.168.1.52  node2.com
+	nfs  :192.168.1.53
+	ansible:192.168.1.54
+
+
+## **集群准备工作**
+   两节点要时间同步，ssh访问互信，hosts名称解析一致,关闭selinux
+
+    1.修改Hosts	
+	[root@node1 ~]# vim /etc/hosts
+	192.168.1.51 node1.com node1
+	192.168.1.52 node2.com node2
+ 	[root@node1 ~]# uname -n 
+	  	 node1.com
+   	其他节点和上面配置一样
+ 
+	2.配置ansible主机
+	[root@ansible ~]# yum -y install ansible （需要配置eple源）
+	[root@ansible ~]# cp hosts{,.bak} ##复制一份备用
+	[root@ansible ~]# vim /etc/ansible/hosts	  
+	[haservers]   ##定义一个ansible集群组
+	192.168.1.51
+	192.168.1.52
+
+	3.建立ssh公钥认证
+    [root@ansible ~]# ssh-keygent -t rsa -P''  ##生成公钥（一路回车就行了）
+    [root@ansible ~]# ssh-copy-id -i .ssh/id_rsa.pub root@192.168.1.51 ##复制公钥到node1.com
+    [root@ansible ~]# ssh-copy-id -i .ssh/id_rsa.pub root@192.168.1.52   ##复制到node2.com
+   
+	4.测试一下：
+    [root@ansible ~]# ssh node1
+    The authenticity of host 'node1 (192.168.1.51)' can't be established.
+    ECDSA key fingerprint is 85:a3:4b:1d:ab:2f:41:30:df:70:39:76:f4:08:be:02.
+    Are you sure you want to continue connecting (yes/no)? yes
+    Warning: Permanently added 'node1' (ECDSA) to the list of known hosts.
+    Last login: Tue Feb 28 22:07:37 2017
+	[root@node1 ~]#       ##没有输密码表示成功
+
+    node2节点也试一下
+    [root@ansible ~]# ansible all -m ping  ##使用ansible测试一下   
+    192.168.1.51 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+     }
+     192.168.1.52 | SUCCESS => {
+     "changed": false, 
+     "ping": "pong"
+      }
+  
+同步时间：
+     
+      [root@ansible ~]# ansible all -m yum -a "name=ntpdate state=present" ##各节点都装上时间服务器
+      [root@ansible ~]# ansible all -m shell -a "ntpdate cn.pool.ntp.org" ##向国家时间服务器同步
+
+## **安装corosync,pacemaker,crmsh ** 
+
+	   1.首先安装corosync和pacemaker
+       由于corosync是pacemake的依赖包，所有安装完pacemaker后corosync自动被安装上  
+       使用ansible安装:
+       [root@ansible ~]# ansible all -m yum -a "name=pacemaker state=present"
+
+       在2个node节点确认：
+       [root@node1~]# rpm -qa pacemaker
+        pacemaker-1.1.13-10.el7.x86_64
+       [root@node1~]# rpm -qa corosync
+        corosync-2.3.4-7.el7.x86_64
+
+	   2.安装crmsh
+	   crmsh在yum仓库和epel源都没有需要去另外下载,下载后拷贝到ansible主机/crmsh
+  	   http://download.opensuse.org/repositories/network:/ha-clustering:/Stable/CentOS_CentOS-7/noarch/ 
+  	   [root@ansible ~]#ls /crmsh
+  	   asciidoc-8.6.9-32.2.noarch.rpm           crmsh-scripts-3.0.0-1.2.noarch.rpm
+   	   asciidoc-examples-8.6.9-32.2.noarch.rpm  crmsh-test-3.0.0-1.2.noarch.rpm
+  	   crmsh-3.0.0-1.2.noarch.rpm               python-parallax-1.0.1-28.2.noarch.rpm
+       [root@ansible ~]# ansible all -m shell -a 'mkdir /root/crmsh'
+       [root@ansible ~]# ansible all -m copy -a "src=/root/crmsh/ dest=/root/crmsh/"
+       [root@ansible ~]# ansible all -m shell -a 'yum -y install /root/crmsh/*.rpm'
+   
+   	   两个节点确认一下:
+       [root@node1 ~]#crm
+       crm(live)#     ##表示crmsh安装成功
+
+## **配置corosync和pacemaker并启动服务**
+
+	 corosync配置文件修改，ansible主机上修改并部署
+     [root@ansible ~]# yum -y install pacemaker
+     [root@ansible ~]# cd /etc/corosync
+     [root@ansible ~]# cp corosync.conf.example corosync.conf
+     [root@ansible ~]# vim corosync.conf
+ 	 # Please read the corosync.conf.5 manual page
+ 	 totem {   ##集群信息   
+        version: 2   ##版本
+        crypto_cipher: aes128   ##对称节点采用aes128加密方式，单项采用sha1加密
+        crypto_hash: sha1
+
+        interface {
+                ringnumber: 0 ##心跳信息传递的环号码，如果有多个接口传递心跳信息，则定义多个，每个环号不同
+                bindnetaddr: 192.168.1.0 ##心跳信息接口的网络地址
+                mcastaddr: 239.255.1.1   ##心跳信息传递时使用的组播地址
+                mcastport: 5405  ##组播端口
+                ttl: 1  ##防止心跳信息环路，限定心跳信息传递的ttl值，一般是集群节点个数减去1
+        	}
+ 	 }
+
+ 	 logging { ##定义日志记录方式
+        fileline: off
+        to_stderr: no
+        to_logfile: yes  ##是否记录日志
+        logfile: /var/log/cluster/corosync.log  ##日志文件位置
+        to_syslog: no  ##是否记录到系统日志
+        debug: off   ##关闭调试模式
+        timestamp: on  ##时间戳标签
+
+        logger_subsys {  ##记录投票子系统的日志信息
+                subsys: QUORUM
+                debug: off
+        }
+    }
+
+  	quorum {
+ 	 	      provider: corosync_votequorum  ##投票系统使用corosync自带
+ 	 }
+
+ 	 nodelist {  ##自定义的节点
+
+        node {
+                ring0_addr:node1.com  ##环0上的地址，如果此前定义了多个接口用于传递心跳信息，
+					则次处定义多个环上的不同地址，如ring1_addr:....
+                nodeid:1
+         }
+
+        node {
+                ring0_addr:node2.com
+                nodeid:2
+        }
+
+	}
+
+创建认证文件
+ 
+	[root@ansible ~]# corosync-keygen -l  ##由于corosync配置文件中定义了通信采用的加密方式进行，因此要生成秘钥文件
+    使用ansible将配置文件及认证文件全部拷贝至节点服务器，注意authkey的权限（400或600）
+	[root@ansible ~]# ansible all -m copy -a "src=/etc/corosync/authkey mode=400 dest =/etc/corosync/authkey"##复制认证文件到各节点    
+	[root@ansible ~]# ansible all -m copy -a "src=/etc/corosync/corosync.confdest=/etc/corosync/corosync.conf"##复制corosync配置文件到各节点 
+进入节点主机进行验证:
+
+	[root@node1~]# ll /etc/corosync/
+	total 20
+	-r--------. 1 root root  128 Feb 23 02:47 authkey
+	-rw-r--r--. 1 root root 2999 Feb 27 22:32 corosync.conf
+	-rw-r--r--. 1 root root 2881 Nov 20  2015 corosync.conf.example
+	-rw-r--r--. 1 root root  767 Nov 20  2015 corosync.conf.example.udpu
+	-rw-r--r--. 1 root root 3278 Nov 20  2015 corosync.xml.example
+	drwxr-xr-x. 2 root root    6 Nov 20  2015 uidgid.d
+
+开启corosync和pacemaker服务：
+
+	[root@ansible ~]# ansible all -m service -a "name=corosync state=started"   ##启动各节点的corosync服务
+	[root@ansible ~]# ansible all -m service -a "name=pacemaker state=started"  ##启动各节点的pacemaker服务
+
+各节点查看服务状态：
+
+       [root@node1~]# crm status
+        Last updated: Tue Feb 28 23:32:05 2017		
+        Last change: Tue Feb 28 22:03:05 2017 by root via cibadmin on node1.com
+        Stack: corosync
+	    Current DC: node1.com (version 1.1.13-10.el7-44eb2dd) - partition with quorum
+        2 nodes and 3 resources configured
+
+        Online: [ node1.com node2.com ]    ##node1和node同时在线表示成功
+
+## **配置NFS服务**
+
+安装配置nfs服务
+   
+       [root@nfs server ~]# yum -y install nfs-utils  ##安装nfs
+       [root@nfs server ~]# systemctl enable nfs.service  ##开机启动nfs
+       [root@nfs server ~]# systemctl start  nfs.service  ##启动nfs
+       [root@nfs server ~]# firewall-cmd --permanent --add-service=nfs ##防火墙放行nfs
+       [root@nfs server ~]# firewall-cmd --permanent --add-service=rpc-bind
+       [root@nfs server ~]# firewall-cmd --permanent --add-service=mountd
+       [root@nfs server ~]# firewall-cmd --reload
+       [root@nfs server ~]# mkdir /web/storage -pv
+       [root@nfs server ~]# vim /etc/exportfs
+    		/web/storage 192.168.1.0/24(rw)
+       [root@nfs server ~]#exportfs -rv      ##(-r表示重读配置，-v显示共享情况)
+       [root@nfs server ~]# systemctl restart nfs.service
+ 
+**使用ansible挂载nfs**
+
+       [root@ansible ~]# ansible all -m yum -a "name=nfs-utils state=present"
+       [root@ansible ~]# ansible all -m shell -a 'mount -t nfs 192.168.1.53:/web/storage /var/www/html'
+   	    到node节点上查看是否挂载
+       [root@node1 ~]# df -h 
+       Filesystem                 Size  Used Avail Use% Mounted on
+       192.168.1.53:/web/storage   10G  4.1G  6.0G  41% /var/www/html
+   
+       ansible卸载nfs（这里先卸载，因为后面集群会自动挂载）
+       [root@ansible ~]# ansible all -m shell -a 'umount /var/www/html’
+  
+
+## **crmsh配置集群**
+
+   	[root@node1~]# crm(live)cd configure
+	
+    crm(live)configure# property no-quorum-policy=stop   ##关闭法定票数不足   	
+	  
+	crm(live)configure# property stonith-enabled=false  ##由于没有stonith设备，所以先将stonith关闭	
+  
+	crm(live)configure# rsc_defaults resource-stickiness=100 ##设定资源粘性值为100	  		 
+ 
+	crm(live)configure#primitive webip ocf:heartbeat:IPaddr params ip=192.168.1.60 ##定义虚拟IP               
+		定义完虚拟IP可以验证一下，看各节点是否都配置成功  
+
+	[root@node1~]# ip addr	        
+		  2: eno16777736: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    		     link/ether 00:0c:29:9b:93:76 brd ff:ff:ff:ff:ff:ff
+		     inet 192.168.1.51/24 brd 192.168.1.255 scope global eno16777736
+	             valid_lft forever preferred_lft forever
+                     inet 192.168.1.60/24 brd 192.168.1.255 scope global secondary eno16777736
+                     valid_lft forever preferred_lft forever
+                     inet6 fe80::20c:29ff:fe9b:9376/64 scope link 
+                     valid_lft forever preferred_lft forever
+
+	 crm(live)configure# primitive webserver systemd:httpd op start timeout=100 
+	 op stop timeout=100 op monitor interval=60 timeout=100   ##定义使用的服务
+
+     crm(live)configure# primitive webstore ocf:heartbeat:Filesystem params directory="/var/www/html" 
+	 fstype=nfs op start timeout=60s op stop timeout=60s op monitor interval=60 timeout=100       ##定义使用的存储设备
+		  
+     crm(live)configure# group   webservice  webip webstore webserver ##定义集群组，要按照资源顺序来
+
+	 crm(live)configure# verify  ##校验
+		  
+	 crm(live)configure# commit  ##提交配置确认并生效
+		  
+	配置完成后查看是这样，表示成功
+	  crm(live)# status
+		   Last updated: Wed Mar  1 01:27:39 2017		
+		   Last change: Tue Feb 28 22:03:05 2017 by root via cibadmin on node1.com
+		   Stack: corosync
+ 		   Current DC: node1.com (version 1.1.13-10.el7-44eb2dd) - partition with quorum
+		   2 nodes and 3 resources configured
+
+		Online: [ node1.com node2.com ]
+
+		Full list of resources:
+
+ 		Resource Group: webservice
+   	  	webip		(ocf::heartbeat:IPaddr):	Started node1.com
+     	 	webstore	(ocf::heartbeat:Filesystem):	Started node1.com
+     	 	webserver	(systemd:httpd):	Started node1.com
+
+ 	可以用下面几种资源约束的方法： 	
+	
+	crm(live)configure# location webstore_perfer webstore inf: node1.com ##使用location定义webstore对节点1的倾向性为正无穷
+		        
+	crm(live)configure# colocation webserver_with_webip inf:webserver webip ##定义两个资源的粘性，必须在一起
+            	
+	crm(live)configure# order webip_bef_webstore_bef_webserver mandatory: webip webstore webse    ##强制资源启动顺序	
+
+	crm(live)resource# migrate webip node1.com  ##使用migrate进行资源转移
+
+## **开始测试集群：**
+
+	 [root@node1~]# echo The page is NFS Server >> /var/www/html/index.html
+     [root@node1~]# curl http://192.168.1.60
+		 The page is NFS Server     
+	 [root@node1~]# crm node standby ##停用当前节点
+     [root@node1~]# crm status
+		Node node1.com: standby
+		Online: [ node2.com ]
+		Full list of resources:
+		Resource Group: webservice
+     		webip	 	(ocf::heartbeat:IPaddr):	Started node2.com
+     		webstore	(ocf::heartbeat:Filesystem):	Started node2.com
+     		webserver	(systemd:httpd):	Started node2.com
+           此时节点已经转移到了node2
+
+  OK，到此结束，全部成功了     
+	
+
+## ** 遇到的问题：**
+
+	  1、 2个节点双方都显示自己这一方在线，另一方不在线
+	      解决方法：彻底关闭selinux
+
+      2、[root@node1 ~]#crm status
+         ERROR: status: crm_mon (rc=107): Connection to cluster failed: Transport endpoint is not connected
+	     解决方法：systemctl start packemaker.service  ##ok!
+
+
+         
+
+
+
+
