@@ -173,28 +173,6 @@
   </entry>
   
   <entry>
-    <title>Centos7 Mysql双主模型</title>
-    <link href="http://yoursite.com/2018/03/27/mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://yoursite.com/2018/03/27/mysql双主模型/</id>
-    <published>2018-03-27T05:22:38.517Z</published>
-    <updated>2017-09-26T03:23:58.145Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>Mysql</strong>双主模型可以在一定程度上保证主库的高可用,在一台主库down掉之后,可以在极短的时间内切换到另一台主库上（尽可能减少主库宕机对业务造成的影响），减少了主从同步给线上主库带来的压力；<a id="more"></a></p><p><strong>目的：利用双主模型来提高系统的可用性</strong></p><p><strong>模型图</strong><br>（来源于网络）：<br><img src="http://i.imgur.com/UCkH4Eo.jpg" alt=""></p><p><strong>准备工作</strong><br>1、为了不影响实验结果，建议关闭Selinux和Iptables<br>2、两台服务器时间要同步<br>3、两台服务器都要启动中继日志，二进制日志<br>4、主服务器1: 192.168.1.60<br>      主服务器2：192.168.1.61</p><h2 id="安装Mariadb"><a href="#安装Mariadb" class="headerlink" title="安装Mariadb"></a><strong>安装Mariadb</strong></h2><p>[root@mysql-masster1 /]# yum -y install mariadb-server mariadb<br>第二台服务器一样直接安装</p><h2 id="修改主配置文件"><a href="#修改主配置文件" class="headerlink" title=" 修改主配置文件"></a><strong> 修改主配置文件</strong></h2><pre><code>Master1配置：[root@mysql-masster1 /]# vim /etc/my.cnf[mysqld]server_id=1       ##设定全局唯一的server_idlog_bin=master-log      ##启用二进制日志，指明二进制日志的存放路径及名称relay_log=relay-log    ##启用中继日志，指明中继日志的存放路径及名称    auto_increment_offset=1    ##避免自增长字段的冲突值，设置本机的自增长字段从1开始，每次增长2auto_increment_increment=2    skip-name-resolve=ON     ##禁止名称解析innodb-file-per-table=ON   ##innodb存储引擎每表一个表空间Master2配置：[root@mysql-masster2 /]# vim /etc/my.cnf[mysqld]server_id=2    ##设定全局唯一的server_idlog-bin=master-log  ##启用二进制日志，指明二进制日志的存放路径及名称    relay-log=relay-log  ##启用中继日志，指明中继日志的存放路径及名称auto_increment_offset=2  ##避免自增长字段的冲突值，设置本机的自增长字段从1开始，每次增长2auto_increment_increment=2skip-name-resolve=ON     ##禁止名称解析innodb-file-per-table=ON  ##innodb存储引擎每表一个表空间**Master1和Master2配置完成后，重新启动mariadb服务**</code></pre><h2 id="登录MySQL用户授权"><a href="#登录MySQL用户授权" class="headerlink" title="登录MySQL用户授权"></a><strong>登录MySQL用户授权</strong></h2><pre><code>Master1配置：[root@mysql-masster1 /]#mysql -uroot -p MariaDB [mysql]&gt; grant replication client,replication slave on *.* to &apos;repluser&apos;@&apos;192.168.1.61&apos; identified by &apos;redhat&apos;;  MariaDB [mysql]&gt; flush privileges;MariaDB [mysql]&gt; show master logs;  ##查看二进制日志列表和当前正在使用的二进制日志的文件位置MariaDB [mysql]&gt; show master status; +-------------------+----------+--------------+------------------+ | File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | +-------------------+----------+--------------+------------------+ | master-log.000001 |   245|   |              |                  |  +-------------------+----------+--------------+------------------+    MariaDB [mysql]&gt; ls /var/lib/mysql/ 查询二进制文件是否存在Master2配置：[root@mysql-masster2 /]#mysql -uroot -p MariaDB [mysql]&gt; grant replication client,replication slave on *.* to &apos;repluser&apos;@&apos;192.168.1.60&apos; identified by &apos;redhat&apos;;MariaDB [mysql]&gt; flush privileges;MariaDB [mysql]&gt; show master logs;MariaDB [mysql]&gt; show master status;+-------------------+----------+--------------+------------------+| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB |+-------------------+----------+--------------+------------------+| master-log.000003 |     2109 |              |                  |+-------------------+----------+--------------+------------------+MariaDB [mysql]&gt; ls /var/lib/mysql/</code></pre><h2 id="定义2个节点"><a href="#定义2个节点" class="headerlink" title="定义2个节点"></a><strong>定义2个节点</strong></h2><pre><code> 在两个节点上定义复制时的属性，启动复制线程  Master1的配置：      MariaDB [mysql]&gt; change master to                                  master_host=&apos;192.168.1.61&apos;,    ##指定的Master主机                 master_user=&apos;repluser&apos;,            ##以哪个用户的身份练上去             master_password=&apos;redhat&apos;,       ##连接用户的密码             master_log_file=&apos;master-log.000003&apos;,      ##主节点的二进制日志文件             master_log_pos=2109;    ##主节点的二进制日志所在位置Master2的配置：change master to master_host=&apos;192.168.1.60&apos;,master_user=&apos;repluser&apos;,master_password=&apos;redhat&apos;,master_log_file=&apos;master-log.000001&apos;,master_log_pos=245;</code></pre><h2 id="启动复制线程"><a href="#启动复制线程" class="headerlink" title="启动复制线程    "></a><strong>启动复制线程    </strong></h2><pre><code>[root@mysql-masster2 /]#mysql -uroot -p MariaDB [mysql]&gt;start slave; ##启动复制线程MariaDB [mysql]&gt;show salve status;             Slave_IO_Running:YES  ##IO线程和SQL线程Slave_SQL_Running:YES两个线程都是YES，表明成功了，如果IO线程状态是Connecting 请退出MySQL，这个地方稍微有点延迟,重新启动一下mariadb服务，再连进去查看线程状态</code></pre><h2 id="双主服务器互相验证"><a href="#双主服务器互相验证" class="headerlink" title="双主服务器互相验证"></a><strong>双主服务器互相验证</strong></h2><p>在Master1上创建一个testdb库，看Master2能否看见。<br>Master2在testdb库中创建t1表，Master1能看见表明成功<br>Master1在t1插入数据，Master能看见表示成功</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;Mysql&lt;/strong&gt;双主模型可以在一定程度上保证主库的高可用,在一台主库down掉之后,可以在极短的时间内切换到另一台主库上（尽可能减少主库宕机对业务造成的影响），减少了主从同步给线上主库带来的压力；
-    
-    </summary>
-    
-      <category term="Mysql" scheme="http://yoursite.com/categories/Mysql/"/>
-    
-    
-      <category term="Mysql双主模型" scheme="http://yoursite.com/tags/Mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Centos7 LB集群之LVS（一）</title>
     <link href="http://yoursite.com/2018/03/27/LVS+NAT/"/>
     <id>http://yoursite.com/2018/03/27/LVS+NAT/</id>
@@ -213,6 +191,28 @@
     
     
       <category term="Lvs+NAT" scheme="http://yoursite.com/tags/Lvs-NAT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Centos7 Mysql双主模型</title>
+    <link href="http://yoursite.com/2018/03/27/mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://yoursite.com/2018/03/27/mysql双主模型/</id>
+    <published>2018-03-27T05:22:38.517Z</published>
+    <updated>2017-09-26T03:23:58.145Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Mysql</strong>双主模型可以在一定程度上保证主库的高可用,在一台主库down掉之后,可以在极短的时间内切换到另一台主库上（尽可能减少主库宕机对业务造成的影响），减少了主从同步给线上主库带来的压力；<a id="more"></a></p><p><strong>目的：利用双主模型来提高系统的可用性</strong></p><p><strong>模型图</strong><br>（来源于网络）：<br><img src="http://i.imgur.com/UCkH4Eo.jpg" alt=""></p><p><strong>准备工作</strong><br>1、为了不影响实验结果，建议关闭Selinux和Iptables<br>2、两台服务器时间要同步<br>3、两台服务器都要启动中继日志，二进制日志<br>4、主服务器1: 192.168.1.60<br>      主服务器2：192.168.1.61</p><h2 id="安装Mariadb"><a href="#安装Mariadb" class="headerlink" title="安装Mariadb"></a><strong>安装Mariadb</strong></h2><p>[root@mysql-masster1 /]# yum -y install mariadb-server mariadb<br>第二台服务器一样直接安装</p><h2 id="修改主配置文件"><a href="#修改主配置文件" class="headerlink" title=" 修改主配置文件"></a><strong> 修改主配置文件</strong></h2><pre><code>Master1配置：[root@mysql-masster1 /]# vim /etc/my.cnf[mysqld]server_id=1       ##设定全局唯一的server_idlog_bin=master-log      ##启用二进制日志，指明二进制日志的存放路径及名称relay_log=relay-log    ##启用中继日志，指明中继日志的存放路径及名称    auto_increment_offset=1    ##避免自增长字段的冲突值，设置本机的自增长字段从1开始，每次增长2auto_increment_increment=2    skip-name-resolve=ON     ##禁止名称解析innodb-file-per-table=ON   ##innodb存储引擎每表一个表空间Master2配置：[root@mysql-masster2 /]# vim /etc/my.cnf[mysqld]server_id=2    ##设定全局唯一的server_idlog-bin=master-log  ##启用二进制日志，指明二进制日志的存放路径及名称    relay-log=relay-log  ##启用中继日志，指明中继日志的存放路径及名称auto_increment_offset=2  ##避免自增长字段的冲突值，设置本机的自增长字段从1开始，每次增长2auto_increment_increment=2skip-name-resolve=ON     ##禁止名称解析innodb-file-per-table=ON  ##innodb存储引擎每表一个表空间**Master1和Master2配置完成后，重新启动mariadb服务**</code></pre><h2 id="登录MySQL用户授权"><a href="#登录MySQL用户授权" class="headerlink" title="登录MySQL用户授权"></a><strong>登录MySQL用户授权</strong></h2><pre><code>Master1配置：[root@mysql-masster1 /]#mysql -uroot -p MariaDB [mysql]&gt; grant replication client,replication slave on *.* to &apos;repluser&apos;@&apos;192.168.1.61&apos; identified by &apos;redhat&apos;;  MariaDB [mysql]&gt; flush privileges;MariaDB [mysql]&gt; show master logs;  ##查看二进制日志列表和当前正在使用的二进制日志的文件位置MariaDB [mysql]&gt; show master status; +-------------------+----------+--------------+------------------+ | File              | Position | Binlog_Do_DB | Binlog_Ignore_DB | +-------------------+----------+--------------+------------------+ | master-log.000001 |   245|   |              |                  |  +-------------------+----------+--------------+------------------+    MariaDB [mysql]&gt; ls /var/lib/mysql/ 查询二进制文件是否存在Master2配置：[root@mysql-masster2 /]#mysql -uroot -p MariaDB [mysql]&gt; grant replication client,replication slave on *.* to &apos;repluser&apos;@&apos;192.168.1.60&apos; identified by &apos;redhat&apos;;MariaDB [mysql]&gt; flush privileges;MariaDB [mysql]&gt; show master logs;MariaDB [mysql]&gt; show master status;+-------------------+----------+--------------+------------------+| File              | Position | Binlog_Do_DB | Binlog_Ignore_DB |+-------------------+----------+--------------+------------------+| master-log.000003 |     2109 |              |                  |+-------------------+----------+--------------+------------------+MariaDB [mysql]&gt; ls /var/lib/mysql/</code></pre><h2 id="定义2个节点"><a href="#定义2个节点" class="headerlink" title="定义2个节点"></a><strong>定义2个节点</strong></h2><pre><code> 在两个节点上定义复制时的属性，启动复制线程  Master1的配置：      MariaDB [mysql]&gt; change master to                                  master_host=&apos;192.168.1.61&apos;,    ##指定的Master主机                 master_user=&apos;repluser&apos;,            ##以哪个用户的身份练上去             master_password=&apos;redhat&apos;,       ##连接用户的密码             master_log_file=&apos;master-log.000003&apos;,      ##主节点的二进制日志文件             master_log_pos=2109;    ##主节点的二进制日志所在位置Master2的配置：change master to master_host=&apos;192.168.1.60&apos;,master_user=&apos;repluser&apos;,master_password=&apos;redhat&apos;,master_log_file=&apos;master-log.000001&apos;,master_log_pos=245;</code></pre><h2 id="启动复制线程"><a href="#启动复制线程" class="headerlink" title="启动复制线程    "></a><strong>启动复制线程    </strong></h2><pre><code>[root@mysql-masster2 /]#mysql -uroot -p MariaDB [mysql]&gt;start slave; ##启动复制线程MariaDB [mysql]&gt;show salve status;             Slave_IO_Running:YES  ##IO线程和SQL线程Slave_SQL_Running:YES两个线程都是YES，表明成功了，如果IO线程状态是Connecting 请退出MySQL，这个地方稍微有点延迟,重新启动一下mariadb服务，再连进去查看线程状态</code></pre><h2 id="双主服务器互相验证"><a href="#双主服务器互相验证" class="headerlink" title="双主服务器互相验证"></a><strong>双主服务器互相验证</strong></h2><p>在Master1上创建一个testdb库，看Master2能否看见。<br>Master2在testdb库中创建t1表，Master1能看见表明成功<br>Master1在t1插入数据，Master能看见表示成功</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;Mysql&lt;/strong&gt;双主模型可以在一定程度上保证主库的高可用,在一台主库down掉之后,可以在极短的时间内切换到另一台主库上（尽可能减少主库宕机对业务造成的影响），减少了主从同步给线上主库带来的压力；
+    
+    </summary>
+    
+      <category term="Mysql" scheme="http://yoursite.com/categories/Mysql/"/>
+    
+    
+      <category term="Mysql双主模型" scheme="http://yoursite.com/tags/Mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/"/>
     
   </entry>
   
