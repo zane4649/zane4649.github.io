@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://yoursite.com/2018/03/29/2018%E9%9A%8F%E6%89%8B%E4%B8%80%E8%AE%B0/</loc>
-    <lastmod>2018-03-29T13:26:04.801Z</lastmod>
+    <lastmod>2018-03-30T11:33:18.534Z</lastmod>
     <data>
         <display>
         <title>2018年随手一记</title>
@@ -15,6 +15,24 @@
            
              
               <breadCrumb title="日常生活" url="http://yoursite.com/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/30/next%E4%BF%AE%E6%94%B9%E6%98%BE%E7%A4%BA%E5%AE%BD%E5%BA%A6/</loc>
+    <lastmod>2018-03-30T11:31:17.188Z</lastmod>
+    <data>
+        <display>
+        <title>Next主题 Pisces Scheme更改内容区域的宽度</title>
+        <pubTime>2018-03-30T11:31:17.127Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://yoursite.com/categories/Hexo/"/>
           
         </display>
     </data>
