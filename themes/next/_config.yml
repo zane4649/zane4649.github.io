@@ -19,7 +19,7 @@ keywords: "Hexo, NexT"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: false
 
 # Specify the date when the site was setup
 #since: 2017
@@ -59,7 +59,6 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  archives: /archives/ || archive
   categories: /categories/ || th
   tags: /tags/ || tags
   board: /board
@@ -126,13 +125,14 @@ links_title: 友情链接
 #links_layout: block
 #links_layout: inline
 links: 
-  leeyom: http://leeyom.top/
+  Leeyom: http://leeyom.top/
   SimonSong: http://www.vpsdu.com/
+  Axu: http://www.axugege.com/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: /images/avatar.png
+avatar: /images/avatar.PNG
 
 # Table Of Contents in the Sidebar
 toc:
@@ -719,3 +719,7 @@ images: images
 
 # Theme version
 version: 5.1.2
+
+passage_end_tag:
+    enabled: true
+
