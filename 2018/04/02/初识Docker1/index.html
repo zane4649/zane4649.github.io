@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Docker," />
 
 
 
@@ -69,17 +69,20 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="&amp;emsp;&amp;emsp;Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。Docker分为CE和EE。CE即社区版，免费开源。EE即企业版，安全性更高，需要付费使用。">
+<meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/03/27/hello-world/index.html">
+<meta property="og:title" content="初识Docker 一">
+<meta property="og:url" content="http://yoursite.com/2018/04/02/初识Docker1/index.html">
 <meta property="og:site_name" content="Wenbing&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。Docker分为CE和EE。CE即社区版，免费开源。EE即企业版，安全性更高，需要付费使用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-25T08:35:10.034Z">
+<meta property="og:image" content="https://i.imgur.com/c8nnEdw.jpg">
+<meta property="og:updated_time" content="2018-04-02T11:20:10.242Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="初识Docker 一">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。Docker分为CE和EE。CE即社区版，免费开源。EE即企业版，安全性更高，需要付费使用。">
+<meta name="twitter:image" content="https://i.imgur.com/c8nnEdw.jpg">
 
 
 
@@ -109,13 +112,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/27/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/02/初识Docker1/"/>
 
 
 
 
 
-  <title>Hello World | Wenbing's Blog</title>
+  <title>初识Docker 一 | Wenbing's Blog</title>
   
 
 
@@ -286,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/初识Docker1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wenbing">
@@ -303,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">初识Docker 一</h1>
         
 
         <div class="post-meta">
@@ -315,8 +318,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T13:22:38+08:00">
-                2018-03-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T17:51:06+08:00">
+                2018-04-02
               </time>
             
 
@@ -325,6 +328,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -358,16 +383,21 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <p><img src="https://i.imgur.com/c8nnEdw.jpg" alt=""></p>
+<p>&emsp;&emsp;Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。Docker分为CE和EE。CE即社区版，免费开源。EE即企业版，安全性更高，需要付费使用。<a id="more"></a></p>
+<h2 id="Docker-三个基本概念"><a href="#Docker-三个基本概念" class="headerlink" title="Docker 三个基本概念"></a><strong>Docker 三个基本概念</strong></h2><p>·镜像（Images）<br>·容器（Container）<br>·仓库（Registry）</p>
+<h2 id="Docker镜像"><a href="#Docker镜像" class="headerlink" title="Docker镜像"></a><strong>Docker镜像</strong></h2><p>&emsp;&emsp;就是一个层叠的只读文件系统，底端是一个引导文件系统，当容器启动之后引导文件系统就会被卸载，上一层是只读的root文件系统，或者更上一层还有其他文件系统，Docker“联合加载”会将这种叠加在一起的文件系统整合在一起，而这种整合在一起的文件系统，就是Docker镜像。它主要提供一些容器运行时需要的程序，库，资源，配置(环境变量，用户)。镜像不会包含任何动态内容，内容结构也不会被改变。</p>
+<h2 id="Docker容器"><a href="#Docker容器" class="headerlink" title="Docker容器"></a><strong>Docker容器</strong></h2><p>&emsp;&emsp;容器就实质是一个进程，当启动一个容器时，Docker会在镜像最顶层加载一个“读写层”，容器就是在这个读写层执行的。Docker第一次启动时，这个“读写层”是空白的，当修改一个文件时，Docker会从文件系统底层的“只读层”复制到“读写层”，该文件只读版本依然存在但是被“读写层”改文件的副本所隐藏，这就是Docker的“写时复制”。</p>
+<h2 id="镜像和容器的关系"><a href="#镜像和容器的关系" class="headerlink" title="镜像和容器的关系"></a><strong>镜像和容器的关系</strong></h2><p>&emsp;&emsp;镜像是静止的定义，容器是镜像运行时的实体，容器可以被创建，启动，停止和删除等。（这个地方花了很长时间才区分开镜像和容器的本质区别）</p>
+<h2 id="Docker仓库"><a href="#Docker仓库" class="headerlink" title="Docker仓库"></a><strong>Docker仓库</strong></h2><p>&emsp;&emsp;当镜像构建完成后，如果要拿到其他服务器上使用时，就需要一个集中管理，分发镜像的服务，这就是Docker仓库(分为共有和私有)。</p>
+<p>如果还是不清楚，可以参考这个：<a href="http://dockone.io/article/783" target="_blank" rel="external">http://dockone.io/article/783</a></p>
+<h2 id="Docker依赖Linux内核特性"><a href="#Docker依赖Linux内核特性" class="headerlink" title="Docker依赖Linux内核特性"></a><strong>Docker依赖Linux内核特性</strong></h2><pre><code>Docker依赖Linux内核2大特性：
+        ·NameSpace
+        ·Cgroups
 
+NameSpace: 将特定的全局系统资源(网络，文件系统，进程等)，通过抽象的方法使NameSpace进程实现资源隔离
+Cgroups: 用于资源限定，设置优先级和资源计量和资源控制
+</code></pre>
       
     </div>
 	
@@ -393,6 +423,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
 
       
       
@@ -402,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/27/haproxy/" rel="next" title="Centos7 HAproxy实现反向代理和资源动静分离">
-                <i class="fa fa-chevron-left"></i> Centos7 HAproxy实现反向代理和资源动静分离
+              <a href="/2018/03/30/next修改显示宽度/" rel="next" title="Next主题 Pisces Scheme更改内容区域的宽度">
+                <i class="fa fa-chevron-left"></i> Next主题 Pisces Scheme更改内容区域的宽度
               </a>
             
           </div>
@@ -411,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/27/lamp+weordpress/" rel="prev" title="Centos7 LAMP黄金组合之wordpress">
-                Centos7 LAMP黄金组合之wordpress <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -589,7 +621,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-三个基本概念"><span class="nav-number">1.</span> <span class="nav-text">Docker 三个基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker镜像"><span class="nav-number">2.</span> <span class="nav-text">Docker镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker容器"><span class="nav-number">3.</span> <span class="nav-text">Docker容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像和容器的关系"><span class="nav-number">4.</span> <span class="nav-text">镜像和容器的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker仓库"><span class="nav-number">5.</span> <span class="nav-text">Docker仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker依赖Linux内核特性"><span class="nav-number">6.</span> <span class="nav-text">Docker依赖Linux内核特性</span></a></li></ol></div>
             
 
           </div>
