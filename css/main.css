@@ -1819,7 +1819,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #adf9ff;
+  background: #1460bb;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2981,6 +2981,6 @@ pre .javascript .function {
   }
 }
 body {
-  background: url("https://cdn.pixabay.com/photo/2016/11/08/05/16/ancient-1807518_960_720.jpg");
+  background: url("/images/background.jpg");
   background-attachment: fixed;
 }
