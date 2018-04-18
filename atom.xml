@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-18T14:33:00.174Z</updated>
+  <updated>2018-04-18T14:35:27.578Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,13 +21,13 @@
     <link href="http://yoursite.com/2018/04/18/docker%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
     <id>http://yoursite.com/2018/04/18/docker私有仓库/</id>
     <published>2018-04-18T14:28:36.370Z</published>
-    <updated>2018-04-18T14:33:00.174Z</updated>
+    <updated>2018-04-18T14:35:27.578Z</updated>
     
-    <content type="html"><![CDATA[<p>仓库是存放镜像的地方，每个服务器可以有多个仓库，而每个仓库下面有多个镜像。仓库分为公库和私库，官方的公共仓库就是docker Hub,不过国内被墙。今天就来创建一个私有仓库<br><a id="more"></a><br>docker registry是官方提供的工具，用来构建私有镜像仓库</p><h2 id="启动registry镜像"><a href="#启动registry镜像" class="headerlink" title="启动registry镜像"></a>启动registry镜像</h2><pre><code>[root@ubuntu:~]# docker run -d -p 5000:5000 --restart=always --name registry registryUnable to find image &apos;registry:latest&apos; locallylatest: Pulling from library/registry81033e7c1d6a: Pull completeb235084c2315: Pull completec692f3a6894b: Pull completeba2177f3a70e: Pull completea8d793620947: Pull completeDigest: sha256:672d519d7fd7bbc7a448d17956ebeefe225d5eb27509d8dc5ce67ecb4a0bce54Status: Downloaded newer image for registry:lateste97c298aabcdb30b1901b33b03768c78bcda3643c3255084ad3cbe4df68e6a8c将registry镜像启动私有仓库，仓库会被创建在容器/var/lib/registry目录下，使用-v参数来讲镜像文件放到本地/opt/data/registry下报错：[root@ubuntu:~]# docker run -d  -p 5000:5000  -v /opt/data/registry:/var/lib/registry registry08ccd61cfc5fe2fdcbee16aede38807ca80239141f5e6dd6adf3cb825ef76f62docker: Error response from daemon: driver failed programming external connectivity on endpoint unruffled_villani (b12b514dc8419abf708dca81f227997b4957f0cb3f52432978b25760b4f7a9dc): Bind for 0.0.0.0:5000 failed: port is already allocated.停掉占用端口的容器即可[root@ubuntu:/]# docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry registry49bc7964d631d1c45058a1b03305106c13afb959eb4c794c6fed9233c1c1ce1b[root@ubuntu:/]# cd /opt/data/[root@ubuntu:/]opt/data# lsregistry可以看到registry目录，表示成功了</code></pre><h2 id="docker-tag"><a href="#docker-tag" class="headerlink" title="docker tag"></a>docker tag</h2><pre><code>将test/ubuntu v1.0 这个镜像标记为 127.0.0.0:5000/ubuntu:latest[root@ubuntu:/opt/data]# docker image lsREPOSITORY          TAG                 IMAGE ID            CREATED             SIZEtest/ubuntu         v1.0                072cd43a3a6a        2 hours ago         85.8MB&lt;none&gt;              &lt;none&gt;              0ccd5ef276a3        47 hours ago        85.8MBubuntu              latest              c9d990395902        2 days ago          113MBubuntu              17.10               14107f6d2c97        2 days ago          99.1MBcentos              latest              e934aafc2206        8 days ago          199MBregistry            latest              d1fd7d86a825        3 months ago        33.3MB[root@ubuntu:/opt/data]# docker tag test/ubuntu:v1.0 127.0.0.0:5000/ubuntu:latest[root@ubuntu:/opt/data]# docker image lsREPOSITORY              TAG                 IMAGE ID            CREATED             SIZE127.0.0.0:5000/ubuntu   latest              072cd43a3a6a        2 hours ago         85.8MBtest/ubuntu             v1.0                072cd43a3a6a        2 hours ago         85.8MB&lt;none&gt;                  &lt;none&gt;              0ccd5ef276a3        47 hours ago        85.8MBubuntu                  latest              c9d990395902        2 days ago          113MBubuntu                  17.10               14107f6d2c97        2 days ago          99.1MBcentos                  latest              e934aafc2206        8 days ago          199MBregistry                latest              d1fd7d86a825        3 months ago        33.3MBroot@ubuntu:/opt/data#</code></pre><h2 id="docker-push"><a href="#docker-push" class="headerlink" title="docker push"></a>docker push</h2><pre><code>上传标记的镜像[root@ubuntu:/opt/data]# docker push 127.0.0.1:5000/ubuntuThe push refers to repository [127.0.0.1:5000/ubuntu]414667feb05a: Pushedlatest: digest: sha256:c408657b59e55a1ca24e7b5165bdf620031c79d5b803b2df68b12ed249dfe951 size: 528</code></pre><h2 id="curl查看仓库中的镜像，"><a href="#curl查看仓库中的镜像，" class="headerlink" title="curl查看仓库中的镜像，"></a>curl查看仓库中的镜像，</h2><pre><code>可以看到 {&quot;repositories&quot;:[&quot;ubuntu&quot;]} 表示上传成功[root@ubuntu:/opt/data]# curl 127.0.0.1:5000/v2/_catalog{&quot;repositories&quot;:[&quot;ubuntu&quot;]}</code></pre><h2 id="验证："><a href="#验证：" class="headerlink" title="验证："></a>验证：</h2><pre><code>删除已经创建的127.0.0.1:5000/ubuntu镜像，再从私有仓库下载刚创建的镜像[root@ubuntu:/opt/data]# docker image rm 127.0.0.1:5000/ubuntuUntagged: 127.0.0.1:5000/ubuntu:latestUntagged: 127.0.0.1:5000/ubuntu@sha256:c408657b59e55a1ca24e7b5165bdf620031c79d5b803b2df68b12ed249dfe951这里可以看到镜像已经被删除了[root@ubuntu:/opt/data]# docker image lsREPOSITORY          TAG                 IMAGE ID            CREATED             SIZEtest/ubuntu         v1.0                072cd43a3a6a        2 hours ago         85.8MB&lt;none&gt;              &lt;none&gt;              0ccd5ef276a3        47 hours ago        85.8MBubuntu              latest              c9d990395902        2 days ago          113MBubuntu              17.10               14107f6d2c97        2 days ago          99.1MBcentos              latest              e934aafc2206        8 days ago          199MBregistry            latest              d1fd7d86a825        3 months ago        33.3MB重新从仓库下载带有127.0.0.1:5000/ubuntu标签的镜像[root@ubuntu:/opt/data]# docker pull 127.0.0.1:5000/ubuntuUsing default tag: latestlatest: Pulling from ubuntuDigest: sha256:c408657b59e55a1ca24e7b5165bdf620031c79d5b803b2df68b12ed249dfe951Status: Downloaded newer image for 127.0.0.1:5000/ubuntu:latest这样就下载成功了[root@ubuntu:/opt/data]# docker image lsREPOSITORY              TAG                 IMAGE ID            CREATED             SIZE127.0.0.1:5000/ubuntu   latest              072cd43a3a6a        2 hours ago         85.8MBtest/ubuntu             v1.0                072cd43a3a6a        2 hours ago         85.8MB&lt;none&gt;                  &lt;none&gt;              0ccd5ef276a3        47 hours ago        85.8MBubuntu                  latest              c9d990395902        2 days ago          113MBubuntu                  17.10               14107f6d2c97        2 days ago          99.1MBcentos                  latest              e934aafc2206        8 days ago          199MBregistry                latest              d1fd7d86a825        3 months ago        33.3MB[root@ubuntu:/opt/data]#注意：不使用127.0.0.1:5000这个地址作为仓库地址，将无法推送镜像，因为docker默认不允许使用https的方式推送镜像</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>&emsp;&emsp; 仓库是存放镜像的地方，每个服务器可以有多个仓库，而每个仓库下面有多个镜像。仓库分为公库和私库，官方的公共仓库就是docker Hub,不过国内被墙。今天就来创建一个私有仓库<br><a id="more"></a><br>docker registry是官方提供的工具，用来构建私有镜像仓库</p><h2 id="启动registry镜像"><a href="#启动registry镜像" class="headerlink" title="启动registry镜像"></a>启动registry镜像</h2><pre><code>[root@ubuntu:~]# docker run -d -p 5000:5000 --restart=always --name registry registryUnable to find image &apos;registry:latest&apos; locallylatest: Pulling from library/registry81033e7c1d6a: Pull completeb235084c2315: Pull completec692f3a6894b: Pull completeba2177f3a70e: Pull completea8d793620947: Pull completeDigest: sha256:672d519d7fd7bbc7a448d17956ebeefe225d5eb27509d8dc5ce67ecb4a0bce54Status: Downloaded newer image for registry:lateste97c298aabcdb30b1901b33b03768c78bcda3643c3255084ad3cbe4df68e6a8c将registry镜像启动私有仓库，仓库会被创建在容器/var/lib/registry目录下，使用-v参数来讲镜像文件放到本地/opt/data/registry下报错：[root@ubuntu:~]# docker run -d  -p 5000:5000  -v /opt/data/registry:/var/lib/registry registry08ccd61cfc5fe2fdcbee16aede38807ca80239141f5e6dd6adf3cb825ef76f62docker: Error response from daemon: driver failed programming external connectivity on endpoint unruffled_villani (b12b514dc8419abf708dca81f227997b4957f0cb3f52432978b25760b4f7a9dc): Bind for 0.0.0.0:5000 failed: port is already allocated.停掉占用端口的容器即可[root@ubuntu:/]# docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry registry49bc7964d631d1c45058a1b03305106c13afb959eb4c794c6fed9233c1c1ce1b[root@ubuntu:/]# cd /opt/data/[root@ubuntu:/]opt/data# lsregistry可以看到registry目录，表示成功了</code></pre><h2 id="docker-tag"><a href="#docker-tag" class="headerlink" title="docker tag"></a>docker tag</h2><pre><code>将test/ubuntu v1.0 这个镜像标记为 127.0.0.0:5000/ubuntu:latest[root@ubuntu:/opt/data]# docker image lsREPOSITORY          TAG                 IMAGE ID            CREATED             SIZEtest/ubuntu         v1.0                072cd43a3a6a        2 hours ago         85.8MB&lt;none&gt;              &lt;none&gt;              0ccd5ef276a3        47 hours ago        85.8MBubuntu              latest              c9d990395902        2 days ago          113MBubuntu              17.10               14107f6d2c97        2 days ago          99.1MBcentos              latest              e934aafc2206        8 days ago          199MBregistry            latest              d1fd7d86a825        3 months ago        33.3MB[root@ubuntu:/opt/data]# docker tag test/ubuntu:v1.0 127.0.0.0:5000/ubuntu:latest[root@ubuntu:/opt/data]# docker image lsREPOSITORY              TAG                 IMAGE ID            CREATED             SIZE127.0.0.0:5000/ubuntu   latest              072cd43a3a6a        2 hours ago         85.8MBtest/ubuntu             v1.0                072cd43a3a6a        2 hours ago         85.8MB&lt;none&gt;                  &lt;none&gt;              0ccd5ef276a3        47 hours ago        85.8MBubuntu                  latest              c9d990395902        2 days ago          113MBubuntu                  17.10               14107f6d2c97        2 days ago          99.1MBcentos                  latest              e934aafc2206        8 days ago          199MBregistry                latest              d1fd7d86a825        3 months ago        33.3MBroot@ubuntu:/opt/data#</code></pre><h2 id="docker-push"><a href="#docker-push" class="headerlink" title="docker push"></a>docker push</h2><pre><code>上传标记的镜像[root@ubuntu:/opt/data]# docker push 127.0.0.1:5000/ubuntuThe push refers to repository [127.0.0.1:5000/ubuntu]414667feb05a: Pushedlatest: digest: sha256:c408657b59e55a1ca24e7b5165bdf620031c79d5b803b2df68b12ed249dfe951 size: 528</code></pre><h2 id="curl查看仓库中的镜像，"><a href="#curl查看仓库中的镜像，" class="headerlink" title="curl查看仓库中的镜像，"></a>curl查看仓库中的镜像，</h2><pre><code>可以看到 {&quot;repositories&quot;:[&quot;ubuntu&quot;]} 表示上传成功[root@ubuntu:/opt/data]# curl 127.0.0.1:5000/v2/_catalog{&quot;repositories&quot;:[&quot;ubuntu&quot;]}</code></pre><h2 id="验证："><a href="#验证：" class="headerlink" title="验证："></a>验证：</h2><pre><code>删除已经创建的127.0.0.1:5000/ubuntu镜像，再从私有仓库下载刚创建的镜像[root@ubuntu:/opt/data]# docker image rm 127.0.0.1:5000/ubuntuUntagged: 127.0.0.1:5000/ubuntu:latestUntagged: 127.0.0.1:5000/ubuntu@sha256:c408657b59e55a1ca24e7b5165bdf620031c79d5b803b2df68b12ed249dfe951这里可以看到镜像已经被删除了[root@ubuntu:/opt/data]# docker image lsREPOSITORY          TAG                 IMAGE ID            CREATED             SIZEtest/ubuntu         v1.0                072cd43a3a6a        2 hours ago         85.8MB&lt;none&gt;              &lt;none&gt;              0ccd5ef276a3        47 hours ago        85.8MBubuntu              latest              c9d990395902        2 days ago          113MBubuntu              17.10               14107f6d2c97        2 days ago          99.1MBcentos              latest              e934aafc2206        8 days ago          199MBregistry            latest              d1fd7d86a825        3 months ago        33.3MB重新从仓库下载带有127.0.0.1:5000/ubuntu标签的镜像[root@ubuntu:/opt/data]# docker pull 127.0.0.1:5000/ubuntuUsing default tag: latestlatest: Pulling from ubuntuDigest: sha256:c408657b59e55a1ca24e7b5165bdf620031c79d5b803b2df68b12ed249dfe951Status: Downloaded newer image for 127.0.0.1:5000/ubuntu:latest这样就下载成功了[root@ubuntu:/opt/data]# docker image lsREPOSITORY              TAG                 IMAGE ID            CREATED             SIZE127.0.0.1:5000/ubuntu   latest              072cd43a3a6a        2 hours ago         85.8MBtest/ubuntu             v1.0                072cd43a3a6a        2 hours ago         85.8MB&lt;none&gt;                  &lt;none&gt;              0ccd5ef276a3        47 hours ago        85.8MBubuntu                  latest              c9d990395902        2 days ago          113MBubuntu                  17.10               14107f6d2c97        2 days ago          99.1MBcentos                  latest              e934aafc2206        8 days ago          199MBregistry                latest              d1fd7d86a825        3 months ago        33.3MB[root@ubuntu:/opt/data]#注意：不使用127.0.0.1:5000这个地址作为仓库地址，将无法推送镜像，因为docker默认不允许使用https的方式推送镜像</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;仓库是存放镜像的地方，每个服务器可以有多个仓库，而每个仓库下面有多个镜像。仓库分为公库和私库，官方的公共仓库就是docker Hub,不过国内被墙。今天就来创建一个私有仓库&lt;br&gt;
+      &lt;p&gt;&amp;emsp;&amp;emsp; 仓库是存放镜像的地方，每个服务器可以有多个仓库，而每个仓库下面有多个镜像。仓库分为公库和私库，官方的公共仓库就是docker Hub,不过国内被墙。今天就来创建一个私有仓库&lt;br&gt;
     
     </summary>
     
@@ -141,6 +141,28 @@
   </entry>
   
   <entry>
+    <title>windows下安装RabbitMQ</title>
+    <link href="http://yoursite.com/2018/03/27/windows%E5%AE%89%E8%A3%85rabbitmq/"/>
+    <id>http://yoursite.com/2018/03/27/windows安装rabbitmq/</id>
+    <published>2018-03-27T05:22:38.602Z</published>
+    <updated>2017-10-09T03:37:48.231Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天学习Python第11天的课程，讲消息队列，当然说的就是RabbitMQ，于是就想起，写篇博客记录一下安装过程！<br><img src="https://i.imgur.com/RaoQK9b.png" alt=""></p><a id="more"></a><p><strong> 版本说明 </strong><br>    OS: win10_1703<br>    Erlang: 20.1<br>    RabbitMQ: 3.6.12</p><p><strong> 安装erlang </strong></p><pre><code>RabbitMQ是建立Erlang平台上，所以先要装上erlang我这里安装的版本是：otp_win64_20.1（各人按自己系统版本下载）官方下载地址：http://www.erlang.org/downloads</code></pre><p><strong>添加环境变量</strong><br><img src="https://i.imgur.com/1kYBja7.png" alt=""></p><p><strong>安装RabbitMQ</strong></p><pre><code>我这里下载的版本是：rabbitmq-server-3.6.12官方下载地址：http://www.rabbitmq.com/download.html</code></pre><p><strong>配置RabbitMQ</strong></p><pre><code>激活rabbitmq-plugins(C:\Program Files\RabbitMQ Server\rabbitmq_server-3.6.12\sbin\rabbitmq-plugins.bat)命令：rabbitmq-plugins enable rabbitmq_management需要重启服务才能生效</code></pre><p><img src="https://i.imgur.com/bcV9bg6.png" alt=""></p><p><strong>访问控制台</strong><br>     上面步骤都配置好后，浏览器地址栏输入：<a href="http://localhost:15672(" target="_blank" rel="external">http://localhost:15672(</a> 默认用户和密码都是guest)</p><p> <img src="https://i.imgur.com/4BWu5BR.png" alt=""></p><p>最后：简单的配置到这里就结束了，后续有其他的要求到时候再更新博客</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天学习Python第11天的课程，讲消息队列，当然说的就是RabbitMQ，于是就想起，写篇博客记录一下安装过程！&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/RaoQK9b.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="RabbitMQ" scheme="http://yoursite.com/categories/RabbitMQ/"/>
+    
+    
+      <category term="RabbitMQ" scheme="http://yoursite.com/tags/RabbitMQ/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Centos7 编译安装MariaDB-10.1.22</title>
     <link href="http://yoursite.com/2018/03/27/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85mysql/"/>
     <id>http://yoursite.com/2018/03/27/编译安装mysql/</id>
@@ -164,24 +186,24 @@
   </entry>
   
   <entry>
-    <title>windows下安装RabbitMQ</title>
-    <link href="http://yoursite.com/2018/03/27/windows%E5%AE%89%E8%A3%85rabbitmq/"/>
-    <id>http://yoursite.com/2018/03/27/windows安装rabbitmq/</id>
-    <published>2018-03-27T05:22:38.602Z</published>
-    <updated>2017-10-09T03:37:48.231Z</updated>
+    <title>Centos7 Jdk+Tomcat的安装</title>
+    <link href="http://yoursite.com/2018/03/27/tomcat/"/>
+    <id>http://yoursite.com/2018/03/27/tomcat/</id>
+    <published>2018-03-27T05:22:38.570Z</published>
+    <updated>2017-04-25T10:07:55.772Z</updated>
     
-    <content type="html"><![CDATA[<p>今天学习Python第11天的课程，讲消息队列，当然说的就是RabbitMQ，于是就想起，写篇博客记录一下安装过程！<br><img src="https://i.imgur.com/RaoQK9b.png" alt=""></p><a id="more"></a><p><strong> 版本说明 </strong><br>    OS: win10_1703<br>    Erlang: 20.1<br>    RabbitMQ: 3.6.12</p><p><strong> 安装erlang </strong></p><pre><code>RabbitMQ是建立Erlang平台上，所以先要装上erlang我这里安装的版本是：otp_win64_20.1（各人按自己系统版本下载）官方下载地址：http://www.erlang.org/downloads</code></pre><p><strong>添加环境变量</strong><br><img src="https://i.imgur.com/1kYBja7.png" alt=""></p><p><strong>安装RabbitMQ</strong></p><pre><code>我这里下载的版本是：rabbitmq-server-3.6.12官方下载地址：http://www.rabbitmq.com/download.html</code></pre><p><strong>配置RabbitMQ</strong></p><pre><code>激活rabbitmq-plugins(C:\Program Files\RabbitMQ Server\rabbitmq_server-3.6.12\sbin\rabbitmq-plugins.bat)命令：rabbitmq-plugins enable rabbitmq_management需要重启服务才能生效</code></pre><p><img src="https://i.imgur.com/bcV9bg6.png" alt=""></p><p><strong>访问控制台</strong><br>     上面步骤都配置好后，浏览器地址栏输入：<a href="http://localhost:15672(" target="_blank" rel="external">http://localhost:15672(</a> 默认用户和密码都是guest)</p><p> <img src="https://i.imgur.com/4BWu5BR.png" alt=""></p><p>最后：简单的配置到这里就结束了，后续有其他的要求到时候再更新博客</p>]]></content>
+    <content type="html"><![CDATA[<p>Java Development Kit（JDK）是太阳微系统针对Java开发人员发布的免费软件开发工具包（SDK，Software development kit）。自从Java推出以来，JDK已经成为使用最广泛的Java SDK。由于JDK的一部分特性采用商业许可证，而非开源。因此，2006年太阳微系统宣布将发布基于GPL的开源JDK，使JDK成为自由软件。<a id="more"></a></p><p>目的：公司开发人员的需要</p><p>安装的版本：<br>jdk版本：1.8.0_121<br>tomcat版本：8.5.13</p><h2 id="Jdk的安装："><a href="#Jdk的安装：" class="headerlink" title="Jdk的安装："></a><strong>Jdk的安装</strong>：</h2><p><strong>先查询是否安装JDK</strong> </p><pre><code>[root@node1 ~]# java -version  #centos7 默认是装的openjdkOpenjdk version &quot;1.8.0_65&quot;OpenJDK Runtime Environment (build 1.8.0_65-b17)OpenJDK 64-Bit Server VM (build 25.65-b01, mixed mode) [root@node1 ~]# yum remove java-1.8.0-openjdk ##直接卸载[root@node1 ~]# java -version  #为什么还有在是吗？？？？Openjdk version &quot;1.8.0_65&quot;OpenJDK Runtime Environment (build 1.8.0_65-b17)OpenJDK 64-Bit Server VM (build 25.65-b01, mixed mode) 正确的方式卸载openjdk：[root@node1 ~]# rpm -qa | grep java #查看装了那些包java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64[root@node1 ~]# rpm -e --nodeps java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64 ##三个都要卸载[root@node1 ~]# java -version #OK，这次卸载的很干净-bash: /bin/java: No such file or directory</code></pre><h2 id="下载你需要版本的jdk"><a href="#下载你需要版本的jdk" class="headerlink" title="下载你需要版本的jdk"></a><strong>下载你需要版本的jdk</strong></h2><pre><code>地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html [root@node1 ~]# rpm -ivh /usr/java/jdk1.7.0.79.rpm #安装JDK</code></pre><h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a><strong>配置环境变量</strong></h2><pre><code>在/etc/profile尾部添加以下代码：JAVA_PATH #标记是java的内容export JAVA_HOME=/usr/java/jdk1.8.0_121 #export PATH=$JAVA_HOME/bin:$PATHexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar [root@node1 ~]# source /etc/profile #使配置生效</code></pre><p><strong>java -version  #查看是否安装成功</strong></p><h2 id="TOMCAT的配置和安装："><a href="#TOMCAT的配置和安装：" class="headerlink" title="TOMCAT的配置和安装："></a><strong>TOMCAT的配置和安装</strong>：</h2><p>Tomcat是由Apache软件基金会下属的Jakarta项目开发的一个Servlet容器，按照Sun Microsystems提供的技术规范，实现了对Servlet和JavaServer Page（JSP）的支持，并提供了作为Web服务器的一些特有功能，如Tomcat管理和控制平台、安全域管理和Tomcat阀等。<br>由于Tomcat本身也内含了一个HTTP服务器，它也可以被视作一个单独的Web服务器。<br>但是，不能将Tomcat和Apache HTTP服务器混淆，Apache HTTP服务器是一个用C语言实现的HTTPWeb服务器；<br>这两个HTTP web server不是捆绑在一起的。Apache Tomcat包含了一个配置管理工具，<br>也可以通过编辑XML格式的配置文件来进行配置。</p><h2 id="下载并安装TOMCAT"><a href="#下载并安装TOMCAT" class="headerlink" title="下载并安装TOMCAT"></a><strong>下载并安装TOMCAT</strong></h2><pre><code>[root@node1 ~]# tar -zxvf tomcat-8.5.13.tar.gz tomcat #解压安装文件并命名为&quot;tomcat&quot;[root@node1 ~]# mv tomcat /usr/local/</code></pre><h2 id="启动tomcat"><a href="#启动tomcat" class="headerlink" title="启动tomcat"></a><strong>启动tomcat</strong></h2><pre><code>[root@node1 ~]# bash catalina.sh start [root@node1 ~]# curl http://localhost:8080 #能看到tomcat的欢迎页面表示ok</code></pre><h2 id="修改TOMCAT默认端口"><a href="#修改TOMCAT默认端口" class="headerlink" title="修改TOMCAT默认端口"></a><strong>修改TOMCAT默认端口</strong></h2><pre><code>[root@node1 ~]# vim /usr/local/tomcat/conf/server.xml**Connector port=&quot;**80**[S1] &quot; maxHttpHeaderSize=&quot;8192&quot;##默认端口是8080,看你需求修改maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot;enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot;connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;**[root@node1 bin]# ./shutdown.sh [root@node1 bin]# ./catalina.sh start #重新启动一下tomcat[root@node1 bin]# ss -tnlp #查看80、8005、8009是否为Java所监听    [root@node1 ~]#netstat -pant | grep 8005命令查看端口[root@node1 ~]#fuser -v -n tcp 8005 #查看8005监听状态-v 详细模式-n 指定一个不同的命名空间</code></pre><h2 id="放行防火墙端口"><a href="#放行防火墙端口" class="headerlink" title="放行防火墙端口"></a><strong>放行防火墙端口</strong></h2><pre><code>firewall-cmd --permanent --add-prot=80/tcpfirewall-cmd --reload</code></pre><h2 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a><strong>开机启动</strong></h2><pre><code>[root@node1 ~]# vim /etc/rc.d/rc.local添加下面三行内容：tomcat #标记是tomcat的内容export JAVA_HOME=/usr/java/jdk1.8.0_121 # 是jdk安装目录/usr/local/tomcat/bin/startup.sh start  #是tomcat安装的目录注意：修改rc.local文件添加执行权限： chmod +x rc.local</code></pre><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a><strong>遇到的问题</strong></h2><pre><code>如果执行配置文件报错1：touch:cannot touc &apos;/usr/local/kencery/tomcat/logs/catalina.out:NO such file or directory*:报这个错只需要 mkdir /usr/local/tomcat/logs 即可一般执行配置文件报错都会在/usr/local/tomcat/logs/catalina.out中显示如果执行配置文件报错2：/usr/local/tomcat/bin/catalina.sh:line 435: /usr/local/java/jdk1.7.0_79/bin/java: no such file directory/usr/local/tomcat/bin/catalina.sh:line 435: /usr/local/jdk6/jre/bin/java: no such file or directory/usr/local/tomcat/bin/catalina.sh:line 435: /usr/local/jdk1.7.0_79//jre/bin/java: no such file or directory*:报这个错 只需要打开配置文件 /usr/local/tomcat/bin/catalina.sh 然后在435行用#注释掉即可</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;今天学习Python第11天的课程，讲消息队列，当然说的就是RabbitMQ，于是就想起，写篇博客记录一下安装过程！&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/RaoQK9b.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+      &lt;p&gt;Java Development Kit（JDK）是太阳微系统针对Java开发人员发布的免费软件开发工具包（SDK，Software development kit）。自从Java推出以来，JDK已经成为使用最广泛的Java SDK。由于JDK的一部分特性采用商业许可证，而非开源。因此，2006年太阳微系统宣布将发布基于GPL的开源JDK，使JDK成为自由软件。
     
     </summary>
     
-      <category term="RabbitMQ" scheme="http://yoursite.com/categories/RabbitMQ/"/>
+      <category term="Tomcat" scheme="http://yoursite.com/categories/Tomcat/"/>
     
     
-      <category term="RabbitMQ" scheme="http://yoursite.com/tags/RabbitMQ/"/>
+      <category term="Tomcat" scheme="http://yoursite.com/tags/Tomcat/"/>
     
   </entry>
   
@@ -205,28 +227,6 @@
     
     
       <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Centos7 Jdk+Tomcat的安装</title>
-    <link href="http://yoursite.com/2018/03/27/tomcat/"/>
-    <id>http://yoursite.com/2018/03/27/tomcat/</id>
-    <published>2018-03-27T05:22:38.570Z</published>
-    <updated>2017-04-25T10:07:55.772Z</updated>
-    
-    <content type="html"><![CDATA[<p>Java Development Kit（JDK）是太阳微系统针对Java开发人员发布的免费软件开发工具包（SDK，Software development kit）。自从Java推出以来，JDK已经成为使用最广泛的Java SDK。由于JDK的一部分特性采用商业许可证，而非开源。因此，2006年太阳微系统宣布将发布基于GPL的开源JDK，使JDK成为自由软件。<a id="more"></a></p><p>目的：公司开发人员的需要</p><p>安装的版本：<br>jdk版本：1.8.0_121<br>tomcat版本：8.5.13</p><h2 id="Jdk的安装："><a href="#Jdk的安装：" class="headerlink" title="Jdk的安装："></a><strong>Jdk的安装</strong>：</h2><p><strong>先查询是否安装JDK</strong> </p><pre><code>[root@node1 ~]# java -version  #centos7 默认是装的openjdkOpenjdk version &quot;1.8.0_65&quot;OpenJDK Runtime Environment (build 1.8.0_65-b17)OpenJDK 64-Bit Server VM (build 25.65-b01, mixed mode) [root@node1 ~]# yum remove java-1.8.0-openjdk ##直接卸载[root@node1 ~]# java -version  #为什么还有在是吗？？？？Openjdk version &quot;1.8.0_65&quot;OpenJDK Runtime Environment (build 1.8.0_65-b17)OpenJDK 64-Bit Server VM (build 25.65-b01, mixed mode) 正确的方式卸载openjdk：[root@node1 ~]# rpm -qa | grep java #查看装了那些包java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64java-1.7.0-openjdk-headless-1.7.0.91-2.6.2.3.el7.x86_64java-1.8.0-openjdk-headless-1.8.0.65-3.b17.el7.x86_64[root@node1 ~]# rpm -e --nodeps java-1.7.0-openjdk-1.7.0.91-2.6.2.3.el7.x86_64 ##三个都要卸载[root@node1 ~]# java -version #OK，这次卸载的很干净-bash: /bin/java: No such file or directory</code></pre><h2 id="下载你需要版本的jdk"><a href="#下载你需要版本的jdk" class="headerlink" title="下载你需要版本的jdk"></a><strong>下载你需要版本的jdk</strong></h2><pre><code>地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html [root@node1 ~]# rpm -ivh /usr/java/jdk1.7.0.79.rpm #安装JDK</code></pre><h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a><strong>配置环境变量</strong></h2><pre><code>在/etc/profile尾部添加以下代码：JAVA_PATH #标记是java的内容export JAVA_HOME=/usr/java/jdk1.8.0_121 #export PATH=$JAVA_HOME/bin:$PATHexport CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar [root@node1 ~]# source /etc/profile #使配置生效</code></pre><p><strong>java -version  #查看是否安装成功</strong></p><h2 id="TOMCAT的配置和安装："><a href="#TOMCAT的配置和安装：" class="headerlink" title="TOMCAT的配置和安装："></a><strong>TOMCAT的配置和安装</strong>：</h2><p>Tomcat是由Apache软件基金会下属的Jakarta项目开发的一个Servlet容器，按照Sun Microsystems提供的技术规范，实现了对Servlet和JavaServer Page（JSP）的支持，并提供了作为Web服务器的一些特有功能，如Tomcat管理和控制平台、安全域管理和Tomcat阀等。<br>由于Tomcat本身也内含了一个HTTP服务器，它也可以被视作一个单独的Web服务器。<br>但是，不能将Tomcat和Apache HTTP服务器混淆，Apache HTTP服务器是一个用C语言实现的HTTPWeb服务器；<br>这两个HTTP web server不是捆绑在一起的。Apache Tomcat包含了一个配置管理工具，<br>也可以通过编辑XML格式的配置文件来进行配置。</p><h2 id="下载并安装TOMCAT"><a href="#下载并安装TOMCAT" class="headerlink" title="下载并安装TOMCAT"></a><strong>下载并安装TOMCAT</strong></h2><pre><code>[root@node1 ~]# tar -zxvf tomcat-8.5.13.tar.gz tomcat #解压安装文件并命名为&quot;tomcat&quot;[root@node1 ~]# mv tomcat /usr/local/</code></pre><h2 id="启动tomcat"><a href="#启动tomcat" class="headerlink" title="启动tomcat"></a><strong>启动tomcat</strong></h2><pre><code>[root@node1 ~]# bash catalina.sh start [root@node1 ~]# curl http://localhost:8080 #能看到tomcat的欢迎页面表示ok</code></pre><h2 id="修改TOMCAT默认端口"><a href="#修改TOMCAT默认端口" class="headerlink" title="修改TOMCAT默认端口"></a><strong>修改TOMCAT默认端口</strong></h2><pre><code>[root@node1 ~]# vim /usr/local/tomcat/conf/server.xml**Connector port=&quot;**80**[S1] &quot; maxHttpHeaderSize=&quot;8192&quot;##默认端口是8080,看你需求修改maxThreads=&quot;150&quot; minSpareThreads=&quot;25&quot; maxSpareThreads=&quot;75&quot;enableLookups=&quot;false&quot; redirectPort=&quot;8443&quot; acceptCount=&quot;100&quot;connectionTimeout=&quot;20000&quot; disableUploadTimeout=&quot;true&quot; /&gt;**[root@node1 bin]# ./shutdown.sh [root@node1 bin]# ./catalina.sh start #重新启动一下tomcat[root@node1 bin]# ss -tnlp #查看80、8005、8009是否为Java所监听    [root@node1 ~]#netstat -pant | grep 8005命令查看端口[root@node1 ~]#fuser -v -n tcp 8005 #查看8005监听状态-v 详细模式-n 指定一个不同的命名空间</code></pre><h2 id="放行防火墙端口"><a href="#放行防火墙端口" class="headerlink" title="放行防火墙端口"></a><strong>放行防火墙端口</strong></h2><pre><code>firewall-cmd --permanent --add-prot=80/tcpfirewall-cmd --reload</code></pre><h2 id="开机启动"><a href="#开机启动" class="headerlink" title="开机启动"></a><strong>开机启动</strong></h2><pre><code>[root@node1 ~]# vim /etc/rc.d/rc.local添加下面三行内容：tomcat #标记是tomcat的内容export JAVA_HOME=/usr/java/jdk1.8.0_121 # 是jdk安装目录/usr/local/tomcat/bin/startup.sh start  #是tomcat安装的目录注意：修改rc.local文件添加执行权限： chmod +x rc.local</code></pre><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a><strong>遇到的问题</strong></h2><pre><code>如果执行配置文件报错1：touch:cannot touc &apos;/usr/local/kencery/tomcat/logs/catalina.out:NO such file or directory*:报这个错只需要 mkdir /usr/local/tomcat/logs 即可一般执行配置文件报错都会在/usr/local/tomcat/logs/catalina.out中显示如果执行配置文件报错2：/usr/local/tomcat/bin/catalina.sh:line 435: /usr/local/java/jdk1.7.0_79/bin/java: no such file directory/usr/local/tomcat/bin/catalina.sh:line 435: /usr/local/jdk6/jre/bin/java: no such file or directory/usr/local/tomcat/bin/catalina.sh:line 435: /usr/local/jdk1.7.0_79//jre/bin/java: no such file or directory*:报这个错 只需要打开配置文件 /usr/local/tomcat/bin/catalina.sh 然后在435行用#注释掉即可</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Java Development Kit（JDK）是太阳微系统针对Java开发人员发布的免费软件开发工具包（SDK，Software development kit）。自从Java推出以来，JDK已经成为使用最广泛的Java SDK。由于JDK的一部分特性采用商业许可证，而非开源。因此，2006年太阳微系统宣布将发布基于GPL的开源JDK，使JDK成为自由软件。
-    
-    </summary>
-    
-      <category term="Tomcat" scheme="http://yoursite.com/categories/Tomcat/"/>
-    
-    
-      <category term="Tomcat" scheme="http://yoursite.com/tags/Tomcat/"/>
     
   </entry>
   
@@ -297,6 +297,28 @@
   </entry>
   
   <entry>
+    <title>Centos7 LB集群之LVS（一）</title>
+    <link href="http://yoursite.com/2018/03/27/LVS+NAT/"/>
+    <id>http://yoursite.com/2018/03/27/LVS+NAT/</id>
+    <published>2018-03-27T05:22:38.517Z</published>
+    <updated>2017-09-26T03:23:30.659Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>LVS</strong>(linux virtue server)是一个虚拟的服务器集群系统。项目在1998年5月由章文嵩成立，是中国国内最早出现的自由软件项目之一。<br>LVS集群采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。<a id="more"></a></p><p><strong>目的</strong>：利用LVS实现负载均衡</p><p>模型图：<br><img src="http://i.imgur.com/2tSFs0K.jpg" alt=""></p><h2 id="配置IP"><a href="#配置IP" class="headerlink" title="配置IP"></a><strong>配置IP</strong></h2><p>lvs eth0： 192.168.1.103（VIP）<br>    eth1： 192.168.201.138（DIP）<br>web1 eth0：192.168.201.137<br>       lo：192.168.201.103<br>web2 eth0：192.168.201.132<br>    lo ：192.168.201.103 </p><h2 id="安装http服务"><a href="#安装http服务" class="headerlink" title="安装http服务"></a><strong>安装http服务</strong></h2><p>[root@WEB1 ~]# yum -y install httpd<br>[root@WEB1 ~]# systemctl enable http.service<br>[root@WEB1 ~]# systemctl start  http.service<br>[root@WEB1 ~]# echo “1” &gt;/var/www/html/index.html<br>[root@WEB1 ~]# curl <a href="http://localhost" target="_blank" rel="external">http://localhost</a><br>WEB2同上</p><h2 id="安装ipvsadm"><a href="#安装ipvsadm" class="headerlink" title="安装ipvsadm"></a><strong>安装ipvsadm</strong></h2><p>[root@WEB1 ~]# yum -y install ipvsadm<br>[root@WEB1 ~]# modprobe ip_vs  #加载到内核<br>[root@WEB1 ~]# ipvsadm         #查看是否安装成功</p><h2 id="配置IPVS"><a href="#配置IPVS" class="headerlink" title="配置IPVS"></a><strong>配置IPVS</strong></h2><p>[root@WEB1 ~]#ipvsadm -C 清空原来表格内容<br>[root@WEB1 ~]# ipvsadm -A -t 192.168.1.103:80 -s rr #创建一个集群<br>  -A添加地址 -t指定vip tcp端口 -s指定算法<br>[root@WEB1 ~]# ipvsadm -a -t 192.168.1.103:80 -r 192.168.201.137:80 -m<br>  -a指定真实服务器 -t lvs上的vip -r 真实服务器<br>[root@WEB1 ~]# ipvsadm -a -t 192.168.1.103:80 -r 192.168.201.132:80 -m<br>  -a指定真实服务器 -t lvs上的vip -r 真实服务器<br>[root@WEB1 ~]# ipvsadm -L -n 查看<br>IP Virtual Server version 1.2.1(size=4096)<br>Prot LocalAddress:PortScheduler Flags<br>-&gt; RemoteAddress:Port Forward Weight ActiveConn InActConn<br>TCP 192.168.1.103 wrr persistent 20<br>-&gt; 192.168.201.137 Route 1 0 0<br>-&gt; 192.168.201.132 Route 1 0 0 </p><p>…表示成功了</p><h2 id="配置RS"><a href="#配置RS" class="headerlink" title="配置RS"></a><strong>配置RS</strong></h2><p>给WEB1服务器配置VIP<br>ifconfig lo 192.168.1.103 netmask 255.255.255.255<br>WEB2设置同上</p><h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a><strong>验证</strong></h2><p>浏览器输入VIP地址 192.168.1.103<br>看WEB1和WEB2是不是轮询响应，down掉一个还能否响应</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;LVS&lt;/strong&gt;(linux virtue server)是一个虚拟的服务器集群系统。项目在1998年5月由章文嵩成立，是中国国内最早出现的自由软件项目之一。&lt;br&gt;LVS集群采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。
+    
+    </summary>
+    
+      <category term="Cluster" scheme="http://yoursite.com/categories/Cluster/"/>
+    
+    
+      <category term="Lvs+NAT" scheme="http://yoursite.com/tags/Lvs-NAT/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Centos7 Mysql双主模型</title>
     <link href="http://yoursite.com/2018/03/27/mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/"/>
     <id>http://yoursite.com/2018/03/27/mysql双主模型/</id>
@@ -341,28 +363,6 @@
   </entry>
   
   <entry>
-    <title>Centos7 LB集群之LVS（一）</title>
-    <link href="http://yoursite.com/2018/03/27/LVS+NAT/"/>
-    <id>http://yoursite.com/2018/03/27/LVS+NAT/</id>
-    <published>2018-03-27T05:22:38.517Z</published>
-    <updated>2017-09-26T03:23:30.659Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>LVS</strong>(linux virtue server)是一个虚拟的服务器集群系统。项目在1998年5月由章文嵩成立，是中国国内最早出现的自由软件项目之一。<br>LVS集群采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。<a id="more"></a></p><p><strong>目的</strong>：利用LVS实现负载均衡</p><p>模型图：<br><img src="http://i.imgur.com/2tSFs0K.jpg" alt=""></p><h2 id="配置IP"><a href="#配置IP" class="headerlink" title="配置IP"></a><strong>配置IP</strong></h2><p>lvs eth0： 192.168.1.103（VIP）<br>    eth1： 192.168.201.138（DIP）<br>web1 eth0：192.168.201.137<br>       lo：192.168.201.103<br>web2 eth0：192.168.201.132<br>    lo ：192.168.201.103 </p><h2 id="安装http服务"><a href="#安装http服务" class="headerlink" title="安装http服务"></a><strong>安装http服务</strong></h2><p>[root@WEB1 ~]# yum -y install httpd<br>[root@WEB1 ~]# systemctl enable http.service<br>[root@WEB1 ~]# systemctl start  http.service<br>[root@WEB1 ~]# echo “1” &gt;/var/www/html/index.html<br>[root@WEB1 ~]# curl <a href="http://localhost" target="_blank" rel="external">http://localhost</a><br>WEB2同上</p><h2 id="安装ipvsadm"><a href="#安装ipvsadm" class="headerlink" title="安装ipvsadm"></a><strong>安装ipvsadm</strong></h2><p>[root@WEB1 ~]# yum -y install ipvsadm<br>[root@WEB1 ~]# modprobe ip_vs  #加载到内核<br>[root@WEB1 ~]# ipvsadm         #查看是否安装成功</p><h2 id="配置IPVS"><a href="#配置IPVS" class="headerlink" title="配置IPVS"></a><strong>配置IPVS</strong></h2><p>[root@WEB1 ~]#ipvsadm -C 清空原来表格内容<br>[root@WEB1 ~]# ipvsadm -A -t 192.168.1.103:80 -s rr #创建一个集群<br>  -A添加地址 -t指定vip tcp端口 -s指定算法<br>[root@WEB1 ~]# ipvsadm -a -t 192.168.1.103:80 -r 192.168.201.137:80 -m<br>  -a指定真实服务器 -t lvs上的vip -r 真实服务器<br>[root@WEB1 ~]# ipvsadm -a -t 192.168.1.103:80 -r 192.168.201.132:80 -m<br>  -a指定真实服务器 -t lvs上的vip -r 真实服务器<br>[root@WEB1 ~]# ipvsadm -L -n 查看<br>IP Virtual Server version 1.2.1(size=4096)<br>Prot LocalAddress:PortScheduler Flags<br>-&gt; RemoteAddress:Port Forward Weight ActiveConn InActConn<br>TCP 192.168.1.103 wrr persistent 20<br>-&gt; 192.168.201.137 Route 1 0 0<br>-&gt; 192.168.201.132 Route 1 0 0 </p><p>…表示成功了</p><h2 id="配置RS"><a href="#配置RS" class="headerlink" title="配置RS"></a><strong>配置RS</strong></h2><p>给WEB1服务器配置VIP<br>ifconfig lo 192.168.1.103 netmask 255.255.255.255<br>WEB2设置同上</p><h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a><strong>验证</strong></h2><p>浏览器输入VIP地址 192.168.1.103<br>看WEB1和WEB2是不是轮询响应，down掉一个还能否响应</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;LVS&lt;/strong&gt;(linux virtue server)是一个虚拟的服务器集群系统。项目在1998年5月由章文嵩成立，是中国国内最早出现的自由软件项目之一。&lt;br&gt;LVS集群采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。
-    
-    </summary>
-    
-      <category term="Cluster" scheme="http://yoursite.com/categories/Cluster/"/>
-    
-    
-      <category term="Lvs+NAT" scheme="http://yoursite.com/tags/Lvs-NAT/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Centos7 LVS集群+Keepalived（二）</title>
     <link href="http://yoursite.com/2018/03/27/LVS+Keepalived/"/>
     <id>http://yoursite.com/2018/03/27/LVS+Keepalived/</id>
@@ -385,6 +385,24 @@
   </entry>
   
   <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2018/03/27/hello-world/"/>
+    <id>http://yoursite.com/2018/03/27/hello-world/</id>
+    <published>2018-03-27T05:22:38.470Z</published>
+    <updated>2017-09-25T08:35:10.034Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Centos7 LAMP黄金组合之wordpress</title>
     <link href="http://yoursite.com/2018/03/27/lamp+weordpress/"/>
     <id>http://yoursite.com/2018/03/27/lamp+weordpress/</id>
@@ -403,24 +421,6 @@
     
     
       <category term="LAMP+Wordpress" scheme="http://yoursite.com/tags/LAMP-Wordpress/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2018/03/27/hello-world/"/>
-    <id>http://yoursite.com/2018/03/27/hello-world/</id>
-    <published>2018-03-27T05:22:38.470Z</published>
-    <updated>2017-09-25T08:35:10.034Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;br&gt;
-    
-    </summary>
-    
     
   </entry>
   
