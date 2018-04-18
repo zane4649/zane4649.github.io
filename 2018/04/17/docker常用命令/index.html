@@ -69,17 +69,17 @@
 
 
 
-<meta name="description" content="docker用起来还是很方便的，而且命令也容易，常用的命令如下：docker rundocker psdocker inspectdocker attach….….">
+<meta name="description" content="docker用起来还是很方便的，而且命令也容易，常用的命令如下：docker rundocker psdocker inspectdocker attach….">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker 常用命令">
 <meta property="og:url" content="http://yoursite.com/2018/04/17/docker常用命令/index.html">
 <meta property="og:site_name" content="Wenbing&#39;s Blog">
-<meta property="og:description" content="docker用起来还是很方便的，而且命令也容易，常用的命令如下：docker rundocker psdocker inspectdocker attach….….">
+<meta property="og:description" content="docker用起来还是很方便的，而且命令也容易，常用的命令如下：docker rundocker psdocker inspectdocker attach….">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-18T13:07:13.307Z">
+<meta property="og:updated_time" content="2018-04-18T13:14:04.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker 常用命令">
-<meta name="twitter:description" content="docker用起来还是很方便的，而且命令也容易，常用的命令如下：docker rundocker psdocker inspectdocker attach….….">
+<meta name="twitter:description" content="docker用起来还是很方便的，而且命令也容易，常用的命令如下：docker rundocker psdocker inspectdocker attach….">
 
 
 
@@ -328,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
                   </a>
                 </span>
 
@@ -370,7 +370,7 @@
       
 
       
-        <p>docker用起来还是很方便的，而且命令也容易，常用的命令如下：<br>docker run<br>docker ps<br>docker inspect<br>docker attach<br>….<br>….<br><a id="more"></a></p>
+        <p>docker用起来还是很方便的，而且命令也容易，常用的命令如下：<br>docker run<br>docker ps<br>docker inspect<br>docker attach<br>….<br><a id="more"></a></p>
 <h2 id="docker-run运行一个容器"><a href="#docker-run运行一个容器" class="headerlink" title="docker run运行一个容器"></a>docker run运行一个容器</h2><pre><code>Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...] [flags]
 [root@ubuntu:~]# docker run -it ubuntu /bin/bash
 [root@c32ec2b3f49a:/]# ls
@@ -379,24 +379,65 @@ srv  sys  tmp  usr  var
 [root@c32ec2b3f49a:/]#   
   -i 为容器打开标准输出
   -t 给打开的容器运行一个伪tty终端
-</code></pre><p>##docker ps## 列出容器<br>    [root@ubuntu:~]# docker ps -a<br>    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES<br>    c32ec2b3f49a        ubuntu              “/bin/bash”         2 minutes ago       Up 2 minutes                            hopeful_bose<br>    4f078216cfef        ubuntu              “/bin/bash”         47 hours ago        Up 47 hours                             competent_sammet<br>    41432143ef92        ubuntu              “/bin/bash”         47 hours ago        Up 47 hours                             hardcore_payne<br>    929860f00fa4        ubuntu              “/bin/bash”         47 hours ago        Up 47 hours                             competent_perlman<br>    d2170af637a4        centos              “/bin/bash”         47 hours ago        Up 47 hours                             epic_stallman<br>    3ac68df6d5de        ubuntu              “/bin/bash”         2 days ago          Up 2 days                               blissful_northcutt<br>    8b9e5cc28561        ubuntu              “/bin/bash”         2 days ago          Up 2 days                               cranky_stallman</p>
-<pre><code>[root@ubuntu:~]# docker ps -l
+</code></pre><h2 id="docker-ps-列出容器"><a href="#docker-ps-列出容器" class="headerlink" title="docker ps 列出容器"></a>docker ps 列出容器</h2><pre><code>[root@ubuntu:~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+c32ec2b3f49a        ubuntu              &quot;/bin/bash&quot;         2 minutes ago       Up 2 minutes                            hopeful_bose
+4f078216cfef        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             competent_sammet
+41432143ef92        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             hardcore_payne
+929860f00fa4        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             competent_perlman
+d2170af637a4        centos              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             epic_stallman
+3ac68df6d5de        ubuntu              &quot;/bin/bash&quot;         2 days ago          Up 2 days                               blissful_northcutt
+8b9e5cc28561        ubuntu              &quot;/bin/bash&quot;         2 days ago          Up 2 days                               cranky_stallman
+
+[root@ubuntu:~]# docker ps -l
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 c32ec2b3f49a        ubuntu              &quot;/bin/bash&quot;         2 minutes ago       Up 2 minutes                            hopeful_bose
 
  -a 列出所有的容器
  -l 最新创建的容器
-</code></pre><p>##docker inspect列出镜像信息<br>    Usage:  docker inspect [OPTIONS] NAME|ID [NAME|ID…] [flags]<br>    [root@ubuntu:~]# docker inspect c32ec2b3f49a<br>                hopeful_bose<br>    [<br>    {<br>        “Id”: “c32ec2b3f49a5774bef44f88c00c1303d760c142fc0b528ad33c61208cf97725”,<br>        “Created”: “2018-04-15T14:01:11.956052589Z”,<br>        “Path”: “/bin/bash”,<br>        “Args”: [],<br>        “State”: {<br>            “Status”: “running”,<br>            “Running”: true,<br>            “Paused”: false,<br>            “Restarting”: false,<br>            “OOMKilled”: false,<br>            “Dead”: false,<br>            “Pid”: 6180,<br>            “ExitCode”: 0,<br>            “Error”: “”,<br>            “StartedAt”: “2018-04-15T14:01:12.390885359Z”,<br>            “FinishedAt”: “0001-01-01T00:00:00Z”</p>
-<pre><code>...
+</code></pre><h2 id="docker-inspect列出镜像信息"><a href="#docker-inspect列出镜像信息" class="headerlink" title="docker inspect列出镜像信息"></a>docker inspect列出镜像信息</h2><pre><code>Usage:  docker inspect [OPTIONS] NAME|ID [NAME|ID...] [flags]
+[root@ubuntu:~]# docker inspect c32ec2b3f49a
+            hopeful_bose
+[
+{
+    &quot;Id&quot;: &quot;c32ec2b3f49a5774bef44f88c00c1303d760c142fc0b528ad33c61208cf97725&quot;,
+    &quot;Created&quot;: &quot;2018-04-15T14:01:11.956052589Z&quot;,
+    &quot;Path&quot;: &quot;/bin/bash&quot;,
+    &quot;Args&quot;: [],
+    &quot;State&quot;: {
+        &quot;Status&quot;: &quot;running&quot;,
+        &quot;Running&quot;: true,
+        &quot;Paused&quot;: false,
+        &quot;Restarting&quot;: false,
+        &quot;OOMKilled&quot;: false,
+        &quot;Dead&quot;: false,
+        &quot;Pid&quot;: 6180,
+        &quot;ExitCode&quot;: 0,
+        &quot;Error&quot;: &quot;&quot;,
+        &quot;StartedAt&quot;: &quot;2018-04-15T14:01:12.390885359Z&quot;,
+        &quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;
+
 ...
-</code></pre><p>##docker attach进入后台运行的容器<br>    Usage:  docker attach [OPTIONS] CONTAINER [flags]<br>    [root@ubuntu:~]# docker run -it ubuntu /bin/bash<br>    [root@40fe9f37c774:/]#<br>    [root@40fe9f37c774:/]# root@ubuntu:~#<br>    [root@ubuntu:~]#</p>
-<pre><code>注意：在刚创建的容器里，&quot;Ctrl+d&quot;直接退出并结束进程，使用&quot;Ctrl+P+Q&quot;(大写)退出不结束进程
+...
+</code></pre><h2 id="docker-attach进入后台运行的容器"><a href="#docker-attach进入后台运行的容器" class="headerlink" title="docker attach进入后台运行的容器"></a>docker attach进入后台运行的容器</h2><pre><code>Usage:  docker attach [OPTIONS] CONTAINER [flags]
+[root@ubuntu:~]# docker run -it ubuntu /bin/bash
+[root@40fe9f37c774:/]#
+[root@40fe9f37c774:/]# root@ubuntu:~#
+[root@ubuntu:~]#
+
+注意：在刚创建的容器里，&quot;Ctrl+d&quot;直接退出并结束进程，使用&quot;Ctrl+P+Q&quot;(大写)退出不结束进程
 
 [root@ubuntu:~]# docker attach 40fe9f37c774
 [root@40fe9f37c774:/]#
 [root@40fe9f37c774:/]#
-</code></pre><p>##docker exec 命令<br>    Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG…] [flags]<br>    [root@ubuntu:~]# docker run -itd ubuntu<br>    cd92f0ec9d4018f24ee4a06edd17f38d382dbed174bc578825d72e42219f6653<br>    [root@ubuntu:~]# docker ps -a<br>    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                  PORTS               NAMES<br>    cd92f0ec9d40        ubuntu              “/bin/bash”              16 seconds ago      Up 16 seconds                                   upbeat_blackwell</p>
-<pre><code>[root@ubuntu:~]# docker exec -it cd92f0ec9d40 bash
+</code></pre><h2 id="docker-exec-命令"><a href="#docker-exec-命令" class="headerlink" title="docker exec 命令"></a>docker exec 命令</h2><pre><code>Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...] [flags]
+[root@ubuntu:~]# docker run -itd ubuntu
+cd92f0ec9d4018f24ee4a06edd17f38d382dbed174bc578825d72e42219f6653
+[root@ubuntu:~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                  PORTS               NAMES
+cd92f0ec9d40        ubuntu              &quot;/bin/bash&quot;              16 seconds ago      Up 16 seconds                                   upbeat_blackwell
+
+[root@ubuntu:~]# docker exec -it cd92f0ec9d40 bash
 root@cd92f0ec9d40:/# ls
 bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
 boot  etc  lib   media  opt  root  sbin  sys  usr
@@ -409,10 +450,25 @@ boot  etc  lib   media  opt  root  sbin  sys  usr
 [root@ubuntu:~]# docker container ls -a
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
 cd92f0ec9d40        ubuntu              &quot;/bin/bash&quot;              39 minutes ago      Up 39 minu
-</code></pre><p>##docker export导出容器快照<br>    [root@ubuntu:~]# docker export cd92f0ec9d40 &gt;/tmp/ubuntu.tar<br>    [root@ubuntu:~]# ls /tmp/<br>    ubuntu.tar            unity_support_test.0</p>
-<p>##docker import导入容器快照<br>    [root@ubuntu:~]# cat /tmp/ubuntu.tar |docker import - test/ubuntu:v1.0<br>    sha256:0ccd5ef276a3b175b14d9b031fba85bbdf44e8d5819a62d49564333398f0e9dc<br>    [root@ubuntu:~]# docker image ls<br>    REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE<br>    test/ubuntu         v1.0                072cd43a3a6a        About a minute ago   85.8MB</p>
-<p>##docker rm 删除容器<br>    [root@ubuntu:~]# docker ps<br>    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES<br>    1862e1300c97        ubuntu              “/bin/bash”         46 hours ago        Up 46 hours                             stupefied_chebyshev<br>    4f078216cfef        ubuntu              “/bin/bash”         46 hours ago        Up 46 hours                             competent_sammet<br>    41432143ef92        ubuntu              “/bin/bash”         46 hours ago        Up 46 hours                             hardcore_payne<br>    929860f00fa4        ubuntu              “/bin/bash”         47 hours ago        Up 47 hours                             competent_perlman<br>    d2170af637a4        centos              “/bin/bash”         47 hours ago        Up 47 hours                             epic_stallman<br>    3ac68df6d5de        ubuntu              “/bin/bash”         47 hours ago        Up 47 hours                             blissful_northcutt<br>    8b9e5cc28561        ubuntu              “/bin/bash”         47 hours ago        Up 47 hours                             cranky_stallman</p>
-<pre><code>[root@ubuntu:~]# docker container rm 1862e1300c97 
+</code></pre><h2 id="docker-export导出容器快照"><a href="#docker-export导出容器快照" class="headerlink" title="docker export导出容器快照"></a>docker export导出容器快照</h2><pre><code>[root@ubuntu:~]# docker export cd92f0ec9d40 &gt;/tmp/ubuntu.tar 
+[root@ubuntu:~]# ls /tmp/
+ubuntu.tar            unity_support_test.0
+</code></pre><h2 id="docker-import导入容器快照"><a href="#docker-import导入容器快照" class="headerlink" title="docker import导入容器快照"></a>docker import导入容器快照</h2><pre><code>[root@ubuntu:~]# cat /tmp/ubuntu.tar |docker import - test/ubuntu:v1.0
+sha256:0ccd5ef276a3b175b14d9b031fba85bbdf44e8d5819a62d49564333398f0e9dc
+[root@ubuntu:~]# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED              SIZE
+test/ubuntu         v1.0                072cd43a3a6a        About a minute ago   85.8MB
+</code></pre><h2 id="docker-rm-删除容器"><a href="#docker-rm-删除容器" class="headerlink" title="docker rm 删除容器"></a>docker rm 删除容器</h2><pre><code>[root@ubuntu:~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+1862e1300c97        ubuntu              &quot;/bin/bash&quot;         46 hours ago        Up 46 hours                             stupefied_chebyshev
+4f078216cfef        ubuntu              &quot;/bin/bash&quot;         46 hours ago        Up 46 hours                             competent_sammet
+41432143ef92        ubuntu              &quot;/bin/bash&quot;         46 hours ago        Up 46 hours                             hardcore_payne
+929860f00fa4        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             competent_perlman
+d2170af637a4        centos              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             epic_stallman
+3ac68df6d5de        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             blissful_northcutt
+8b9e5cc28561        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             cranky_stallman
+
+[root@ubuntu:~]# docker container rm 1862e1300c97 
 Error response from daemon: You cannot remove a running container cd92f0ec9d4018f24ee4a06edd17f38d382dbed174bc578825d72e42219f6653.
 Stop the container before attempting removal or force remove
 注意：因为当前容器是正在运行的，所以直接停止会报错，加上参数-f，docker会发送sigkill信号给容器
@@ -428,8 +484,23 @@ d2170af637a4        centos              &quot;/bin/bash&quot;         47 hours a
 3ac68df6d5de        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             blissful_northcutt
 8b9e5cc28561        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             cranky_stallman
 [root@ubuntu:~]#
-</code></pre><p>##prune清除所有处于终止状态的容器<br>    [root@ubuntu:~]# docker container ls -a<br>    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES<br>    cd92f0ec9d40        ubuntu              “/bin/bash”              46 hours ago        Exited (0) 6 minutes ago                       upbeat_blackwell<br>    4f078216cfef        ubuntu              “/bin/bash”              46 hours ago        Up 46 hours                                    competent_sammet<br>    51783f7ff529        ubuntu              “/bin/bash”              46 hours ago        Exited (0) 46 hours ago                        competent_chebyshev<br>    41432143ef92        ubuntu              “/bin/bash”              47 hours ago        Up 47 hours                                    hardcore_payne<br>    4e80f171f0dd        ubuntu              “/bin/bash”              47 hours ago        Exited (0) 47 hours ago                        xenodochial_dijkstra<br>    e34b31703aac        ubuntu:17.10        “/bin/sh -c ‘whilr t…”   47 hours ago        Exited (0) 47 hours ago                        reverent_bhaskara<br>    929860f00fa4        ubuntu              “/bin/bash”              47 hours ago        Up 47 hours                                    competent_perlman<br>    af27e78a0078        ubuntu              “/bin/bash”              47 hours ago        Exited (0) 47 hours ago                        goofy_hamilton<br>    d4306e006205        ubuntu              “/bin/echo ‘ hello w…”   47 hours ago        Exited (0) 47 hours ago                        relaxed_albattani<br>    6134f0d591a5        ubuntu              “/bin/hello world”       47 hours ago        Created                                        determined_heisenberg<br>    d2170af637a4        centos              “/bin/bash”              47 hours ago        Up 47 hours                                    epic_stallman<br>    3ac68df6d5de        ubuntu              “/bin/bash”              47 hours ago        Up 47 hours                                    blissful_northcutt<br>    8b9e5cc28561        ubuntu              “/bin/bash”              47 hours ago        Up 47 hours                                    cranky_stallman</p>
-<pre><code>[root@ubuntu:~]# docker container prune
+</code></pre><h2 id="prune清除所有处于终止状态的容器"><a href="#prune清除所有处于终止状态的容器" class="headerlink" title="prune清除所有处于终止状态的容器"></a>prune清除所有处于终止状态的容器</h2><pre><code>[root@ubuntu:~]# docker container ls -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+cd92f0ec9d40        ubuntu              &quot;/bin/bash&quot;              46 hours ago        Exited (0) 6 minutes ago                       upbeat_blackwell
+4f078216cfef        ubuntu              &quot;/bin/bash&quot;              46 hours ago        Up 46 hours                                    competent_sammet
+51783f7ff529        ubuntu              &quot;/bin/bash&quot;              46 hours ago        Exited (0) 46 hours ago                        competent_chebyshev
+41432143ef92        ubuntu              &quot;/bin/bash&quot;              47 hours ago        Up 47 hours                                    hardcore_payne
+4e80f171f0dd        ubuntu              &quot;/bin/bash&quot;              47 hours ago        Exited (0) 47 hours ago                        xenodochial_dijkstra
+e34b31703aac        ubuntu:17.10        &quot;/bin/sh -c &apos;whilr t…&quot;   47 hours ago        Exited (0) 47 hours ago                        reverent_bhaskara
+929860f00fa4        ubuntu              &quot;/bin/bash&quot;              47 hours ago        Up 47 hours                                    competent_perlman
+af27e78a0078        ubuntu              &quot;/bin/bash&quot;              47 hours ago        Exited (0) 47 hours ago                        goofy_hamilton
+d4306e006205        ubuntu              &quot;/bin/echo &apos; hello w…&quot;   47 hours ago        Exited (0) 47 hours ago                        relaxed_albattani
+6134f0d591a5        ubuntu              &quot;/bin/hello world&quot;       47 hours ago        Created                                        determined_heisenberg
+d2170af637a4        centos              &quot;/bin/bash&quot;              47 hours ago        Up 47 hours                                    epic_stallman
+3ac68df6d5de        ubuntu              &quot;/bin/bash&quot;              47 hours ago        Up 47 hours                                    blissful_northcutt
+8b9e5cc28561        ubuntu              &quot;/bin/bash&quot;              47 hours ago        Up 47 hours                                    cranky_stallman
+
+[root@ubuntu:~]# docker container prune
 WARNING! This will remove all stopped containers.
 Are you sure you want to continue? [y/N] y
 Deleted Containers:
@@ -453,9 +524,14 @@ d2170af637a4        centos              &quot;/bin/bash&quot;         47 hours a
 3ac68df6d5de        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             blissful_northcutt
 8b9e5cc28561        ubuntu              &quot;/bin/bash&quot;         47 hours ago        Up 47 hours                             cranky_stallman
 [root@ubuntu:~]#
-</code></pre><p>##docker stop停止一个容器<br>    [root@ubuntu:~]# docker run -it ubuntu /bin/bash<br>    [root@2a1de0464580:/]#<br>    [root@ubuntu:~]# docker ps<br>    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES<br>    2a1de0464580        ubuntu              “/bin/bash”         41 seconds ago      Up 40 seconds                           romantic_bhaskara<br>    [root@ubuntu:~]# docker stop 2a1de0464580<br>    2a1de0464580</p>
-<pre><code>*docker search**拉取镜像
-[root@ubuntu:~]# docker search centos
+</code></pre><h2 id="docker-stop停止一个容器"><a href="#docker-stop停止一个容器" class="headerlink" title="docker stop停止一个容器"></a>docker stop停止一个容器</h2><pre><code>[root@ubuntu:~]# docker run -it ubuntu /bin/bash
+[root@2a1de0464580:/]#
+[root@ubuntu:~]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+2a1de0464580        ubuntu              &quot;/bin/bash&quot;         41 seconds ago      Up 40 seconds                           romantic_bhaskara
+[root@ubuntu:~]# docker stop 2a1de0464580
+2a1de0464580
+</code></pre><h2 id="docker-search拉取镜像"><a href="#docker-search拉取镜像" class="headerlink" title="docker search拉取镜像"></a>docker search拉取镜像</h2><pre><code>[root@ubuntu:~]# docker search centos
 NAME                               DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
 centos                             The official build of CentOS.                   4188                [OK]
 ansible/centos7-ansible            Ansible on Centos7                              108                                     [OK]
@@ -500,8 +576,13 @@ centos              latest              e934aafc2206        8 days ago          
 
  -a 显示所有镜像
  -q 显示镜像ID
-</code></pre><p>##docker pull下载镜像到本地<br>    [root@ubuntu:~]# docker pull centos<br>    Using default tag: latest<br>    latest: Pulling from library/centos<br>    Digest: sha256:989b936d56b1ace20ddf855a301741e52abca38286382cba7f44443210e96d16<br>    Status: Image is up to date for centos:latest<br>    root@ubuntu:~#</p>
-
+</code></pre><h2 id="docker-pull下载镜像到本地"><a href="#docker-pull下载镜像到本地" class="headerlink" title="docker pull下载镜像到本地"></a>docker pull下载镜像到本地</h2><pre><code>[root@ubuntu:~]# docker pull centos
+Using default tag: latest
+latest: Pulling from library/centos
+Digest: sha256:989b936d56b1ace20ddf855a301741e52abca38286382cba7f44443210e96d16
+Status: Image is up to date for centos:latest
+root@ubuntu:~#
+</code></pre>
       
     </div>
 	
@@ -643,7 +724,7 @@ centos              latest              e934aafc2206        8 days ago          
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -719,7 +800,7 @@ centos              latest              e934aafc2206        8 days ago          
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-run运行一个容器"><span class="nav-number">1.</span> <span class="nav-text">docker run运行一个容器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-run运行一个容器"><span class="nav-number">1.</span> <span class="nav-text">docker run运行一个容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-ps-列出容器"><span class="nav-number">2.</span> <span class="nav-text">docker ps 列出容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-inspect列出镜像信息"><span class="nav-number">3.</span> <span class="nav-text">docker inspect列出镜像信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-attach进入后台运行的容器"><span class="nav-number">4.</span> <span class="nav-text">docker attach进入后台运行的容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-exec-命令"><span class="nav-number">5.</span> <span class="nav-text">docker exec 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-export导出容器快照"><span class="nav-number">6.</span> <span class="nav-text">docker export导出容器快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-import导入容器快照"><span class="nav-number">7.</span> <span class="nav-text">docker import导入容器快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-rm-删除容器"><span class="nav-number">8.</span> <span class="nav-text">docker rm 删除容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prune清除所有处于终止状态的容器"><span class="nav-number">9.</span> <span class="nav-text">prune清除所有处于终止状态的容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-stop停止一个容器"><span class="nav-number">10.</span> <span class="nav-text">docker stop停止一个容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-search拉取镜像"><span class="nav-number">11.</span> <span class="nav-text">docker search拉取镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-pull下载镜像到本地"><span class="nav-number">12.</span> <span class="nav-text">docker pull下载镜像到本地</span></a></li></ol></div>
             
 
           </div>
