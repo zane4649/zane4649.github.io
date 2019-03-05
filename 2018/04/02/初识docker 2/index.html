@@ -78,7 +78,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/BKmp13Y.jpg">
 <meta property="og:image" content="https://i.imgur.com/tgEMC2j.png">
-<meta property="og:updated_time" content="2018-04-03T03:19:34.156Z">
+<meta property="og:updated_time" content="2018-05-02T06:44:52.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Docker 二">
 <meta name="twitter:description" content="Docker的安装">
@@ -383,18 +383,16 @@ Linux version 4.13.0-1011-gcp (buildd@lgw01-amd64-006)
 </code></pre><h2 id="卸载之前旧版本的Docker"><a href="#卸载之前旧版本的Docker" class="headerlink" title="卸载之前旧版本的Docker"></a><strong>卸载之前旧版本的Docker</strong></h2><pre><code>[zane4649@instance-2:~]$ sudo apt-get remove docker docker-engine docker.io
 </code></pre><h2 id="安装apt源依赖"><a href="#安装apt源依赖" class="headerlink" title="安装apt源依赖"></a><strong>安装apt源依赖</strong></h2><pre><code>因为要确保apt源使用https下载过程不被更改，因此要添加https传输的软件包和ca证书
 [zane4649@instance-2:~]$ sudo apt-get update
-[zane4649@instance-2:~]$ sudo apt-get install \ apt-transport-https \
-                       ca-certificates \ curl \
-                       software-properties-common
+[zane4649@instance-2:~]$ sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ software-properties-common
 </code></pre><h2 id="添加Docker的官方GPG密钥"><a href="#添加Docker的官方GPG密钥" class="headerlink" title="添加Docker的官方GPG密钥"></a><strong>添加Docker的官方GPG密钥</strong></h2><pre><code>[zane4649@instance-2:~]$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 </code></pre><h2 id="添加docker软件源"><a href="#添加docker软件源" class="headerlink" title="添加docker软件源"></a><strong>添加docker软件源</strong></h2><pre><code>[zane4649@instance-2:~]$ sudo add-apt-repository \
                        &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
                        $(lsb_release -cs) \
                        stable&quot;
 </code></pre><h2 id="更新Docker软件包索引"><a href="#更新Docker软件包索引" class="headerlink" title="更新Docker软件包索引"></a><strong>更新Docker软件包索引</strong></h2><pre><code>[zane4649@instance-2:~]$ sudo apt-get update
-</code></pre><h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a><strong>安装Docker</strong></h2><pre><code>[zane4649@instance-2:~]$ sudo apt-get install docker-ce
-</code></pre><h2 id="启动Docker"><a href="#启动Docker" class="headerlink" title="启动Docker"></a><strong>启动Docker</strong></h2><pre><code>[zane4649@instance-2:~]$ sudo sytemctl enable docker
-[zane4649@instance-2:~]$ sudo sytemctl starrt docker
+</code></pre><h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a><strong>安装Docker</strong></h2><pre><code>[zane4649@instance-2:~]$ sudo apt-get -y install docker-ce
+</code></pre><h2 id="启动Docker"><a href="#启动Docker" class="headerlink" title="启动Docker"></a><strong>启动Docker</strong></h2><pre><code>[zane4649@instance-2:~]$ sudo systemctl enable docker
+[zane4649@instance-2:~]$ sudo systemctl start docker
 </code></pre><h2 id="创建docker用户组"><a href="#创建docker用户组" class="headerlink" title="创建docker用户组"></a><strong>创建docker用户组</strong></h2><pre><code>默认情况，docker命令会使用Unix socket与docker建立通讯，而只有root和docker组的用户
 才可以访问docker引擎的Unix socket。因此要创建docker用户并加入docker组，因为root权限过大
 
@@ -656,6 +654,10 @@ c86c09d8da04        hello-world         &quot;/hello&quot;            3 hours ag
                   <a href="http://www.axugege.com/" title="Axu" target="_blank">Axu</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="https://zy17105022.jz.fkw.com/col.jsp?id=102" title="BossDai" target="_blank">BossDai</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -698,7 +700,7 @@ c86c09d8da04        hello-world         &quot;/hello&quot;            3 hours ag
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

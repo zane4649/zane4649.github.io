@@ -76,7 +76,7 @@
 <meta property="og:site_name" content="Wenbing&#39;s Blog">
 <meta property="og:description" content="&amp;emsp;&amp;emsp; 仓库是存放镜像的地方，每个服务器可以有多个仓库，而每个仓库下面有多个镜像。仓库分为公库和私库，官方的公共仓库就是docker Hub,不过国内被墙。今天就来创建一个私有仓库">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-18T14:35:27.578Z">
+<meta property="og:updated_time" content="2018-04-18T14:38:47.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建Docker私有仓库">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp; 仓库是存放镜像的地方，每个服务器可以有多个仓库，而每个仓库下面有多个镜像。仓库分为公库和私库，官方的公共仓库就是docker Hub,不过国内被墙。今天就来创建一个私有仓库">
@@ -373,7 +373,7 @@ docker: Error response from daemon: driver failed programming external connectiv
 [root@ubuntu:/]# docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry registry
 49bc7964d631d1c45058a1b03305106c13afb959eb4c794c6fed9233c1c1ce1b
 [root@ubuntu:/]# cd /opt/data/
-[root@ubuntu:/]opt/data# ls
+[root@ubuntu:/opt/data]# ls
 registry
 可以看到registry目录，表示成功了
 </code></pre><h2 id="docker-tag"><a href="#docker-tag" class="headerlink" title="docker tag"></a>docker tag</h2><pre><code>将test/ubuntu v1.0 这个镜像标记为 127.0.0.0:5000/ubuntu:latest
@@ -396,13 +396,13 @@ ubuntu                  latest              c9d990395902        2 days ago      
 ubuntu                  17.10               14107f6d2c97        2 days ago          99.1MB
 centos                  latest              e934aafc2206        8 days ago          199MB
 registry                latest              d1fd7d86a825        3 months ago        33.3MB
-root@ubuntu:/opt/data#
+[root@ubuntu:/opt/data]#
 </code></pre><h2 id="docker-push"><a href="#docker-push" class="headerlink" title="docker push"></a>docker push</h2><pre><code>上传标记的镜像
 [root@ubuntu:/opt/data]# docker push 127.0.0.1:5000/ubuntu
 The push refers to repository [127.0.0.1:5000/ubuntu]
 414667feb05a: Pushed
 latest: digest: sha256:c408657b59e55a1ca24e7b5165bdf620031c79d5b803b2df68b12ed249dfe951 size: 528
-</code></pre><h2 id="curl查看仓库中的镜像，"><a href="#curl查看仓库中的镜像，" class="headerlink" title="curl查看仓库中的镜像，"></a>curl查看仓库中的镜像，</h2><pre><code>可以看到 {&quot;repositories&quot;:[&quot;ubuntu&quot;]} 表示上传成功
+</code></pre><h2 id="curl查看仓库中的镜像"><a href="#curl查看仓库中的镜像" class="headerlink" title="curl查看仓库中的镜像"></a>curl查看仓库中的镜像</h2><pre><code>可以看到 {&quot;repositories&quot;:[&quot;ubuntu&quot;]} 表示上传成功
 [root@ubuntu:/opt/data]# curl 127.0.0.1:5000/v2/_catalog
 {&quot;repositories&quot;:[&quot;ubuntu&quot;]}
 </code></pre><h2 id="验证："><a href="#验证：" class="headerlink" title="验证："></a>验证：</h2><pre><code>删除已经创建的127.0.0.1:5000/ubuntu镜像，再从私有仓库下载刚创建的镜像
@@ -638,6 +638,10 @@ registry                latest              d1fd7d86a825        3 months ago    
                   <a href="http://www.axugege.com/" title="Axu" target="_blank">Axu</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="https://zy17105022.jz.fkw.com/col.jsp?id=102" title="BossDai" target="_blank">BossDai</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -657,7 +661,7 @@ registry                latest              d1fd7d86a825        3 months ago    
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动registry镜像"><span class="nav-number">1.</span> <span class="nav-text">启动registry镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-tag"><span class="nav-number">2.</span> <span class="nav-text">docker tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-push"><span class="nav-number">3.</span> <span class="nav-text">docker push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curl查看仓库中的镜像，"><span class="nav-number">4.</span> <span class="nav-text">curl查看仓库中的镜像，</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证："><span class="nav-number">5.</span> <span class="nav-text">验证：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动registry镜像"><span class="nav-number">1.</span> <span class="nav-text">启动registry镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-tag"><span class="nav-number">2.</span> <span class="nav-text">docker tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-push"><span class="nav-number">3.</span> <span class="nav-text">docker push</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curl查看仓库中的镜像"><span class="nav-number">4.</span> <span class="nav-text">curl查看仓库中的镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证："><span class="nav-number">5.</span> <span class="nav-text">验证：</span></a></li></ol></div>
             
 
           </div>
@@ -680,7 +684,7 @@ registry                latest              d1fd7d86a825        3 months ago    
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
