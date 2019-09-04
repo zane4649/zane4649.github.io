@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://yoursite.com/2019/09/04/python01_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2019-09-04T05:07:52.098Z</lastmod>
+    <data>
+        <display>
+        <title>python语法基础</title>
+        <pubTime>2019-09-04T03:12:33.529Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python" url="http://yoursite.com/categories/Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2019/08/27/Python%E5%86%92%E6%B3%A1%E6%B3%95/</loc>
     <lastmod>2019-08-27T02:24:33.396Z</lastmod>
     <data>
@@ -106,24 +124,6 @@
            
              
               <breadCrumb title="Docker" url="http://yoursite.com/categories/Docker/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/03/29/2018%E9%9A%8F%E6%89%8B%E4%B8%80%E8%AE%B0/</loc>
-    <lastmod>2018-03-30T11:33:18.534Z</lastmod>
-    <data>
-        <display>
-        <title>2018年随手一记</title>
-        <pubTime>2018-03-29T04:37:17.843Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="日常生活" url="http://yoursite.com/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
           
         </display>
     </data>

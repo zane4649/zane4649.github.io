@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-27T02:24:33.396Z</updated>
+  <updated>2019-09-04T05:07:52.098Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python语法基础</title>
+    <link href="http://yoursite.com/2019/09/04/python01_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/09/04/python01_基础语法/</id>
+    <published>2019-09-04T03:12:33.529Z</published>
+    <updated>2019-09-04T05:07:52.098Z</updated>
+    
+    <content type="html"><![CDATA[<p>python是一门解释性语言，动态语言，强类型语言</p><h2 id="语言分类"><a href="#语言分类" class="headerlink" title="语言分类"></a><strong>语言分类</strong></h2><pre><code>编译语言：编辑器把代码程序编译成一个文件才能执行的语言，(例如.exe)解释语言：一边解释，一边执行</code></pre><p>两者的区别：<br>    白话解释：编译语言就像炒菜，非要把菜炒好了才能吃<br>             解释语言就像吃火锅，可以一边煮一边吃<a id="more"></a></p><p>静态语言：使用前必须声明变量类型，类型不能再改变，编译的时候会检查<br>动态语言：不用事先声明变量，随时可以赋值为其他类型</p><p>强类型语言：不同类型之间操作，必须先“强制类型转换”为同一类型,如python print(‘a’+1)<br>弱类型语言：不同类型之间可以操作，自动隐士转换，如javaScript中console(1+’a’)</p><blockquote><h2 id="python基础语法："><a href="#python基础语法：" class="headerlink" title="python基础语法："></a>python基础语法：</h2><h3 id="转义序列"><a href="#转义序列" class="headerlink" title="转义序列"></a><strong>转义序列</strong></h3></blockquote><pre><code>转义符主要有：\\  \t  \r  \n \&apos; \&quot;\用法：&gt;&gt;&gt; print(&apos;c:\user\test&apos;)  File &quot;&lt;stdin&gt;&quot;, line 1SyntaxError: (unicode error) &apos;unicodeescape&apos; codec can&apos;t decode bytes in position 2-3: truncated \uXXXX escape&gt;&gt;&gt; print(&apos;c:\\user\\test&apos;)c:\user\test&gt;&gt;&gt;</code></pre><blockquote><h3 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a><strong>算数运算符</strong></h3></blockquote><pre><code>  算数运算符主要有6种：+ - * / % **自然数除/的结果是浮点数，整除//    例子：&gt;&gt;&gt; 2 * 3    乘6&gt;&gt;&gt; 6 / 3    除2.0&gt;&gt;&gt; 6//3     整除2&gt;&gt;&gt; 10 % 3   取模1&gt;&gt;&gt; 2 ** 2   幂运算4</code></pre><blockquote><h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a><strong>位运算符</strong></h3></blockquote><pre><code>位运算符主要有6种：&amp;：按位与运算，参与的运算的2个值，如果相应位都是1，则该位的结果为1，否则为0|：按位或运算，只要对应的2个二进制有一个为1时，则结果为1^：按位异或运算，当2个对应的二进位想异时，结果为1~：按位取反运算，对数据的每个二进制位取反，即1变成0,0变成1&lt;&lt;：左移位运算，运算的各二进位全部左移若干位，高位丢弃，低位补0&gt;&gt;：右移位运算，运算的各二进位全部右移若干位，高位丢弃，低位补0例子：&gt;&gt;&gt; a=60&gt;&gt;&gt; b=13&gt;&gt;&gt; a &amp; b12&gt;&gt;&gt; a | b61&gt;&gt;&gt; ~a-61&gt;&gt;&gt; a ^ b49&gt;&gt;&gt; a &lt;&lt; 2   向左边移动2位240&gt;&gt;&gt; a &gt;&gt; 2   向右边移动2位15&gt;&gt;&gt;解答“&amp;运算”为什么结果是12：60在二进制表示：0011 110013再二进制表示：0000 1101按&amp;位运算符号的定义，结果为：0000 1100 </code></pre><blockquote><h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a><strong>比较运算符</strong></h3></blockquote><pre><code>比较运算符主要有6种：==：比较对象是否相等    !=：，比较两个对象是否不相等    &gt;：返回a是否大于b    &lt;：返回a是否小于b&gt;=：返回a是否大于等于b&lt;=：返回a是否小于等于b    所有比较运算符返回1表示真，返回0表示假。这分别与特殊的变量True和False等价。&gt;&gt;&gt; a=60&gt;&gt;&gt; b=13&gt;&gt;&gt; a == bFalse&gt;&gt;&gt; a != bTrue&gt;&gt;&gt; a &gt; bTrue&gt;&gt;&gt; a &lt; bFalse&gt;&gt;&gt; a &gt;= bTrue&gt;&gt;&gt; a &lt;= bFalse&gt;&gt;&gt;</code></pre><blockquote><h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a><strong>逻辑运算符</strong></h3></blockquote><pre><code>逻辑运算符主要有3种：and     如果 a 为 False，a and b 返回 False，否则它返回 b 的计算值。    or     如果 a 为 True，它返回 a 的值，否则它返回 b 的计算值。not     如果 a 为 True，返回 False 。如果 a 为 False，它返回 True。&gt;&gt;&gt; a and b   a为True所以返回b的值13&gt;&gt;&gt; a or b    a为True所以返回a的值60&gt;&gt;&gt; not a     a为True所以返回FalseFalse</code></pre><blockquote><h3 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a><strong>成员运算符</strong></h3></blockquote><pre><code>成员运算符主要有2种：    in：如果在指定的序列找打了值返回True，否则为False    not in:如果没有在指定的序列找打值返回True,否则返回True&gt;&gt;&gt; lst =(1,3,6,8,4)&gt;&gt;&gt; 2 in lstFalse&gt;&gt;&gt; 3 in lstTrue&gt;&gt;&gt; 9 not in lstTrue&gt;&gt;&gt; 8 not in lstFalse&gt;&gt;&gt;</code></pre><blockquote><h3 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符 "></a><strong>身份运算符 </strong></h3></blockquote><pre><code>身份运算符主要有2种：    is：判断2个标识符是不是引用自一个对象    is not：判断2个标识符是不是引用自不同对象&gt;&gt;&gt; a = 20&gt;&gt;&gt; b = 20&gt;&gt;&gt; id(a)140710943307184&gt;&gt;&gt; id(b)140710943307184&gt;&gt;&gt;&gt;&gt;&gt; a is bTrue&gt;&gt;&gt; id(a) is id(b)False&gt;&gt;&gt; a is not bFalse&gt;&gt;&gt; id(a) is not id(b)True&gt;&gt;&gt;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;python是一门解释性语言，动态语言，强类型语言&lt;/p&gt;
+&lt;h2 id=&quot;语言分类&quot;&gt;&lt;a href=&quot;#语言分类&quot; class=&quot;headerlink&quot; title=&quot;语言分类&quot;&gt;&lt;/a&gt;&lt;strong&gt;语言分类&lt;/strong&gt;&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;编译语言：编辑器把代码程序编译成一个文件才能执行的语言，(例如.exe)
+解释语言：一边解释，一边执行
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;两者的区别：&lt;br&gt;    白话解释：编译语言就像炒菜，非要把菜炒好了才能吃&lt;br&gt;             解释语言就像吃火锅，可以一边煮一边吃
+    
+    </summary>
+    
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Python冒泡法排序</title>
@@ -143,23 +166,24 @@
   </entry>
   
   <entry>
-    <title>2018年随手一记</title>
-    <link href="http://yoursite.com/2018/03/29/2018%E9%9A%8F%E6%89%8B%E4%B8%80%E8%AE%B0/"/>
-    <id>http://yoursite.com/2018/03/29/2018随手一记/</id>
-    <published>2018-03-29T04:37:17.843Z</published>
-    <updated>2018-03-30T11:33:18.534Z</updated>
+    <title>windows下安装RabbitMQ</title>
+    <link href="http://yoursite.com/2018/03/27/windows%E5%AE%89%E8%A3%85rabbitmq/"/>
+    <id>http://yoursite.com/2018/03/27/windows安装rabbitmq/</id>
+    <published>2018-03-27T05:22:38.602Z</published>
+    <updated>2017-10-09T03:37:48.231Z</updated>
     
-    <content type="html"><![CDATA[<p>&emsp;&emsp; 前几天跟阿旭聊天的时候，突然说到了我的博客，发现我的域名已经过期了(很尴尬),从去年离职换了工作之后，就一直没怎么去打理博客了，不知道怎么就变的这么懒了(可能是老了)，想当年我也是高产的博主啊。</p><p>&emsp;&emsp; 之前博客搭建在公司的电脑上，离职后在家里又重新搭建了一次，准备继续更新博客，然而还没用多久，我就换固态硬盘了!!! 东芝(TOSHIBA)-Q200系列 240G,(为什么要选东芝？ 因为是东芝原厂MLC颗粒啊！),不得不说换了固态硬盘之后明显的感觉到电脑的性能提升了很多，也可能是我电脑太垃圾了(用了四五年的 “ThinkPad”),<a id="more"></a>想更新博客又要重新搭建环境了，然后太懒了就一直没动。。。。</p><p>&emsp;&emsp; 直到2018年3月26号，重新续费了一个域名，换成www.belongwithme.com了，才开始重新搭建了一下环境，安装Git，Node.Js,Hexo等， 然而创建分支的时候，还没有合并分支，手抖了不知道怎么输入了hexo d 提交代码了，直接都提交到master了，之前所有的博客都被重新覆盖了，都变成2018-03-27那天发布了，被自己蠢哭！！！重新搭建了一下，其实也没费什么力气，就是装几个软件，之前的代码直接 git  clone一下就好了，不过在分支管理的时候还是有点麻烦，要多看一下官方文档，用了一下新的评论系统，虽然之前国内的有言也可以用，但是总感觉别扭，不怎么好看，这次换成了livere(来必力)，感觉就好多了，就是加载比较慢。。。</p><p>&emsp;&emsp; 下面说一下最近的生活吧，最近刚学完了一些docker的课程，简单学习了一下docker的网络连接，数据的管理，以及跨主机的访问是如何实现的，不得不说docker容器技术确实很热门，很轻量，但是很高效，比起传统的方案优点很多！</p><p>&emsp;&emsp; 除了学习这些技术之外，最近在看”吴军老师”的《文明之光》，之前也看过”吴军老师”写的《浪潮之巅》，主要讲IT行业发展史，HP,IBM,APPLE,微软，Google,SUN,Cisco,这些公司是怎么崛起的，如何站到了互联网这个浪潮的巅峰，以及斯坦福大学为什么可以成为科技公司的人才摇篮！一个偶然的机会看了《文明之光》这本书，主要是讲历史的，从最开始的宇宙再到地球生命的起源，从古埃及文明到美索不达米亚文明，再到古代科学之路，大开眼界，之前一直觉得”中华文明”是最源远流长的，动不动就中华上下5000年文化，我们从小报纸电视媒体上都是这么说的，看了吴军老师的讲解之后才知道地球上有一个国家叫古埃及，在中国商朝刚建立的时候，古埃及已经存在千年而且还出土了文字。。。心碎！才看了百分之十五，后面看完了有新的收货再分享！</p><p>&emsp;&emsp; 简单的介绍一下”吴军老师”,吴军老师毕业于清华大学，之前腾讯的副总裁，现任Google的科学家。。。。还是默默的看书吧！</p>]]></content>
+    <content type="html"><![CDATA[<p>今天学习Python第11天的课程，讲消息队列，当然说的就是RabbitMQ，于是就想起，写篇博客记录一下安装过程！<br><img src="https://i.imgur.com/RaoQK9b.png" alt=""></p><a id="more"></a><p><strong> 版本说明 </strong><br>    OS: win10_1703<br>    Erlang: 20.1<br>    RabbitMQ: 3.6.12</p><p><strong> 安装erlang </strong></p><pre><code>RabbitMQ是建立Erlang平台上，所以先要装上erlang我这里安装的版本是：otp_win64_20.1（各人按自己系统版本下载）官方下载地址：http://www.erlang.org/downloads</code></pre><p><strong>添加环境变量</strong><br><img src="https://i.imgur.com/1kYBja7.png" alt=""></p><p><strong>安装RabbitMQ</strong></p><pre><code>我这里下载的版本是：rabbitmq-server-3.6.12官方下载地址：http://www.rabbitmq.com/download.html</code></pre><p><strong>配置RabbitMQ</strong></p><pre><code>激活rabbitmq-plugins(C:\Program Files\RabbitMQ Server\rabbitmq_server-3.6.12\sbin\rabbitmq-plugins.bat)命令：rabbitmq-plugins enable rabbitmq_management需要重启服务才能生效</code></pre><p><img src="https://i.imgur.com/bcV9bg6.png" alt=""></p><p><strong>访问控制台</strong><br>     上面步骤都配置好后，浏览器地址栏输入：<a href="http://localhost:15672(" target="_blank" rel="external">http://localhost:15672(</a> 默认用户和密码都是guest)</p><p> <img src="https://i.imgur.com/4BWu5BR.png" alt=""></p><p>最后：简单的配置到这里就结束了，后续有其他的要求到时候再更新博客</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&amp;emsp;&amp;emsp; 前几天跟阿旭聊天的时候，突然说到了我的博客，发现我的域名已经过期了(很尴尬),从去年离职换了工作之后，就一直没怎么去打理博客了，不知道怎么就变的这么懒了(可能是老了)，想当年我也是高产的博主啊。&lt;/p&gt;
-&lt;p&gt;&amp;emsp;&amp;emsp; 之前博客搭建在公司的电脑上，离职后在家里又重新搭建了一次，准备继续更新博客，然而还没用多久，我就换固态硬盘了!!! 东芝(TOSHIBA)-Q200系列 240G,(为什么要选东芝？ 因为是东芝原厂MLC颗粒啊！),不得不说换了固态硬盘之后明显的感觉到电脑的性能提升了很多，也可能是我电脑太垃圾了(用了四五年的 “ThinkPad”),
+      &lt;p&gt;今天学习Python第11天的课程，讲消息队列，当然说的就是RabbitMQ，于是就想起，写篇博客记录一下安装过程！&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/RaoQK9b.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     
-      <category term="日常生活" scheme="http://yoursite.com/categories/%E6%97%A5%E5%B8%B8%E7%94%9F%E6%B4%BB/"/>
+      <category term="RabbitMQ" scheme="http://yoursite.com/categories/RabbitMQ/"/>
     
+    
+      <category term="RabbitMQ" scheme="http://yoursite.com/tags/RabbitMQ/"/>
     
   </entry>
   
@@ -187,24 +211,25 @@
   </entry>
   
   <entry>
-    <title>windows下安装RabbitMQ</title>
-    <link href="http://yoursite.com/2018/03/27/windows%E5%AE%89%E8%A3%85rabbitmq/"/>
-    <id>http://yoursite.com/2018/03/27/windows安装rabbitmq/</id>
-    <published>2018-03-27T05:22:38.602Z</published>
-    <updated>2017-10-09T03:37:48.231Z</updated>
+    <title>Python学习之第五天</title>
+    <link href="http://yoursite.com/2018/03/27/python%E7%AC%AC%E4%BA%94%E5%A4%A9/"/>
+    <id>http://yoursite.com/2018/03/27/python第五天/</id>
+    <published>2018-03-27T05:22:38.570Z</published>
+    <updated>2017-09-27T10:42:25.726Z</updated>
     
-    <content type="html"><![CDATA[<p>今天学习Python第11天的课程，讲消息队列，当然说的就是RabbitMQ，于是就想起，写篇博客记录一下安装过程！<br><img src="https://i.imgur.com/RaoQK9b.png" alt=""></p><a id="more"></a><p><strong> 版本说明 </strong><br>    OS: win10_1703<br>    Erlang: 20.1<br>    RabbitMQ: 3.6.12</p><p><strong> 安装erlang </strong></p><pre><code>RabbitMQ是建立Erlang平台上，所以先要装上erlang我这里安装的版本是：otp_win64_20.1（各人按自己系统版本下载）官方下载地址：http://www.erlang.org/downloads</code></pre><p><strong>添加环境变量</strong><br><img src="https://i.imgur.com/1kYBja7.png" alt=""></p><p><strong>安装RabbitMQ</strong></p><pre><code>我这里下载的版本是：rabbitmq-server-3.6.12官方下载地址：http://www.rabbitmq.com/download.html</code></pre><p><strong>配置RabbitMQ</strong></p><pre><code>激活rabbitmq-plugins(C:\Program Files\RabbitMQ Server\rabbitmq_server-3.6.12\sbin\rabbitmq-plugins.bat)命令：rabbitmq-plugins enable rabbitmq_management需要重启服务才能生效</code></pre><p><img src="https://i.imgur.com/bcV9bg6.png" alt=""></p><p><strong>访问控制台</strong><br>     上面步骤都配置好后，浏览器地址栏输入：<a href="http://localhost:15672(" target="_blank" rel="external">http://localhost:15672(</a> 默认用户和密码都是guest)</p><p> <img src="https://i.imgur.com/4BWu5BR.png" alt=""></p><p>最后：简单的配置到这里就结束了，后续有其他的要求到时候再更新博客</p>]]></content>
+    <content type="html"><![CDATA[<p>最近这段时间，利用业余时间学习了一下Python,写篇博客算是记录一下相关的知识点，方便以后查询，也算做个小总结！</p><p><img src="https://i.imgur.com/RYTHJeH.jpg" alt=""><br><a id="more"></a><br><strong>第五天学习主要类容：模块定义，导入，正则表达式等</strong></p><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h2><pre><code>模块：用来从逻辑上组织python代码（变量，函数，类，）本质就是.py结尾的python文件（文件名：test.py,对应的模块名：test）包：用来从逻辑上组织模块的，本质就是一个目录（必须要有一个__init__.py文件）</code></pre><h2 id="导入方法"><a href="#导入方法" class="headerlink" title="导入方法"></a><strong>导入方法</strong></h2><pre><code>import module_nameimport module1_name,module2_name#import module1_name 相当于把整个模块的代码复制给当前一个变量，然后调用from module_zane frome * #导入module_zane模块的所有，一般不建议这么用 from module_zane import m1,m2 #导入module_zane模块的方法from module_zane import name as new_name #从module_zane模块下导入一个模块（赋给另一个变量）#from 相当于只打开了module_name的一个方法</code></pre><h2 id="import本质"><a href="#import本质" class="headerlink" title="import本质"></a><strong>import本质</strong></h2><pre><code>导入&quot;模块&quot;的本质就是把python文件解释一遍导入&quot;包&quot;的本质就是执行该包下的__init__.py文件）import sys,osprint(sys.path)#print(os.path.abspath(__file__)) #abspath：获取当前文件的绝对路径#此时的路径E:/pycharm/s14/day5/module_test/main.py&quot;x = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))#os.path.dirname:获取路径名，这里因为module_test文件在day5路径下，所以要上找两层sys.path.append(x)  #把获取的路径sys.pathimport module_test</code></pre><h2 id="time和datetime模块"><a href="#time和datetime模块" class="headerlink" title="time和datetime模块"></a><strong>time和datetime模块</strong></h2><pre><code>import time     #导入time模块time.time()          #获取时间戳time.timezone()    #获取时区，中国在东8区time.altzone()    #夏令时和UTC(标准时)的差值time.daylight()    #是否使用了夏令时time.sleep()    #沉睡几秒time.gmtime()    #把时间戳转换成元祖，结果是UTC时区time.localtime()#把时间戳转换成元祖，结果是本地时区time.mktime()   #将元祖转换成时间戳time.strftime() #将元祖转换成字符串格式显示（例：time.strftime(&quot;%Y-%m:%d %H:%M:%S&quot;,x)）time.strptime() #将字符串转换成元祖形式（time.strptime(&apos;2017-09:06 22:19:00&apos;,&quot;%Y-%m:%d %H:%M:%S&quot;））time.astime()   #将元祖转换成字符转形式time.ctime()    #将时间戳转换成字符串形式时间加减：import datatimeprint(datetime.datetime.now()) #返回当前时间print(datetime.datetime.now() + datetime.timedelta(3)) #当前时间+3天print(datetime.datetime.now() + datetime.timedelta(-3)) #当前时间-3天print(datetime.datetime.now() + datetime.timedelta(hours=3)) #当前时间+3小时print(datetime.datetime.now() + datetime.timedelta(hours+30)) #当前时间+30分钟c_time = datetime.datetime.now() #当前时间：2017-09-06 22:53:53.191920print(c_time.replace(minute=3,hour=2)) #时间替换为：2017-09-06 02:03:53.191920</code></pre><h2 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a><strong>random模块</strong></h2><pre><code>import randomrandom.random() #0到1之间的随机数random.randit(1,3) #生成一个指定范围的整数 random.shuffle() #洗牌（例如：i=[1,2,3,4] random.shuffle(i) 输入为：[2,1,4,3）random.choice(&apos;afsdsgfd&apos;) #随机字符random.sample(&apos;afgagradf&apos;,3) #选取特定数量的字符练习：生成4位随机数import randomcheckcode=&apos;&apos;for i in range(4):    current=random.randint(1,9)        if current ==i:                tmp = chr(random.randint(65,90))           else:    tmp = random.randint(0,9)checkcode+=str(tmp)\print(checkcode)</code></pre><h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a><strong>os模块</strong></h2><pre><code>&quot;os&quot;模块是提供对操作系统进行调用的接口import osos.getcwd() #获取当前工作目录os.chdir(r&quot;C:\User&quot;) #切换目录os.curdir  #返回当前目录os.pardir  #获取当前目录的父目录os.makedirs(r&quot;C:\a\b\c&quot;) #递归创建目录os.removedirs(r&quot;C:\a\b\c&quot;) #递归删除目录（如果目录为空则删除上级目录）os.mkdir() #创建单级目录os.rmdir() #删除单级目录os.listdir(r&apos;D:&apos;) #列出D盘下所有文件夹os.remove() #删除一个文件os.rename(&quot;oldname&quot;,&quot;newname&quot;) #修改文件名os.stat(path/filename) #获取文件/目录信息os.sep #输出系统路径分隔符os.environ #输出当前系统的环境变量os.pathsep #输出用于分割文件路径的字符串os.system(dir,ipconfig) #执行系统命令os.path.abspath() #获取文件的绝对路径os.path.split() #将path分割成目录，文件名os.path.dirname(r&apos;C:\a\b\test.txt&apos;) #只获取路径（输出结果为：&apos;C:\\a\\b&apos;）os.path.basename(r&apos;C:\a\b\test.txt&apos;) #只获取文件名(输出结果为：‘test.txt’)os.path.exists(r&apos;D:\a&apos;) #判断路径是否存在（存在返回True,不存在返回False）os.path.file(path)  #判断是否为文件os.path.dir(path)  #判断是否为目录os.path.getatime(path) #获取文件或目录最后的存取时间(返回时间戳)os.path.getmtime(path) #获取文件或路径最后的修改时间(返回时间戳)</code></pre><h2 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a><strong>sys模块</strong></h2><pre><code>import syssys.argv #命令行参数List，第一个元素是程序本身路径sys.exit(n) #程序退出，正常返回&apos;0&apos;,其他返回&apos;1-254&apos;sys.version #获取Python版本信息sys.path    #返回模块搜索路径sys.platform #获取操作系统平台信息</code></pre><h2 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a><strong>shutil模块</strong></h2><pre><code>高级的文件，文件夹，压缩包处理模块shutil.copyfile(&quot;file_name1&quot;,&quot;file_name2&quot;) #复制文件shutil.copytree(&quot;source&quot;,&quot;new_name&quot;) #递归复制文件目录shutil.rmtree(&quot;file_name&quot;) #递归删除文件shutil.make_archive(&quot;压缩文件名&quot;，“type”,&quot;path&quot;) #压缩文件 (例：shutil.make_archive(&quot;shutil_test&quot;,&quot;gzip&quot;,&quot;D:\test.py&quot;))json &amp; picklejson 把python内存中的数据类型转换成字符串（dumps）,调用（loads）pickle 把python特有的类型和python的数据类型进行转换</code></pre><h2 id="json序列化"><a href="#json序列化" class="headerlink" title="json序列化"></a><strong>json序列化</strong></h2><pre><code>序列化就是把python对象编码转换成json格式的字符串import jsoninfo = {    &apos;name&apos;:&apos;zane&apos;,    &apos;age&apos;:22}f = open(&quot;test.txt&quot;,&apos;w&apos;)#print(json.dumps(info))f.write(json.dumps(info)) #dump序列化f.close()</code></pre><h2 id="json反序列化"><a href="#json反序列化" class="headerlink" title="json反序列化"></a><strong>json反序列化</strong></h2><pre><code>反序列化就是把json字符串解码转换成python数据对象import jsonf = open(&quot;test.txt&quot;,&apos;r&apos;)data = json.loads(f.read()) #反序列化loadsprint(data[&quot;age&quot;])f.close()</code></pre><h2 id="configparser模块"><a href="#configparser模块" class="headerlink" title="configparser模块"></a><strong>configparser模块</strong></h2><pre><code>用于生成和修改常见配置文档详情：http://www.cnblogs.com/alex3714/articles/5161349.html</code></pre><h2 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a><strong>hashlib模块</strong></h2><pre><code>一般用于加密,python3.0里代替了md5模块和sha模块，主要提供了MD5,SHA1,SHA256,SHA512等算法import hashlib# f = hashlib.md5()f.update(b&apos;hello&apos;) #b表示byte类型f.update(b&apos;world&apos;)print(f.digest()) #digest:二进制hashprint(f.hexdigest()) #hexdigest:十六进制hash#md5hash = hashlib.md5()hash.update(b&apos;admin&apos;)print(hash.hexdigest())#sha1hash = hashlib.sha1()hash.update(b&apos;admin&apos;)print(hash.hexdigest())#sha256hash = hashlib.sha256()hash.update(b&apos;admin&apos;)print(hash.hexdigest())#sha512hash = hashlib.sha512()hash.update(b&apos;admin&apos;)print(hash.hexdigest())</code></pre><h2 id="hmac模块"><a href="#hmac模块" class="headerlink" title="hmac模块"></a><strong>hmac模块</strong></h2><pre><code>它内部对我们创建&quot;key&quot;和&quot;内容&quot;再进行处理然后再加密import hmacf = hmac.new(b&apos;123AVC&apos;,&apos;小鸡炖蘑菇&apos;.encode(encoding=&apos;utf-8&apos;))print(f.hexdigest())</code></pre><h2 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a><strong>re模块</strong></h2><pre><code>&quot;re&quot;模块一般用于正则表达式匹配re.match()      #文本从头开始搜索re.search()     #从整个文本开始搜索re.findall()    #把所有匹配到的字符放到以列表中的元素返回re.splitall()  #以匹配到的字符当作列表分隔符re.sub()        #匹配字符并替换(例:将数字替换成|并且只替换前面两个,                (re.sub(&quot;[0-9]+&quot;,&quot;|&quot;,&quot;abc12de3f45gh&quot;,count=2)) 结果为:&apos;abc|de|f45gh&apos;).         #匹配换行符之外的任意字符^         #匹配字符开头$         #匹配字符结尾+         #匹配前一个字符1次或多次?         #匹配前1个字符1次或0次(例:re.search(&quot;aa?&quot;,&quot;aaa123&quot;) 结果为:aa){m}      #匹配前一个字符m次(例：re.search(&quot;[0-9]{3}&quot;,&quot;aa1x2d456&quot;) 结果为456){n,m}     #匹配前一个字符n到m次(例：re.findall(&quot;[0-9]{1,3}&quot;,&quot;aa1x2d456&quot;) 结果为:1,2,456)|         #匹配左或|右的字符(例:re.search(&quot;abc|ABC&quot;,&quot;ABCxabcDN&quot;) 结果为:ABC)...        #分组匹配\A        #从字符开头匹配 (例：re.search(&quot;\A[0-9]+[a-z]\Z&quot;,&quot;1234a&quot;) 结果为:1234a)\Z        #从字符结尾匹配，同$\d        #匹配数字0-9\D        #匹配非数字意外的字符(包括特殊字符)\w        #匹配字母，数字\W        #匹配特殊字符\s       #匹配空白字符(例:re.search(&quot;\s+&quot;,&quot;a12gdf \r\n  &quot;) 结果为:\r\n\t)例：1,匹配R开头，a结尾字符ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)2,获取#之间的字符123#hello#     #re.search(&quot;#.+#&quot;)</code></pre><p>文档详细参考：<a href="http://www.cnblogs.com/alex3714/articles/5161349.html" target="_blank" rel="external">http://www.cnblogs.com/alex3714/articles/5161349.html</a></p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;今天学习Python第11天的课程，讲消息队列，当然说的就是RabbitMQ，于是就想起，写篇博客记录一下安装过程！&lt;br&gt;&lt;img src=&quot;https://i.imgur.com/RaoQK9b.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+      &lt;p&gt;最近这段时间，利用业余时间学习了一下Python,写篇博客算是记录一下相关的知识点，方便以后查询，也算做个小总结！&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/RYTHJeH.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
     
     </summary>
     
-      <category term="RabbitMQ" scheme="http://yoursite.com/categories/RabbitMQ/"/>
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
     
     
-      <category term="RabbitMQ" scheme="http://yoursite.com/tags/RabbitMQ/"/>
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   
@@ -227,29 +252,6 @@
     
     
       <category term="Tomcat" scheme="http://yoursite.com/tags/Tomcat/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python学习之第五天</title>
-    <link href="http://yoursite.com/2018/03/27/python%E7%AC%AC%E4%BA%94%E5%A4%A9/"/>
-    <id>http://yoursite.com/2018/03/27/python第五天/</id>
-    <published>2018-03-27T05:22:38.570Z</published>
-    <updated>2017-09-27T10:42:25.726Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近这段时间，利用业余时间学习了一下Python,写篇博客算是记录一下相关的知识点，方便以后查询，也算做个小总结！</p><p><img src="https://i.imgur.com/RYTHJeH.jpg" alt=""><br><a id="more"></a><br><strong>第五天学习主要类容：模块定义，导入，正则表达式等</strong></p><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h2><pre><code>模块：用来从逻辑上组织python代码（变量，函数，类，）本质就是.py结尾的python文件（文件名：test.py,对应的模块名：test）包：用来从逻辑上组织模块的，本质就是一个目录（必须要有一个__init__.py文件）</code></pre><h2 id="导入方法"><a href="#导入方法" class="headerlink" title="导入方法"></a><strong>导入方法</strong></h2><pre><code>import module_nameimport module1_name,module2_name#import module1_name 相当于把整个模块的代码复制给当前一个变量，然后调用from module_zane frome * #导入module_zane模块的所有，一般不建议这么用 from module_zane import m1,m2 #导入module_zane模块的方法from module_zane import name as new_name #从module_zane模块下导入一个模块（赋给另一个变量）#from 相当于只打开了module_name的一个方法</code></pre><h2 id="import本质"><a href="#import本质" class="headerlink" title="import本质"></a><strong>import本质</strong></h2><pre><code>导入&quot;模块&quot;的本质就是把python文件解释一遍导入&quot;包&quot;的本质就是执行该包下的__init__.py文件）import sys,osprint(sys.path)#print(os.path.abspath(__file__)) #abspath：获取当前文件的绝对路径#此时的路径E:/pycharm/s14/day5/module_test/main.py&quot;x = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))#os.path.dirname:获取路径名，这里因为module_test文件在day5路径下，所以要上找两层sys.path.append(x)  #把获取的路径sys.pathimport module_test</code></pre><h2 id="time和datetime模块"><a href="#time和datetime模块" class="headerlink" title="time和datetime模块"></a><strong>time和datetime模块</strong></h2><pre><code>import time     #导入time模块time.time()          #获取时间戳time.timezone()    #获取时区，中国在东8区time.altzone()    #夏令时和UTC(标准时)的差值time.daylight()    #是否使用了夏令时time.sleep()    #沉睡几秒time.gmtime()    #把时间戳转换成元祖，结果是UTC时区time.localtime()#把时间戳转换成元祖，结果是本地时区time.mktime()   #将元祖转换成时间戳time.strftime() #将元祖转换成字符串格式显示（例：time.strftime(&quot;%Y-%m:%d %H:%M:%S&quot;,x)）time.strptime() #将字符串转换成元祖形式（time.strptime(&apos;2017-09:06 22:19:00&apos;,&quot;%Y-%m:%d %H:%M:%S&quot;））time.astime()   #将元祖转换成字符转形式time.ctime()    #将时间戳转换成字符串形式时间加减：import datatimeprint(datetime.datetime.now()) #返回当前时间print(datetime.datetime.now() + datetime.timedelta(3)) #当前时间+3天print(datetime.datetime.now() + datetime.timedelta(-3)) #当前时间-3天print(datetime.datetime.now() + datetime.timedelta(hours=3)) #当前时间+3小时print(datetime.datetime.now() + datetime.timedelta(hours+30)) #当前时间+30分钟c_time = datetime.datetime.now() #当前时间：2017-09-06 22:53:53.191920print(c_time.replace(minute=3,hour=2)) #时间替换为：2017-09-06 02:03:53.191920</code></pre><h2 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a><strong>random模块</strong></h2><pre><code>import randomrandom.random() #0到1之间的随机数random.randit(1,3) #生成一个指定范围的整数 random.shuffle() #洗牌（例如：i=[1,2,3,4] random.shuffle(i) 输入为：[2,1,4,3）random.choice(&apos;afsdsgfd&apos;) #随机字符random.sample(&apos;afgagradf&apos;,3) #选取特定数量的字符练习：生成4位随机数import randomcheckcode=&apos;&apos;for i in range(4):    current=random.randint(1,9)        if current ==i:                tmp = chr(random.randint(65,90))           else:    tmp = random.randint(0,9)checkcode+=str(tmp)\print(checkcode)</code></pre><h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a><strong>os模块</strong></h2><pre><code>&quot;os&quot;模块是提供对操作系统进行调用的接口import osos.getcwd() #获取当前工作目录os.chdir(r&quot;C:\User&quot;) #切换目录os.curdir  #返回当前目录os.pardir  #获取当前目录的父目录os.makedirs(r&quot;C:\a\b\c&quot;) #递归创建目录os.removedirs(r&quot;C:\a\b\c&quot;) #递归删除目录（如果目录为空则删除上级目录）os.mkdir() #创建单级目录os.rmdir() #删除单级目录os.listdir(r&apos;D:&apos;) #列出D盘下所有文件夹os.remove() #删除一个文件os.rename(&quot;oldname&quot;,&quot;newname&quot;) #修改文件名os.stat(path/filename) #获取文件/目录信息os.sep #输出系统路径分隔符os.environ #输出当前系统的环境变量os.pathsep #输出用于分割文件路径的字符串os.system(dir,ipconfig) #执行系统命令os.path.abspath() #获取文件的绝对路径os.path.split() #将path分割成目录，文件名os.path.dirname(r&apos;C:\a\b\test.txt&apos;) #只获取路径（输出结果为：&apos;C:\\a\\b&apos;）os.path.basename(r&apos;C:\a\b\test.txt&apos;) #只获取文件名(输出结果为：‘test.txt’)os.path.exists(r&apos;D:\a&apos;) #判断路径是否存在（存在返回True,不存在返回False）os.path.file(path)  #判断是否为文件os.path.dir(path)  #判断是否为目录os.path.getatime(path) #获取文件或目录最后的存取时间(返回时间戳)os.path.getmtime(path) #获取文件或路径最后的修改时间(返回时间戳)</code></pre><h2 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a><strong>sys模块</strong></h2><pre><code>import syssys.argv #命令行参数List，第一个元素是程序本身路径sys.exit(n) #程序退出，正常返回&apos;0&apos;,其他返回&apos;1-254&apos;sys.version #获取Python版本信息sys.path    #返回模块搜索路径sys.platform #获取操作系统平台信息</code></pre><h2 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a><strong>shutil模块</strong></h2><pre><code>高级的文件，文件夹，压缩包处理模块shutil.copyfile(&quot;file_name1&quot;,&quot;file_name2&quot;) #复制文件shutil.copytree(&quot;source&quot;,&quot;new_name&quot;) #递归复制文件目录shutil.rmtree(&quot;file_name&quot;) #递归删除文件shutil.make_archive(&quot;压缩文件名&quot;，“type”,&quot;path&quot;) #压缩文件 (例：shutil.make_archive(&quot;shutil_test&quot;,&quot;gzip&quot;,&quot;D:\test.py&quot;))json &amp; picklejson 把python内存中的数据类型转换成字符串（dumps）,调用（loads）pickle 把python特有的类型和python的数据类型进行转换</code></pre><h2 id="json序列化"><a href="#json序列化" class="headerlink" title="json序列化"></a><strong>json序列化</strong></h2><pre><code>序列化就是把python对象编码转换成json格式的字符串import jsoninfo = {    &apos;name&apos;:&apos;zane&apos;,    &apos;age&apos;:22}f = open(&quot;test.txt&quot;,&apos;w&apos;)#print(json.dumps(info))f.write(json.dumps(info)) #dump序列化f.close()</code></pre><h2 id="json反序列化"><a href="#json反序列化" class="headerlink" title="json反序列化"></a><strong>json反序列化</strong></h2><pre><code>反序列化就是把json字符串解码转换成python数据对象import jsonf = open(&quot;test.txt&quot;,&apos;r&apos;)data = json.loads(f.read()) #反序列化loadsprint(data[&quot;age&quot;])f.close()</code></pre><h2 id="configparser模块"><a href="#configparser模块" class="headerlink" title="configparser模块"></a><strong>configparser模块</strong></h2><pre><code>用于生成和修改常见配置文档详情：http://www.cnblogs.com/alex3714/articles/5161349.html</code></pre><h2 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a><strong>hashlib模块</strong></h2><pre><code>一般用于加密,python3.0里代替了md5模块和sha模块，主要提供了MD5,SHA1,SHA256,SHA512等算法import hashlib# f = hashlib.md5()f.update(b&apos;hello&apos;) #b表示byte类型f.update(b&apos;world&apos;)print(f.digest()) #digest:二进制hashprint(f.hexdigest()) #hexdigest:十六进制hash#md5hash = hashlib.md5()hash.update(b&apos;admin&apos;)print(hash.hexdigest())#sha1hash = hashlib.sha1()hash.update(b&apos;admin&apos;)print(hash.hexdigest())#sha256hash = hashlib.sha256()hash.update(b&apos;admin&apos;)print(hash.hexdigest())#sha512hash = hashlib.sha512()hash.update(b&apos;admin&apos;)print(hash.hexdigest())</code></pre><h2 id="hmac模块"><a href="#hmac模块" class="headerlink" title="hmac模块"></a><strong>hmac模块</strong></h2><pre><code>它内部对我们创建&quot;key&quot;和&quot;内容&quot;再进行处理然后再加密import hmacf = hmac.new(b&apos;123AVC&apos;,&apos;小鸡炖蘑菇&apos;.encode(encoding=&apos;utf-8&apos;))print(f.hexdigest())</code></pre><h2 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a><strong>re模块</strong></h2><pre><code>&quot;re&quot;模块一般用于正则表达式匹配re.match()      #文本从头开始搜索re.search()     #从整个文本开始搜索re.findall()    #把所有匹配到的字符放到以列表中的元素返回re.splitall()  #以匹配到的字符当作列表分隔符re.sub()        #匹配字符并替换(例:将数字替换成|并且只替换前面两个,                (re.sub(&quot;[0-9]+&quot;,&quot;|&quot;,&quot;abc12de3f45gh&quot;,count=2)) 结果为:&apos;abc|de|f45gh&apos;).         #匹配换行符之外的任意字符^         #匹配字符开头$         #匹配字符结尾+         #匹配前一个字符1次或多次?         #匹配前1个字符1次或0次(例:re.search(&quot;aa?&quot;,&quot;aaa123&quot;) 结果为:aa){m}      #匹配前一个字符m次(例：re.search(&quot;[0-9]{3}&quot;,&quot;aa1x2d456&quot;) 结果为456){n,m}     #匹配前一个字符n到m次(例：re.findall(&quot;[0-9]{1,3}&quot;,&quot;aa1x2d456&quot;) 结果为:1,2,456)|         #匹配左或|右的字符(例:re.search(&quot;abc|ABC&quot;,&quot;ABCxabcDN&quot;) 结果为:ABC)...        #分组匹配\A        #从字符开头匹配 (例：re.search(&quot;\A[0-9]+[a-z]\Z&quot;,&quot;1234a&quot;) 结果为:1234a)\Z        #从字符结尾匹配，同$\d        #匹配数字0-9\D        #匹配非数字意外的字符(包括特殊字符)\w        #匹配字母，数字\W        #匹配特殊字符\s       #匹配空白字符(例:re.search(&quot;\s+&quot;,&quot;a12gdf \r\n  &quot;) 结果为:\r\n\t)例：1,匹配R开头，a结尾字符ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)2,获取#之间的字符123#hello#     #re.search(&quot;#.+#&quot;)</code></pre><p>文档详细参考：<a href="http://www.cnblogs.com/alex3714/articles/5161349.html" target="_blank" rel="external">http://www.cnblogs.com/alex3714/articles/5161349.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近这段时间，利用业余时间学习了一下Python,写篇博客算是记录一下相关的知识点，方便以后查询，也算做个小总结！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/RYTHJeH.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   
@@ -320,6 +322,28 @@
   </entry>
   
   <entry>
+    <title>Centos7 LB集群之LVS（一）</title>
+    <link href="http://yoursite.com/2018/03/27/LVS+NAT/"/>
+    <id>http://yoursite.com/2018/03/27/LVS+NAT/</id>
+    <published>2018-03-27T05:22:38.517Z</published>
+    <updated>2017-09-26T03:23:30.659Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>LVS</strong>(linux virtue server)是一个虚拟的服务器集群系统。项目在1998年5月由章文嵩成立，是中国国内最早出现的自由软件项目之一。<br>LVS集群采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。<a id="more"></a></p><p><strong>目的</strong>：利用LVS实现负载均衡</p><p>模型图：<br><img src="http://i.imgur.com/2tSFs0K.jpg" alt=""></p><h2 id="配置IP"><a href="#配置IP" class="headerlink" title="配置IP"></a><strong>配置IP</strong></h2><p>lvs eth0： 192.168.1.103（VIP）<br>    eth1： 192.168.201.138（DIP）<br>web1 eth0：192.168.201.137<br>       lo：192.168.201.103<br>web2 eth0：192.168.201.132<br>    lo ：192.168.201.103 </p><h2 id="安装http服务"><a href="#安装http服务" class="headerlink" title="安装http服务"></a><strong>安装http服务</strong></h2><p>[root@WEB1 ~]# yum -y install httpd<br>[root@WEB1 ~]# systemctl enable http.service<br>[root@WEB1 ~]# systemctl start  http.service<br>[root@WEB1 ~]# echo “1” &gt;/var/www/html/index.html<br>[root@WEB1 ~]# curl <a href="http://localhost" target="_blank" rel="external">http://localhost</a><br>WEB2同上</p><h2 id="安装ipvsadm"><a href="#安装ipvsadm" class="headerlink" title="安装ipvsadm"></a><strong>安装ipvsadm</strong></h2><p>[root@WEB1 ~]# yum -y install ipvsadm<br>[root@WEB1 ~]# modprobe ip_vs  #加载到内核<br>[root@WEB1 ~]# ipvsadm         #查看是否安装成功</p><h2 id="配置IPVS"><a href="#配置IPVS" class="headerlink" title="配置IPVS"></a><strong>配置IPVS</strong></h2><p>[root@WEB1 ~]#ipvsadm -C 清空原来表格内容<br>[root@WEB1 ~]# ipvsadm -A -t 192.168.1.103:80 -s rr #创建一个集群<br>  -A添加地址 -t指定vip tcp端口 -s指定算法<br>[root@WEB1 ~]# ipvsadm -a -t 192.168.1.103:80 -r 192.168.201.137:80 -m<br>  -a指定真实服务器 -t lvs上的vip -r 真实服务器<br>[root@WEB1 ~]# ipvsadm -a -t 192.168.1.103:80 -r 192.168.201.132:80 -m<br>  -a指定真实服务器 -t lvs上的vip -r 真实服务器<br>[root@WEB1 ~]# ipvsadm -L -n 查看<br>IP Virtual Server version 1.2.1(size=4096)<br>Prot LocalAddress:PortScheduler Flags<br>-&gt; RemoteAddress:Port Forward Weight ActiveConn InActConn<br>TCP 192.168.1.103 wrr persistent 20<br>-&gt; 192.168.201.137 Route 1 0 0<br>-&gt; 192.168.201.132 Route 1 0 0 </p><p>…表示成功了</p><h2 id="配置RS"><a href="#配置RS" class="headerlink" title="配置RS"></a><strong>配置RS</strong></h2><p>给WEB1服务器配置VIP<br>ifconfig lo 192.168.1.103 netmask 255.255.255.255<br>WEB2设置同上</p><h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a><strong>验证</strong></h2><p>浏览器输入VIP地址 192.168.1.103<br>看WEB1和WEB2是不是轮询响应，down掉一个还能否响应</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;LVS&lt;/strong&gt;(linux virtue server)是一个虚拟的服务器集群系统。项目在1998年5月由章文嵩成立，是中国国内最早出现的自由软件项目之一。&lt;br&gt;LVS集群采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。
+    
+    </summary>
+    
+      <category term="Cluster" scheme="http://yoursite.com/categories/Cluster/"/>
+    
+    
+      <category term="Lvs+NAT" scheme="http://yoursite.com/tags/Lvs-NAT/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Centos7 Mysql双主模型</title>
     <link href="http://yoursite.com/2018/03/27/mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/"/>
     <id>http://yoursite.com/2018/03/27/mysql双主模型/</id>
@@ -360,28 +384,6 @@
     
     
       <category term="Mysql主从同步" scheme="http://yoursite.com/tags/Mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Centos7 LB集群之LVS（一）</title>
-    <link href="http://yoursite.com/2018/03/27/LVS+NAT/"/>
-    <id>http://yoursite.com/2018/03/27/LVS+NAT/</id>
-    <published>2018-03-27T05:22:38.517Z</published>
-    <updated>2017-09-26T03:23:30.659Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>LVS</strong>(linux virtue server)是一个虚拟的服务器集群系统。项目在1998年5月由章文嵩成立，是中国国内最早出现的自由软件项目之一。<br>LVS集群采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。<a id="more"></a></p><p><strong>目的</strong>：利用LVS实现负载均衡</p><p>模型图：<br><img src="http://i.imgur.com/2tSFs0K.jpg" alt=""></p><h2 id="配置IP"><a href="#配置IP" class="headerlink" title="配置IP"></a><strong>配置IP</strong></h2><p>lvs eth0： 192.168.1.103（VIP）<br>    eth1： 192.168.201.138（DIP）<br>web1 eth0：192.168.201.137<br>       lo：192.168.201.103<br>web2 eth0：192.168.201.132<br>    lo ：192.168.201.103 </p><h2 id="安装http服务"><a href="#安装http服务" class="headerlink" title="安装http服务"></a><strong>安装http服务</strong></h2><p>[root@WEB1 ~]# yum -y install httpd<br>[root@WEB1 ~]# systemctl enable http.service<br>[root@WEB1 ~]# systemctl start  http.service<br>[root@WEB1 ~]# echo “1” &gt;/var/www/html/index.html<br>[root@WEB1 ~]# curl <a href="http://localhost" target="_blank" rel="external">http://localhost</a><br>WEB2同上</p><h2 id="安装ipvsadm"><a href="#安装ipvsadm" class="headerlink" title="安装ipvsadm"></a><strong>安装ipvsadm</strong></h2><p>[root@WEB1 ~]# yum -y install ipvsadm<br>[root@WEB1 ~]# modprobe ip_vs  #加载到内核<br>[root@WEB1 ~]# ipvsadm         #查看是否安装成功</p><h2 id="配置IPVS"><a href="#配置IPVS" class="headerlink" title="配置IPVS"></a><strong>配置IPVS</strong></h2><p>[root@WEB1 ~]#ipvsadm -C 清空原来表格内容<br>[root@WEB1 ~]# ipvsadm -A -t 192.168.1.103:80 -s rr #创建一个集群<br>  -A添加地址 -t指定vip tcp端口 -s指定算法<br>[root@WEB1 ~]# ipvsadm -a -t 192.168.1.103:80 -r 192.168.201.137:80 -m<br>  -a指定真实服务器 -t lvs上的vip -r 真实服务器<br>[root@WEB1 ~]# ipvsadm -a -t 192.168.1.103:80 -r 192.168.201.132:80 -m<br>  -a指定真实服务器 -t lvs上的vip -r 真实服务器<br>[root@WEB1 ~]# ipvsadm -L -n 查看<br>IP Virtual Server version 1.2.1(size=4096)<br>Prot LocalAddress:PortScheduler Flags<br>-&gt; RemoteAddress:Port Forward Weight ActiveConn InActConn<br>TCP 192.168.1.103 wrr persistent 20<br>-&gt; 192.168.201.137 Route 1 0 0<br>-&gt; 192.168.201.132 Route 1 0 0 </p><p>…表示成功了</p><h2 id="配置RS"><a href="#配置RS" class="headerlink" title="配置RS"></a><strong>配置RS</strong></h2><p>给WEB1服务器配置VIP<br>ifconfig lo 192.168.1.103 netmask 255.255.255.255<br>WEB2设置同上</p><h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a><strong>验证</strong></h2><p>浏览器输入VIP地址 192.168.1.103<br>看WEB1和WEB2是不是轮询响应，down掉一个还能否响应</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;LVS&lt;/strong&gt;(linux virtue server)是一个虚拟的服务器集群系统。项目在1998年5月由章文嵩成立，是中国国内最早出现的自由软件项目之一。&lt;br&gt;LVS集群采用IP负载均衡技术和基于内容请求分发技术。调度器具有很好的吞吐率，将请求均衡地转移到不同的服务器上执行，且调度器自动屏蔽掉服务器的故障，从而将一组服务器构成一个高性能的、高可用的虚拟服务器。整个服务器集群的结构对客户是透明的，而且无需修改客户端和服务器端的程序。为此，在设计时需要考虑系统的透明性、可伸缩性、高可用性和易管理性。
-    
-    </summary>
-    
-      <category term="Cluster" scheme="http://yoursite.com/categories/Cluster/"/>
-    
-    
-      <category term="Lvs+NAT" scheme="http://yoursite.com/tags/Lvs-NAT/"/>
     
   </entry>
   
