@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhuwenbing.top/"/>
-  <updated>2019-09-05T08:24:46.027Z</updated>
+  <updated>2019-09-06T11:27:06.546Z</updated>
   <id>http://zhuwenbing.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python练习题</title>
+    <link href="http://zhuwenbing.top/2019/09/05/python02_%E7%BB%83%E4%B9%A0%E9%A2%98/"/>
+    <id>http://zhuwenbing.top/2019/09/05/python02_练习题/</id>
+    <published>2019-09-05T09:26:35.516Z</published>
+    <updated>2019-09-06T11:27:06.546Z</updated>
+    
+    <content type="html"><![CDATA[<p>文章主要内容如下：</p><ul><li>打印空心正方形</li><li>求奇数的和</li><li>判断学生成绩</li><li>求1到5的阶乘之和</li><li>求5以内的素数 <a id="more"></a></li><li>求圆的面积和周长</li><li>数字排序 </li><li>九九乘法表</li><li>闪电符号</li><li>斐波那契</li></ul><h2 id="1，打印空心正方形"><a href="#1，打印空心正方形" class="headerlink" title="1，打印空心正方形"></a><strong>1，打印空心正方形</strong></h2><pre><code>代码如下：for i in range(1,12):    if i == 1 or i == 11:        print(&apos;+&apos; * 20)    else:        print(&apos;+&apos; + (&apos; &apos; * 18) + &apos;+&apos;)输出结果：PS D:\Software\python_object&gt;+++++++++++++++++++++                  ++                  ++                  ++                  ++                  ++                  ++                  ++                  ++                  +++++++++++++++++++++PS D:\Software\python_object&gt;</code></pre><h2 id="2，求100以内所有奇数的和"><a href="#2，求100以内所有奇数的和" class="headerlink" title="2，求100以内所有奇数的和"></a><strong>2，求100以内所有奇数的和</strong></h2><pre><code>代码如下：sum = 0for i in range(1,100,2):    sum +=iprint(sum)输出结果：PS D:\Software\python_object&gt;2500PS D:\Software\python_object&gt;</code></pre><h2 id="3，判断学生成绩，成绩等级A-E-其中90分以上为A-80分-89分为B-70-79分为C-60-69分为D，60分以下为E"><a href="#3，判断学生成绩，成绩等级A-E-其中90分以上为A-80分-89分为B-70-79分为C-60-69分为D，60分以下为E" class="headerlink" title="3，判断学生成绩，成绩等级A-E,其中90分以上为A, 80分-89分为B, 70-79分为C,60-69分为D，60分以下为E"></a><strong>3，判断学生成绩</strong>，成绩等级A-E,其中90分以上为A, 80分-89分为B, 70-79分为C,60-69分为D，60分以下为E</h2><pre><code>代码如下：score=int(input(&quot;pleas input your socre: &quot;))if score &gt;= 90:    print(&quot;A&quot;)elif score &gt;= 80 and score &lt;= 89:    print(&quot;B&quot;)elif score &gt;= 70 and score &lt;= 79:    print(&quot;C&quot;)elif score &gt;= 60 and score &lt;= 69:    print(&quot;D&quot;)else:    print(&quot;E&quot;)输出结果：PS D:\Software\python_object&gt;  pleas input your socre: 89BPS D:\Software\python_object&gt;pleas input your socre: 53EPS D:\Software\python_object&gt;</code></pre><h2 id="4，求1到5的阶乘之和"><a href="#4，求1到5的阶乘之和" class="headerlink" title="4，求1到5的阶乘之和"></a><strong>4，求1到5的阶乘之和</strong></h2><pre><code>代码如下：s = 1sum = 0for i in range(1,6):    s = s*i    sum += sprint(s)print(sum)输出结果：PS D:\Software\python_object&gt;120153PS D:\Software\python_object&gt; </code></pre><h2 id="5，求5以内的素数"><a href="#5，求5以内的素数" class="headerlink" title="5，求5以内的素数"></a><strong>5，求5以内的素数</strong></h2><pre><code>代码如下num = int(input(&quot;plese ainput a prime number: &quot;))for i in range(2,num):    if num % i == 0:        print(i,&quot; is not prime number!&quot;)        break    else:        print(i,&quot;is a prime number!&quot;)输出结果：PS D:\Software\python_object&gt;plese ainput a prime number: 52 is a prime number!3 is a prime number!4 is a prime number!PS D:\Software\python_object&gt;</code></pre><h2 id="6，给一个半径，求圆的面积和周长"><a href="#6，给一个半径，求圆的面积和周长" class="headerlink" title="6，给一个半径，求圆的面积和周长"></a><strong>6，给一个半径，求圆的面积和周长</strong></h2><pre><code>代码如下：r =int(input(&quot;请输入半径: &quot;))print(&quot;面积:&quot;,2*3.14*r)print(&quot;周长:&quot;,3.14*(r**2))输出结果：PS D:\Software\python_object&gt;请输入半径: 5面积: 31.400000000000002周长: 78.5PS D:\Software\python_object&gt;</code></pre><h2 id="7，输入2个数，比较大小后，从小到大排序打印"><a href="#7，输入2个数，比较大小后，从小到大排序打印" class="headerlink" title="7，输入2个数，比较大小后，从小到大排序打印"></a><strong>7，输入2个数，比较大小</strong>后，从小到大排序打印</h2><pre><code>代码如下：a=int(input(&quot;please input a first number: &quot;))b=int(input(&quot;please input a second number: &quot;))if a &gt; b:    print(b,a)else:    print(a,b)输出结果：PS D:\Software\python_object&gt;please input a first number: 4please input a second number: 11 4PS D:\Software\python_object&gt;please input a first number: 3please input a second number: 11 3</code></pre><h2 id="8-打印九九乘法表"><a href="#8-打印九九乘法表" class="headerlink" title="8,打印九九乘法表"></a><strong>8,打印九九乘法表</strong></h2><pre><code>代码如下：for i in range(1,10):for j in range(1,i+1):    print(&quot;%d*%d=%d &quot;%(j,i,j*i)+&quot;\t&quot;,end=(&quot;&quot;))print(&quot;&quot;)输出结果：PS D:\Software\python_object&gt;1*1=11*2=2   2*2=41*3=3   2*3=6   3*3=91*4=4   2*4=8   3*4=12  4*4=161*5=5   2*5=10  3*5=15  4*5=20  5*5=251*6=6   2*6=12  3*6=18  4*6=24  5*6=30  6*6=361*7=7   2*7=14  3*7=21  4*7=28  5*7=35  6*7=42  7*7=491*8=8   2*8=16  3*8=24  4*8=32  5*8=40  6*8=48  7*8=56  8*8=641*9=9   2*9=18  3*9=27  4*9=36  5*9=45  6*9=54  7*9=63  8*9=72  9*9=81PS D:\Software\python_object&gt;</code></pre><h2 id="9，打印闪电符号"><a href="#9，打印闪电符号" class="headerlink" title="9，打印闪电符号"></a><strong>9，打印闪电符号</strong></h2><pre><code>代码如下：for i in range(-3,4):if i &lt; 0:    a = -i    print(&quot; &quot;*a+(4-a)*&quot;@&quot;)elif i == 0:    print(&quot;@&quot;*7)else:    print(&quot; &quot;*3+&quot;@&quot;*(4-i))输出结果：PS D:\Software\python_object&gt;   @  @@ @@@@@@@@@@   @@@   @@   @PS D:\Software\python_object&gt;</code></pre><h2 id="10，求10项目内斐波那契数"><a href="#10，求10项目内斐波那契数" class="headerlink" title="10，求10项目内斐波那契数"></a><strong>10，求10项目内斐波那契数</strong></h2><pre><code>代码如下：def feibo(n):if n &lt;= 1:    return nelse:    return(feibo(n-1)+feibo(n-2))num =int(input(&quot;你需要打印到第几项: &quot;))for i in range(num):    print(feibo(i))输出结果：PS D:\Software\python_object&gt;你需要打印到第几项: 501123PS D:\Software\python_object&gt;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文章主要内容如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;打印空心正方形&lt;/li&gt;
+&lt;li&gt;求奇数的和&lt;/li&gt;
+&lt;li&gt;判断学生成绩&lt;/li&gt;
+&lt;li&gt;求1到5的阶乘之和&lt;/li&gt;
+&lt;li&gt;求5以内的素数
+    
+    </summary>
+    
+      <category term="Python" scheme="http://zhuwenbing.top/categories/Python/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>python语法基础</title>
@@ -320,6 +346,28 @@
   </entry>
   
   <entry>
+    <title>Centos7 Mysql主从同步</title>
+    <link href="http://zhuwenbing.top/2018/03/27/Mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
+    <id>http://zhuwenbing.top/2018/03/27/Mysql-主从同步/</id>
+    <published>2018-03-27T05:22:38.517Z</published>
+    <updated>2017-04-25T09:51:14.801Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>MySQL主从同步</strong>：MySQL的主从复制广泛用于数据库备份、故障转移、数据分析等场合<br>主从同步原理*：<br>通过设置在Master MySQL上的binlog(使其处于打开状态)，Slave MySQL上通过一个I/O线程从Master MySQL上读取binlog，再传输到Slave MySQL的中继日志中，<a id="more"></a>然后Slave MySQL的SQL线程从中继日志中读取中继日志，应用到Slave MySQL的数据库中。这样实现了主从数据同步功能。</p><p><strong>目的：主从复制能够有效的缓解数据库读写的压力</strong></p><p>模型图（图片来源于网络）：<br><img src="http://i.imgur.com/ZMwq5kZ.jpg" alt=""></p><h2 id="环境的准备"><a href="#环境的准备" class="headerlink" title="环境的准备"></a><strong>环境的准备</strong></h2><pre><code>1.Mysql主备之前版本必须一致2.为了不影响实验结果建议关闭&apos;Selinux&apos; 主服务器：mysql-master: 192.168.1.60从服务器：mysql_slave:  192.168.1.61</code></pre><p><strong>安装Mariadb</strong></p><pre><code>[root@mysql-master /]yum -y install mariadb mariadb-server [root@mysql-master /]systemctl enable mariadb.service      ##开机启动mariadb服务  [root@mysql-master /]systemctl start  mariadb.service      ##启动mariadb服务  [root@mysql-master /]mysql_secure_installation            ##初始化Mysql从服务器同上操作</code></pre><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a><strong>修改配置文件</strong></h2><pre><code>主服务器的配置文件（/etc/my.cnf）,开启日志功能，设置server_id 保证唯一[root@mysql-master tmp]# vim /etc/my.cnf加入以下两行内容[mysqld]server_id = 200      ##server_id 同步复制时标识该语句最初是从哪个server写入的log-bin=mysql-bin  ##开启二进制功能 保存退出，重启服务器</code></pre><h2 id="数据库授权"><a href="#数据库授权" class="headerlink" title="数据库授权"></a><strong>数据库授权</strong></h2><pre><code>[root@mysql-master /]# mysqldump -uroot -pMariaDB [mysql]&gt; grant replication slave,reload,super on *.* to &apos;slave&apos;@&apos;192.168.1.60&apos; identified by &apos;slavepass&apos;  MariaDB [mysql]&gt;flush privileges  ##重读授权表信息 注释：‘replication slave’拥有此权限可以查看从服务器，从主服务器读取二进制日志 ‘reload’权限，才可以执行flush [tables | logs | privileges]‘super’这个权限允许用户终止任何查询；修改全局变量的SET语句；使用CHANGE MASTER，PURGE MASTER LOGS。 MariaDB [mysql]&gt;show master status; ##查看主服务的状态  +----------------------+----------+--------------+------------------+ | File                 | Position | Binlog_Do_DB | Binlog_Ignore_DB | +----------------------+----------+--------------+------------------+ | mysql-bin.000002      |      245|              |                  | +----------------------+----------+--------------+------------------+</code></pre><h2 id="主从备份"><a href="#主从备份" class="headerlink" title="主从备份"></a><strong>主从备份</strong></h2><pre><code>为保证主DB server和从DB server的数据一致,这里采用主备份,从还原来实现初始数据一致MariaDB [mysql]&gt;flush tables with read lock;    ##加临时锁，表只读[root@mysql-master /]# mysqldump -uroot -p --all-   databases &gt; /home/backup.sql   ##复制所有数据库到/home/[root@mysql-master /]# unlock tables;  J##解锁[root@mysql-master /]# scp /home/backup.sql ‘root’@‘192.168.1.61’：/home/ ##将备份数据发送到从服务器，用于恢复</code></pre><h2 id="配置Slave"><a href="#配置Slave" class="headerlink" title="配置Slave"></a><strong>配置Slave</strong></h2><pre><code>[root@mysql-slave /]# vim /etc/my.cnf server_id=201 ##设置server_id</code></pre><h2 id="Slave还原备份数据"><a href="#Slave还原备份数据" class="headerlink" title="Slave还原备份数据"></a><strong>Slave还原备份数据</strong></h2><pre><code>[root@mysql-slave /]#systemctl restart mariadb.service[root@mysql-slave /]#mysql -uroot -p &lt; /home/backup.sql</code></pre><h2 id="连接Master服务器"><a href="#连接Master服务器" class="headerlink" title="连接Master服务器"></a><strong>连接Master服务器</strong></h2><pre><code>登陆从数据库,添加相关参数(主服务器的ip/端口/同步用户/密码/position号/读取哪个日志文件)[root@mysql-slave /]#mysql -uroot -pMariaDB [mysql]&gt;change master to master_host=&apos;192.168.1.60&apos;,master_user=&apos;slave&apos;,master_password=&apos;slavepass&apos;,        master_log_file=&apos;mysql-bin.000002&apos;,master_log_pos=245;     ##开启主从同步MariaDB [mysql]&gt;start slave;  ##查看主动同步状态MariaDB [mysql]&gt;show slave status\G; ##主要看下面2项，都是YES表示成功了Slave_IO_Running: YesSlave_SQL_Running: Yes</code></pre><h2 id="Master和Slave验证"><a href="#Master和Slave验证" class="headerlink" title="Master和Slave验证"></a><strong>Master和Slave验证</strong></h2><p>上面都没问题，那就开始测试了，去主服务断创建一个库，一张表，插入数据，再到从服务器来查看，如果数据一致表示没问题了</p><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a><strong>遇到的问题</strong></h2><pre><code>ERROR 2002 (HY000): Can&apos;t connect to local MySQL server through socket &apos;/tmp/mysql.sock&apos; (2) ####解决办法：在错误日志中，启动失败的原因极为明显，file ‘./mysql-bin。000004’ not found，failed to open！mysql开启了bin日志功能，到数据库根目录查看该文件是存在的，可能是文件权限的问题。[root@mysql-slave /]chown -R mysql:mysql /var/log/mysql[root@mysql-slave /]mysqld_safe &amp;     ##启动安全模式[root@mysql-slave /]systemctl stop mariadb.service[root@mysql-slave /]systemctl start mariadb.service###再重新初始化数据库，就可以登录了记得killall mysqld_safe mysql，因为不结束将不能开启二进制日志，结束安全模式进程然后[root@mysql-slave /]systemctl stop mariadb.service[root@mysql-slave /]systemctl start mariadb.service</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;MySQL主从同步&lt;/strong&gt;：MySQL的主从复制广泛用于数据库备份、故障转移、数据分析等场合&lt;br&gt;主从同步原理*：&lt;br&gt;通过设置在Master MySQL上的binlog(使其处于打开状态)，Slave MySQL上通过一个I/O线程从Master MySQL上读取binlog，再传输到Slave MySQL的中继日志中，
+    
+    </summary>
+    
+      <category term="Mysql" scheme="http://zhuwenbing.top/categories/Mysql/"/>
+    
+    
+      <category term="Mysql主从同步" scheme="http://zhuwenbing.top/tags/Mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Centos7 LB集群之LVS（一）</title>
     <link href="http://zhuwenbing.top/2018/03/27/LVS+NAT/"/>
     <id>http://zhuwenbing.top/2018/03/27/LVS+NAT/</id>
@@ -364,28 +412,6 @@
   </entry>
   
   <entry>
-    <title>Centos7 Mysql主从同步</title>
-    <link href="http://zhuwenbing.top/2018/03/27/Mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
-    <id>http://zhuwenbing.top/2018/03/27/Mysql-主从同步/</id>
-    <published>2018-03-27T05:22:38.517Z</published>
-    <updated>2017-04-25T09:51:14.801Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>MySQL主从同步</strong>：MySQL的主从复制广泛用于数据库备份、故障转移、数据分析等场合<br>主从同步原理*：<br>通过设置在Master MySQL上的binlog(使其处于打开状态)，Slave MySQL上通过一个I/O线程从Master MySQL上读取binlog，再传输到Slave MySQL的中继日志中，<a id="more"></a>然后Slave MySQL的SQL线程从中继日志中读取中继日志，应用到Slave MySQL的数据库中。这样实现了主从数据同步功能。</p><p><strong>目的：主从复制能够有效的缓解数据库读写的压力</strong></p><p>模型图（图片来源于网络）：<br><img src="http://i.imgur.com/ZMwq5kZ.jpg" alt=""></p><h2 id="环境的准备"><a href="#环境的准备" class="headerlink" title="环境的准备"></a><strong>环境的准备</strong></h2><pre><code>1.Mysql主备之前版本必须一致2.为了不影响实验结果建议关闭&apos;Selinux&apos; 主服务器：mysql-master: 192.168.1.60从服务器：mysql_slave:  192.168.1.61</code></pre><p><strong>安装Mariadb</strong></p><pre><code>[root@mysql-master /]yum -y install mariadb mariadb-server [root@mysql-master /]systemctl enable mariadb.service      ##开机启动mariadb服务  [root@mysql-master /]systemctl start  mariadb.service      ##启动mariadb服务  [root@mysql-master /]mysql_secure_installation            ##初始化Mysql从服务器同上操作</code></pre><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a><strong>修改配置文件</strong></h2><pre><code>主服务器的配置文件（/etc/my.cnf）,开启日志功能，设置server_id 保证唯一[root@mysql-master tmp]# vim /etc/my.cnf加入以下两行内容[mysqld]server_id = 200      ##server_id 同步复制时标识该语句最初是从哪个server写入的log-bin=mysql-bin  ##开启二进制功能 保存退出，重启服务器</code></pre><h2 id="数据库授权"><a href="#数据库授权" class="headerlink" title="数据库授权"></a><strong>数据库授权</strong></h2><pre><code>[root@mysql-master /]# mysqldump -uroot -pMariaDB [mysql]&gt; grant replication slave,reload,super on *.* to &apos;slave&apos;@&apos;192.168.1.60&apos; identified by &apos;slavepass&apos;  MariaDB [mysql]&gt;flush privileges  ##重读授权表信息 注释：‘replication slave’拥有此权限可以查看从服务器，从主服务器读取二进制日志 ‘reload’权限，才可以执行flush [tables | logs | privileges]‘super’这个权限允许用户终止任何查询；修改全局变量的SET语句；使用CHANGE MASTER，PURGE MASTER LOGS。 MariaDB [mysql]&gt;show master status; ##查看主服务的状态  +----------------------+----------+--------------+------------------+ | File                 | Position | Binlog_Do_DB | Binlog_Ignore_DB | +----------------------+----------+--------------+------------------+ | mysql-bin.000002      |      245|              |                  | +----------------------+----------+--------------+------------------+</code></pre><h2 id="主从备份"><a href="#主从备份" class="headerlink" title="主从备份"></a><strong>主从备份</strong></h2><pre><code>为保证主DB server和从DB server的数据一致,这里采用主备份,从还原来实现初始数据一致MariaDB [mysql]&gt;flush tables with read lock;    ##加临时锁，表只读[root@mysql-master /]# mysqldump -uroot -p --all-   databases &gt; /home/backup.sql   ##复制所有数据库到/home/[root@mysql-master /]# unlock tables;  J##解锁[root@mysql-master /]# scp /home/backup.sql ‘root’@‘192.168.1.61’：/home/ ##将备份数据发送到从服务器，用于恢复</code></pre><h2 id="配置Slave"><a href="#配置Slave" class="headerlink" title="配置Slave"></a><strong>配置Slave</strong></h2><pre><code>[root@mysql-slave /]# vim /etc/my.cnf server_id=201 ##设置server_id</code></pre><h2 id="Slave还原备份数据"><a href="#Slave还原备份数据" class="headerlink" title="Slave还原备份数据"></a><strong>Slave还原备份数据</strong></h2><pre><code>[root@mysql-slave /]#systemctl restart mariadb.service[root@mysql-slave /]#mysql -uroot -p &lt; /home/backup.sql</code></pre><h2 id="连接Master服务器"><a href="#连接Master服务器" class="headerlink" title="连接Master服务器"></a><strong>连接Master服务器</strong></h2><pre><code>登陆从数据库,添加相关参数(主服务器的ip/端口/同步用户/密码/position号/读取哪个日志文件)[root@mysql-slave /]#mysql -uroot -pMariaDB [mysql]&gt;change master to master_host=&apos;192.168.1.60&apos;,master_user=&apos;slave&apos;,master_password=&apos;slavepass&apos;,        master_log_file=&apos;mysql-bin.000002&apos;,master_log_pos=245;     ##开启主从同步MariaDB [mysql]&gt;start slave;  ##查看主动同步状态MariaDB [mysql]&gt;show slave status\G; ##主要看下面2项，都是YES表示成功了Slave_IO_Running: YesSlave_SQL_Running: Yes</code></pre><h2 id="Master和Slave验证"><a href="#Master和Slave验证" class="headerlink" title="Master和Slave验证"></a><strong>Master和Slave验证</strong></h2><p>上面都没问题，那就开始测试了，去主服务断创建一个库，一张表，插入数据，再到从服务器来查看，如果数据一致表示没问题了</p><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a><strong>遇到的问题</strong></h2><pre><code>ERROR 2002 (HY000): Can&apos;t connect to local MySQL server through socket &apos;/tmp/mysql.sock&apos; (2) ####解决办法：在错误日志中，启动失败的原因极为明显，file ‘./mysql-bin。000004’ not found，failed to open！mysql开启了bin日志功能，到数据库根目录查看该文件是存在的，可能是文件权限的问题。[root@mysql-slave /]chown -R mysql:mysql /var/log/mysql[root@mysql-slave /]mysqld_safe &amp;     ##启动安全模式[root@mysql-slave /]systemctl stop mariadb.service[root@mysql-slave /]systemctl start mariadb.service###再重新初始化数据库，就可以登录了记得killall mysqld_safe mysql，因为不结束将不能开启二进制日志，结束安全模式进程然后[root@mysql-slave /]systemctl stop mariadb.service[root@mysql-slave /]systemctl start mariadb.service</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;MySQL主从同步&lt;/strong&gt;：MySQL的主从复制广泛用于数据库备份、故障转移、数据分析等场合&lt;br&gt;主从同步原理*：&lt;br&gt;通过设置在Master MySQL上的binlog(使其处于打开状态)，Slave MySQL上通过一个I/O线程从Master MySQL上读取binlog，再传输到Slave MySQL的中继日志中，
-    
-    </summary>
-    
-      <category term="Mysql" scheme="http://zhuwenbing.top/categories/Mysql/"/>
-    
-    
-      <category term="Mysql主从同步" scheme="http://zhuwenbing.top/tags/Mysql%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Centos7 LVS集群+Keepalived（二）</title>
     <link href="http://zhuwenbing.top/2018/03/27/LVS+Keepalived/"/>
     <id>http://zhuwenbing.top/2018/03/27/LVS+Keepalived/</id>
@@ -426,28 +452,6 @@
     
     
       <category term="LAMP+Wordpress" scheme="http://zhuwenbing.top/tags/LAMP-Wordpress/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Centos7 HAproxy实现反向代理和资源动静分离</title>
-    <link href="http://zhuwenbing.top/2018/03/27/haproxy/"/>
-    <id>http://zhuwenbing.top/2018/03/27/haproxy/</id>
-    <published>2018-03-27T05:22:38.455Z</published>
-    <updated>2017-09-26T03:25:49.311Z</updated>
-    
-    <content type="html"><![CDATA[<p>HAProxy 是一款提供高可用性、负载均衡以及基于TCP（第四层）和HTTP（第七层）应用的代理软件， 支持虚拟主机，它是免费、快速并且可靠的一种解决方案。 HAProxy特别适用于那些负载特大的web站点，这些站点通常又需要会话保持或七层处理。HAProxy运行在时下的硬件上，完全可以支持数以万计的 并发连接。并且它的运行模式使得它可以很简单安全的整合进您当前的架构中， 同时可以保护你的web服务器不被<a id="more"></a>暴露到网络上。<br>HAProxy 实现了一种事件驱动、单一进程模型，此模型支持非常大的并发连接数。多进程或多线程模型受内存限制 、系统调度器限制以及无处不在的锁限制，很少能处理数千并发连接。 事件驱动模型因为在有更好的资源和时间管理的用户端(User-Space) 实现所有这些任务，所以没有这些问题。此模型的弊端是，在多核系统上，这些程序通常扩展性较差。<br>这就是为什么他们必须进行优化以 使每个CPU时间片(Cycle)做更多的工作。</p><p><strong>总结</strong>：HAproxy只是Http协议的反向代理，不提供内存，但额外支持对TCP层基于Http通信的应用做负载均衡</p><p>架构图<br><img src="http://i.imgur.com/BeI8SzP.jpg" alt=""></p><p><strong>HAproxy工作模式</strong>：<br>        1、Http反向代理<br>        2、TCP连接负载均衡</p><p><strong>HAproxy的配置文件格式</strong>：<br>    global: 设定全局配置参数<br>    proxy：定义”defaults” “listen” “frontend” “backend”</p><p>三台主机：<br>    HAProxy:192.168.1.51<br>    Web1:192.168.1.52<br>    Web2:192.168.1.53</p><p><strong>目的：利用HAproxy实现反向代理和资源动静分离</strong></p><h2 id="利用HAproxy实现反向代理"><a href="#利用HAproxy实现反向代理" class="headerlink" title="利用HAproxy实现反向代理"></a>利用HAproxy实现反向代理</h2><pre><code>Web1主机安装httpd[root@web1 ~]# yum -y install httpd[root@web1 ~]# echo web1 &gt; /var/www/html/index.html[root@web1 ~]# systemctl start httpd[root@web1 ~]# firewall-cmd --permanent --add-service=http[root@web1 ~]# firewall-cmd --reload[root@web1 ~]# curl http://192.168.1.52    web1Web2主机配置同上Proxy主机安装HAproxy[root@proxy ~]# yum -y install haproxy.x86_64[root@proxy ~]# vim /etc/haproxy/haproxy.cfgchroot      /var/lib/haproxy #工作目录pidfile     /var/run/haproxy.pid #pid文件maxconn     4000 #最大连接数user        haproxy #进程启动以哪个用户来运行group       haproxydaemon  #启动为守护进程，不加daemon将会运行在前台frontend  main *:80 #监听的端口  efault_backend    webserver  backend webserver    balance     roundrobin  #使用roundrobin算法（rr轮询）    #用法:server &lt;name&gt; &lt;addr&gt;[:port] [param]  server web1 192.168.1.52:80 check weight=1 #check做健康监测，默认2秒一次,weight定义权重  server web2 192.168.1.53:80 check weight=1[root@proxy ~]# systemctl start haproxy.service    [root@proxy ~]# curl http://192.168.1.51    web1[root@proxy ~]# curl http://192.168.1.51    web2[root@proxy ~]# firewall-cmd --permanent --add-port=80/tcp[root@proxy ~]# firewall-cmd --reload </code></pre><h2 id="基于浏览器cookie实现session-sticke"><a href="#基于浏览器cookie实现session-sticke" class="headerlink" title="基于浏览器cookie实现session sticke"></a><strong>基于浏览器cookie实现session sticke</strong></h2><pre><code>backend webserverbalance     roundrobincookie SERVERID insert nocahe #设置cookie,insert插入，nocache不允许缓存，indirect间接方式让cookie生效server web1 192.168.1.52:80 check weight=1 cookie websrv1 #绑定cookie并指定cookie名称server web2 192.168.1.53:80 check weight=1 cookie websrv2要点：（1）每个server有自己唯一的cookie标识（2）在backend中定义为用户请求调度完成操作其cookie</code></pre><h2 id="Haproxy的几种调度方法"><a href="#Haproxy的几种调度方法" class="headerlink" title="Haproxy的几种调度方法"></a><strong>Haproxy的几种调度方法</strong></h2><pre><code>动态：（权重可以动态调整）静态：（调整权重不会立即生效，需要重启服务生效）1、Roundrobin(rr轮询）:根据权重的比率在服务器之间公平调度，每个后端服务器最多可以承载4128个并发连接，属于动态2、Leastcinn: 根据后端服务器的负载数量进行调度，仅适用于长连接回话，属于动态3、Static（rr轮询）:和roundrobin类似，但是不支持实时修改权重，后端服务器并发连接理论没有上限，属于静态，4、Source：将连接请求的源地址进行Hash计算，并由后端服务器的权重总和相除后转发至匹配的服务器，是否静态或动态，取决于Hash-type5、URI: 对uri左半部分或对整个uri进行Hash计算,并由服务器的总权重相除后派至匹配后的某个服务器，特别适用于代理缓存服务器应用场景6、Hdr&lt;name&gt;: 根据请求报文中指定的header,（如：user_agent,referer,hostname）进行调度，把指定的header的值做hash计算,Hash_type7、URL_param: 根据url中指定参数的值进行调度，把值做Hash计算，并除以总权重，Hash_type   ##只要用到Hash算法，就会根据Hash_type的值来确定是动态还是静态Hash-type：     1、map-hash(取模法)，静态     2、consistent(一致性哈希)，动态</code></pre><h2 id="配置stats管理界面"><a href="#配置stats管理界面" class="headerlink" title="配置stats管理界面"></a><strong>配置stats管理界面</strong></h2><pre><code>[root@proxy ~]# vim /etc/haproxy/haproxy.cfgfrontend  main    bind *:80default_backend             webserverlisten stat    bind 192.168.1.51:9000 #管理页面的端口    stats enable #开启stats页面stats hide-version #隐藏版本号    stats uri /admin #访问stats的url    stats realm haproxy\ admin\ area  #需要认证时，认证框里面的提示信息    stats auth admin:admin #认证的账号和密码（user:password）    stats refresh 5s #打开页面后每秒刷新间隔    stats admin if TRUE #是否开启管理功能然后浏览器输入 192.168.1.51:9000/admin 根据提示输入用户和密码</code></pre><p><strong>密码验证：</strong><br><img src="http://i.imgur.com/SF8yIvm.png" alt=""></p><p><strong>管理界面：</strong><br><img src="http://i.imgur.com/Qghcrij.png" alt=""></p><h2 id="利用Haproxy实现动静分离"><a href="#利用Haproxy实现动静分离" class="headerlink" title="利用Haproxy实现动静分离"></a><strong>利用Haproxy实现动静分离</strong></h2><pre><code>[root@proxy ~]# vim /etc/haproxy/haproxy.cfgfrontend  main    bind *:80default_backend   dynamic #默认backend为dynamic    acl url_static path_end -i .php #访问控制列表，匹配结尾.php资源    use_backend static if url_static #如果结尾是.php，则backend为staticbackend staticbalance    roundrobin  #这里使用roundrobin算法server dynamic 192.168.1.53:80 checkbackend dynamic    balance uri#这里使用uri算法    server static 192.168.1.52:80 check</code></pre><h2 id="客户端资源验证"><a href="#客户端资源验证" class="headerlink" title="客户端资源验证"></a><strong>客户端资源验证</strong></h2><p><strong>静态资源</strong><br><img src="http://i.imgur.com/s5bHNdg.png" alt=""><br><strong>动态资源</strong><br><img src="http://i.imgur.com/EDRdtgx.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;HAProxy 是一款提供高可用性、负载均衡以及基于TCP（第四层）和HTTP（第七层）应用的代理软件， 支持虚拟主机，它是免费、快速并且可靠的一种解决方案。 HAProxy特别适用于那些负载特大的web站点，这些站点通常又需要会话保持或七层处理。HAProxy运行在时下的硬件上，完全可以支持数以万计的 并发连接。并且它的运行模式使得它可以很简单安全的整合进您当前的架构中， 同时可以保护你的web服务器不被
-    
-    </summary>
-    
-      <category term="HAproxy" scheme="http://zhuwenbing.top/categories/HAproxy/"/>
-    
-    
-      <category term="HAproxy" scheme="http://zhuwenbing.top/tags/HAproxy/"/>
     
   </entry>
   
