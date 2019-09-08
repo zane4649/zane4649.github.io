@@ -55,22 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="目的：使用源码包编译安装Mariadb">
-<meta name="keywords" content="编译安装Mariadb-10.1">
+  <meta name="description" content="简介：OpenResty® 是由国人“章亦春”基于 Nginx 与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Centos7 编译安装MariaDB-10.1.22">
-<meta property="og:url" content="http://zhuwenbing.top/2018/03/27/编译安装mysql/index.html">
+<meta property="og:title" content="Centos7安装 OpenResty">
+<meta property="og:url" content="http://zhuwenbing.top/2019/09/08/安装Openresty/index.html">
 <meta property="og:site_name" content="Wenbing&#39;s  Blog">
-<meta property="og:description" content="目的：使用源码包编译安装Mariadb">
+<meta property="og:description" content="简介：OpenResty® 是由国人“章亦春”基于 Nginx 与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://i.imgur.com/GKr7XTn.jpg">
-<meta property="og:updated_time" content="2017-09-27T06:25:44.876Z">
+<meta property="og:updated_time" content="2019-09-08T09:37:18.600Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Centos7 编译安装MariaDB-10.1.22">
-<meta name="twitter:description" content="目的：使用源码包编译安装Mariadb">
-<meta name="twitter:image" content="http://i.imgur.com/GKr7XTn.jpg">
+<meta name="twitter:title" content="Centos7安装 OpenResty">
+<meta name="twitter:description" content="简介：OpenResty® 是由国人“章亦春”基于 Nginx 与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强">
   <link rel="alternate" href="/atom.xml" title="Wenbing's  Blog" type="application/atom+xml">
-  <link rel="canonical" href="http://zhuwenbing.top/2018/03/27/编译安装mysql/">
+  <link rel="canonical" href="http://zhuwenbing.top/2019/09/08/安装Openresty/">
 
 
 <script id="page-configurations">
@@ -84,7 +81,7 @@
   };
 </script>
 
-  <title>Centos7 编译安装MariaDB-10.1.22 | Wenbing's  Blog</title>
+  <title>Centos7安装 OpenResty | Wenbing's  Blog</title>
   
 
 
@@ -223,7 +220,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhuwenbing.top/2018/03/27/编译安装mysql/">
+    <link itemprop="mainEntityOfPage" href="http://zhuwenbing.top/2019/09/08/安装Openresty/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wenbing">
@@ -237,7 +234,7 @@
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">Centos7 编译安装MariaDB-10.1.22
+          <h1 class="post-title" itemprop="name headline">Centos7安装 OpenResty
 
             
           </h1>
@@ -254,19 +251,11 @@
                 
               
 
-              <time title="创建时间：2018-03-27 13:22:38" itemprop="dateCreated datePublished" datetime="2018-03-27T13:22:38+08:00">2018-03-27</time>
+              <time title="创建时间：2019-09-08 17:28:36 / 修改时间：17:37:18" itemprop="dateCreated datePublished" datetime="2019-09-08T17:28:36+08:00">2019-09-08</time>
             </span>
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2017-09-27 14:25:44" itemprop="dateModified" datetime="2017-09-27T14:25:44+08:00">2017-09-27</time>
-              </span>
             
           
             <span class="post-meta-item">
@@ -275,7 +264,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a></span>
 
                 
                 
@@ -302,78 +291,65 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="http://i.imgur.com/GKr7XTn.jpg" alt=""></p>
-<p><strong>目的</strong>：使用源码包编译安装Mariadb <a id="more"></a></p>
-<h2 id="卸载安装的mariadb"><a href="#卸载安装的mariadb" class="headerlink" title="卸载安装的mariadb"></a>卸载安装的mariadb</h2><pre><code>[root@localhost /]# rpm -qa | grep mariadb
-mariadb-libs-5.5.44-2.el7.centos.x86_64
-[root@localhost /]# rpm -e mariadb-libs-5.5.44-2.el7.centos.x86_64
-</code></pre><h2 id="创建用户和组"><a href="#创建用户和组" class="headerlink" title="创建用户和组"></a>创建用户和组</h2><pre><code>[root@localhost /]# groupadd  mysql
-[root@localhost /]# useradd -g mysql mysql
-</code></pre><h2 id="创建文件目录"><a href="#创建文件目录" class="headerlink" title="创建文件目录"></a>创建文件目录</h2><pre><code>[root@localhost /]# mkdir /mydata/data -pv
-[root@localhost /]# chown mysql.mysql data
-</code></pre><h2 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h2><pre><code>[root@localhost /]# yum groupinstall -y Development Tools #环境开发工具包
-[root@localhost /]# yum -y install gcc gcc-c++ make cmake ncurses ncurses-devel man ncurses libxml2 libxml2-devel openssl-devel bison bison-devel
+        <p> <strong>简介</strong>：OpenResty® 是由国人“章亦春”基于 Nginx 与 Lua 的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。<br>OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强大的通用 Web 应用平台。这样，Web 开发人员和系统工程师可以使用 Lua 脚本语言调动 Nginx 支持的各种 C 以及 Lua 模块，快速构造出足以胜任 10K 乃至 1000K 以上单机并发连接的高性能 Web 应用系统。<a id="more"></a><br>OpenResty® 的目标是让你的Web服务直接跑在 Nginx 服务内部，充分利用 Nginx 的非阻塞 I/O 模型，不仅仅对 HTTP 客户端请求,甚至于对远程后端诸如 MySQL、PostgreSQL、Memcached 以及 Redis 等都进行一致的高性能响应。</p>
+<p><strong>相关依赖</strong><br>[root@master wls]# yum -y install pcre-devel openssl-devel gcc curl perl wget</p>
+<h2 id="1、下载openresty"><a href="#1、下载openresty" class="headerlink" title="1、下载openresty"></a><strong>1、下载openresty</strong></h2><pre><code>[root@master wls]# wget https://openresty.org/download/openresty-1.15.8.1.tar.gz
+[root@master wls]# tar -xf openresty-1.15.8.1.tar.gz
+</code></pre><h2 id="2、编译openresty"><a href="#2、编译openresty" class="headerlink" title="2、编译openresty"></a><strong>2、编译openresty</strong></h2><pre><code>[root@master wls]# cd openresty-1.15.8.1/
+[root@master wls]# ./configure --prefix=/wls/openresty \
+        --with-luajit \
+        --without-http_redis2_module \
+        --with-http_iconv_module \
+        --with-http_postgres_module
+[root@master wls]# make &amp;&amp; make install
+</code></pre><h2 id="3、启动服务"><a href="#3、启动服务" class="headerlink" title="3、启动服务"></a><strong>3、启动服务</strong></h2><pre><code>[root@master wls]# cd /wls/openresty/bin
+[root@master wls]# ./openresty
 
-# cmake：由于从MySQL5.5版本开始弃用了常规的configure编译方法，所以需要cmake编译器，用于设置mysql的编译参数。（如：安装目录，数据存放目录，字符编码，排序规则等）
-# boost：从MySQL5.7.5开始Boost库是必需的，mysql源码中用到了C++的Boost库，要求必需安装Boost1.59.0或以上版本。
-# GCC：这是Linux下的C语言编译工具，MySQL源码编译完全由C和C++编写，要求必需安装GCC。
-# bison：Linux下C/C++语法分析器
-# ncurses：字符终端处理库。
-.........
-</code></pre><h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><pre><code>[root@localhost /]# tar -xvf mariadb-10.1.22.tar.gz -C /usr/local
-[root@localhost /]# cd /usr/local/
-[root@localhost /]# ln -sv mariadb-10.1.22 mysql #做软链接
-[root@localhost /]# chown -R root:mysql ./* #修改配置文件的属组
-</code></pre><h2 id="开始编译"><a href="#开始编译" class="headerlink" title="开始编译"></a>开始编译</h2><pre><code>[root@localhost mysql]#  cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql #Mysql安装的根目录
-             -DMYSQL_DATADIR=/mydata/data            #Mysql数据库文件存放路径
-             -DWITH_INNOBASE_STORAGbE_ENGINE=1       #添加InoooDB引擎 
-             -DWITH_ARCHIVE_STORAGE_ENGINE=1         #添加ARCHIVE引擎
-             -DWITH_BLACKHOLE_STORAGE_ENGINE=1       #添加BLACKHOLE引擎
-             -DWITH_SSL=system -DWITH_ZLIB=system    #可以用systemd控制服务
-             -DWITH_LIBWRAP=0              #
-             -DMYSQL_UNIX_ADDR=/tmp/mysql.sock       #指定sock文件的位置
-             -DEFAULT_CHARSET=utf8 #Mysql默认字符集为utf-8  
-             -DDEFAULT_COLLATION=utf8_general_ci     #支持默认字符集校对规则
+查看服务是否启动成功
+[root@master bin]# ss -tnlp|grep 80
+LISTEN     0      128          *:80                       *:*                   users:((&quot;openresty&quot;,pid=38259,fd=6),(&quot;openresty&quot;,pid=38258,fd=6))
+</code></pre><h2 id="4、开放防火墙"><a href="#4、开放防火墙" class="headerlink" title="4、开放防火墙"></a><strong>4、开放防火墙</strong></h2><pre><code>[root@master wls]# firewall-cmd --zone=public --add-port=80/tcp --permanent
+[root@master wls]# firewall-cmd --reload
+</code></pre><h2 id="5、浏览器验证"><a href="#5、浏览器验证" class="headerlink" title="5、浏览器验证"></a><strong>5、浏览器验证</strong></h2><pre><code>![](https://i.imgur.com/RGDJtyd.jpg)
+</code></pre><h2 id="6、压力测试"><a href="#6、压力测试" class="headerlink" title="6、压力测试"></a><strong>6、压力测试</strong></h2><pre><code>[root@master openresty]# yum -y install httpd-tools
+[root@master openresty]# ab -c1000 -n50000 http://192.168.31.100:80/
+-c：每次并发数为1000个
+-n：共发送50000个请求 
 
-[root@localhost mysql]# make &amp;&amp; make install #编译并安装 
-</code></pre><h2 id="初始化数据库"><a href="#初始化数据库" class="headerlink" title="初始化数据库"></a>初始化数据库</h2><pre><code>四个数据库，information_schema ，performance_schema，test ，mysql源数据库（用户，权限，字段，字段名。。。。）, 自行脚本生成，脚本在mysql/scripts 执行一下就可以安装了
-[root@localhost mysql]# scripts/mysql_install_db --user=mysql --datadir=/mysql/data
-[root@localhost mysql]# scripts/mysql_install_db --help 
-[root@localhost mysql]# ls /mydata/data/
-aria_log.00000001  ib_logfile0                multi-master.info  mysql-bin.index
-aria_log_control   ib_logfile1                mysql              performance_schema
-ibdata1            localhost.localdomain.pid  mysql-bin.000001   test
-</code></pre><h2 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h2><pre><code>[root@localhost mysql]# mkdir /etc/mysql
-[root@localhost mysql]# cp support-files/my-large.cnf /etc/mysql/my.cnf
-[root@localhost mysql]# vim /etc/mysql/my.cnf 
-datadir = /mydata/data      #数据文件的路径
-innodb_file_per_table = on  #修改InnoDB为独立表空间模式
-skip_name_resolve = on      #跳过名称反解，将客户端连接IP反解成主机名，然后做权限检查
-</code></pre><h2 id="创建服务脚本"><a href="#创建服务脚本" class="headerlink" title="创建服务脚本"></a>创建服务脚本</h2><pre><code>[root@localhost mysql]# cp support-files/mysql.server /etc/rc.d/init.d/mysqld 
-[root@localhost mysql]# chkconfig --add mysqld #设置开机启动
-[root@localhost mysql]# chkconfig --list mysqld 
-[root@localhost mysql]# service mysqld start
-[root@localhost mysql]# ss -tnlp #查看3306是否被mysql监听
-LISTEN      0      80                     :::3306                               :::*   
-users:((&quot;mysqld&quot;,pid=5358,fd=21))
-</code></pre><h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><pre><code>[root@localhost mysql]# vim /etc/profile.d/mysqld.sh
-MYSQL_HOME=/usr/local/mysql
-export PATH=$MYSQL_HOME/bin:$PATH
-[root@localhost mysql]#  source /etc/profile.d/mysqld.sh #加载环境变量
-</code></pre><h2 id="连接Mysql"><a href="#连接Mysql" class="headerlink" title="连接Mysql"></a>连接Mysql</h2><pre><code>[root@localhost mysql]# mysql
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 4
-Server version: 10.1.22-MariaDB Source distribution
+详细请求过程
+This is ApacheBench, Version 2.3 &lt;$Revision: 1430300 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
 
-Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+Server Software:        openresty/1.15.8.1       #服务器软件
+Server Hostname:      192.168.31.100           #主机名
+Server Port:                80                       #请求端口
 
-Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.
+Document Path:          /                                  #文件路径
+Document Length:       649 bytes              #页面字节数
 
-MariaDB [(none)]&gt; 
-</code></pre><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><pre><code>启动时报错：
-/usr/local/mysql//libexec/mysqld: Can&apos;t create/write to file &apos;/var/log/mariadb&apos; (Errcode: 13) 120516 15:23:19 [ERROR] Can&apos;t start server: can&apos;t create PID file: Permission denied  
-解决方法：
-chown mysql.mysql /var/log/mariadb/ -R
+Concurrency Level:      1000                  #请求的并发数
+Time taken for tests:     8.090 seconds          #总访问时间
+Complete requests:      50000                  #请求完成数量
+Failed requests:           0                      #请求失败数量
+Write errors:                 0                    
+Total transferred:          44400000 bytes          #请求总数据大小
+HTML transferred:        32450000 bytes          #html页面实例总字节数
+Requests per second:  6180.73 [#/sec] (mean)   #每秒多少请求，服务器的吞吐量
+Time per request:         161.793 [ms] (mean)         #用户平均请求等待时间
+Time per request:         0.162 [ms] (mean, across all concurrent requests)  #服务器处理时间
+Transfer rate:               5359.85 [Kbytes/sec] received #每秒获取的数据长度
+
+Percentage of the requests served within a certain time (ms)
+  50%     23                #50%用户请求在23ms内返回
+  66%     30                #66%用户请求在30ms内返回
+  75%     33                #75%用户请求在33ms内返回
+  80%     40                    #80%用户请求在40ms内返回
+  90%    172                    #90%用户请求在172ms内返回
+  95%   1031                #95%用户请求在1031ms内返回
+  98%   1071                    #1071%用户请求在1071ms内返回
+  99%   1451                            #99%用户请求在1451ms内返回
+ 100%   7071 (longest request)        #100%用户请求在7071ms内返回
 </code></pre>
     </div>
 
@@ -384,23 +360,14 @@ chown mysql.mysql /var/log/mariadb/ -R
       
 
       <footer class="post-footer">
-          
-            
-          
-          <div class="post-tags">
-            
-              <a href="/tags/编译安装Mariadb-10-1/" rel="tag"># 编译安装Mariadb-10.1</a>
-            
-          </div>
-        
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2018/03/27/windows安装rabbitmq/" rel="next" title="windows下安装RabbitMQ">
-                  <i class="fa fa-chevron-left"></i> windows下安装RabbitMQ
+                <a href="/2019/09/05/python02_练习题/" rel="next" title="python练习题">
+                  <i class="fa fa-chevron-left"></i> python练习题
                 </a>
               
             </div>
@@ -408,10 +375,6 @@ chown mysql.mysql /var/log/mariadb/ -R
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2018/03/30/next修改显示宽度/" rel="prev" title="Next主题 Pisces Scheme更改内容区域的宽度">
-                  Next主题 Pisces Scheme更改内容区域的宽度 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -578,7 +541,7 @@ chown mysql.mysql /var/log/mariadb/ -R
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载安装的mariadb"><span class="nav-number">1.</span> <span class="nav-text">卸载安装的mariadb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建用户和组"><span class="nav-number">2.</span> <span class="nav-text">创建用户和组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件目录"><span class="nav-number">3.</span> <span class="nav-text">创建文件目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装依赖包"><span class="nav-number">4.</span> <span class="nav-text">安装依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译准备"><span class="nav-number">5.</span> <span class="nav-text">编译准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始编译"><span class="nav-number">6.</span> <span class="nav-text">开始编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化数据库"><span class="nav-number">7.</span> <span class="nav-text">初始化数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建配置文件"><span class="nav-number">8.</span> <span class="nav-text">创建配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建服务脚本"><span class="nav-number">9.</span> <span class="nav-text">创建服务脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置环境变量"><span class="nav-number">10.</span> <span class="nav-text">设置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接Mysql"><span class="nav-number">11.</span> <span class="nav-text">连接Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">12.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、下载openresty"><span class="nav-number">1.</span> <span class="nav-text">1、下载openresty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、编译openresty"><span class="nav-number">2.</span> <span class="nav-text">2、编译openresty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、启动服务"><span class="nav-number">3.</span> <span class="nav-text">3、启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、开放防火墙"><span class="nav-number">4.</span> <span class="nav-text">4、开放防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、浏览器验证"><span class="nav-number">5.</span> <span class="nav-text">5、浏览器验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、压力测试"><span class="nav-number">6.</span> <span class="nav-text">6、压力测试</span></a></li></ol></div>
             
 
           </div>
