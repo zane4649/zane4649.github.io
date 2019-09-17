@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhuwenbing.top/archives/index.html</loc>
+    
+    <lastmod>2019-09-17T06:05:20.091Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2019/09/04/python01_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</loc>
+    
+    <lastmod>2019-09-17T05:59:21.843Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/about/index.html</loc>
+    
+    <lastmod>2019-09-17T05:30:04.916Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhuwenbing.top/2019/09/08/python02%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     
     <lastmod>2019-09-09T15:55:11.627Z</lastmod>
@@ -19,13 +40,6 @@
     <loc>http://zhuwenbing.top/2019/09/05/python02_%E7%BB%83%E4%B9%A0%E9%A2%98/</loc>
     
     <lastmod>2019-09-06T11:27:06.546Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2019/09/04/python01_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</loc>
-    
-    <lastmod>2019-09-05T08:24:46.027Z</lastmod>
     
   </url>
   
@@ -152,13 +166,6 @@
     <loc>http://zhuwenbing.top/categories/index.html</loc>
     
     <lastmod>2017-09-25T09:12:17.017Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/about/index.html</loc>
-    
-    <lastmod>2017-09-25T06:41:45.865Z</lastmod>
     
   </url>
   
