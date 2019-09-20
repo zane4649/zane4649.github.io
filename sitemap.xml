@@ -2,30 +2,135 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://zhuwenbing.top/2019/09/04/python01_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</loc>
+    <loc>http://zhuwenbing.top/2019/08/27/Python%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
     
-    <lastmod>2019-09-19T08:28:37.790Z</lastmod>
+    <lastmod>2019-09-20T12:47:39.246Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/windows%E5%AE%89%E8%A3%85rabbitmq/</loc>
+    
+    <lastmod>2019-09-20T12:06:09.554Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/</loc>
+    
+    <lastmod>2019-09-20T12:06:00.862Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/Mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</loc>
+    
+    <lastmod>2019-09-20T12:05:59.747Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85mysql/</loc>
+    
+    <lastmod>2019-09-20T12:05:58.612Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/04/18/docker%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</loc>
+    
+    <lastmod>2019-09-20T12:04:46.933Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zhuwenbing.top/2019/09/08/%E5%AE%89%E8%A3%85Openresty/</loc>
     
-    <lastmod>2019-09-19T08:28:24.631Z</lastmod>
+    <lastmod>2019-09-20T12:03:02.651Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/tomcat/</loc>
+    
+    <lastmod>2019-09-20T12:02:54.949Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/pacemaker+corosync/</loc>
+    
+    <lastmod>2019-09-20T12:02:27.362Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/ntp-server/</loc>
+    
+    <lastmod>2019-09-20T12:02:20.111Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</loc>
+    
+    <lastmod>2019-09-20T12:02:11.570Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/LVS+NAT/</loc>
+    
+    <lastmod>2019-09-20T12:01:09.051Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/LVS+Keepalived/</loc>
+    
+    <lastmod>2019-09-20T12:01:01.354Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/lamp+weordpress/</loc>
+    
+    <lastmod>2019-09-20T12:00:52.318Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2018/03/27/haproxy/</loc>
+    
+    <lastmod>2019-09-20T12:00:41.500Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://zhuwenbing.top/2019/09/08/python02%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     
-    <lastmod>2019-09-19T08:27:19.665Z</lastmod>
+    <lastmod>2019-09-20T12:00:01.510Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://zhuwenbing.top/2019/08/27/Python%E5%86%92%E6%B3%A1%E6%B3%95/</loc>
+    <loc>http://zhuwenbing.top/2018/03/27/python%E7%AC%AC%E4%BA%94%E5%A4%A9/</loc>
     
-    <lastmod>2019-09-19T08:26:19.996Z</lastmod>
+    <lastmod>2019-09-20T11:58:38.605Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2019/09/05/python02_%E7%BB%83%E4%B9%A0%E9%A2%98/</loc>
+    
+    <lastmod>2019-09-20T11:58:31.281Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhuwenbing.top/2019/09/04/python01_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</loc>
+    
+    <lastmod>2019-09-20T11:58:09.997Z</lastmod>
     
   </url>
   
@@ -44,23 +149,9 @@
   </url>
   
   <url>
-    <loc>http://zhuwenbing.top/2019/09/05/python02_%E7%BB%83%E4%B9%A0%E9%A2%98/</loc>
-    
-    <lastmod>2019-09-06T11:27:06.546Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://zhuwenbing.top/2018/04/02/%E5%88%9D%E8%AF%86docker%202/</loc>
     
     <lastmod>2018-05-02T06:44:52.755Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/04/18/docker%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</loc>
-    
-    <lastmod>2018-04-18T14:38:47.689Z</lastmod>
     
   </url>
   
@@ -86,69 +177,6 @@
   </url>
   
   <url>
-    <loc>http://zhuwenbing.top/2018/03/27/windows%E5%AE%89%E8%A3%85rabbitmq/</loc>
-    
-    <lastmod>2017-10-09T03:37:48.231Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/python%E7%AC%AC%E4%BA%94%E5%A4%A9/</loc>
-    
-    <lastmod>2017-09-27T10:42:25.726Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85mysql/</loc>
-    
-    <lastmod>2017-09-27T06:25:44.876Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/haproxy/</loc>
-    
-    <lastmod>2017-09-26T03:25:49.311Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/pacemaker+corosync/</loc>
-    
-    <lastmod>2017-09-26T03:25:20.417Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</loc>
-    
-    <lastmod>2017-09-26T03:24:40.599Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/</loc>
-    
-    <lastmod>2017-09-26T03:23:58.145Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/LVS+NAT/</loc>
-    
-    <lastmod>2017-09-26T03:23:30.659Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/lamp+weordpress/</loc>
-    
-    <lastmod>2017-09-26T03:18:32.366Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://zhuwenbing.top/tags/index.html</loc>
     
     <lastmod>2017-09-25T09:12:32.959Z</lastmod>
@@ -166,34 +194,6 @@
     <loc>http://zhuwenbing.top/categories/index.html</loc>
     
     <lastmod>2017-09-25T09:12:17.017Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/tomcat/</loc>
-    
-    <lastmod>2017-04-25T10:07:55.772Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/LVS+Keepalived/</loc>
-    
-    <lastmod>2017-04-25T09:52:28.287Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/Mysql-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</loc>
-    
-    <lastmod>2017-04-25T09:51:14.801Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhuwenbing.top/2018/03/27/ntp-server/</loc>
-    
-    <lastmod>2017-04-25T09:50:22.067Z</lastmod>
     
   </url>
   

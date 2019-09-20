@@ -69,18 +69,18 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;冒泡法排序是一种简单的排序算法，它的思想是，重复的遍历要排序的列表，一次比较2个元素，如果他们的排序错误就把他们的位置交换过来，直到没有需要再交换的元素，表明该列表已经排序完成。">
+<meta name="description" content="&amp;emsp;&amp;emsp;本篇主要学习一下Python几种基本算法排序，冒泡排序，选择排序，插入排序，希尔排序，快速排序，堆排序等等。用博客记录一下，方便后面需要的时候过来复习，有新的思路也会慢慢过来修改更新！">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python冒泡法排序">
-<meta property="og:url" content="http://zhuwenbing.top/2019/08/27/Python冒泡法/index.html">
+<meta property="og:title" content="Python基本排序算法">
+<meta property="og:url" content="http://zhuwenbing.top/2019/08/27/Python简单排序算法/index.html">
 <meta property="og:site_name" content="Wenbing&#39;s  Blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;冒泡法排序是一种简单的排序算法，它的思想是，重复的遍历要排序的列表，一次比较2个元素，如果他们的排序错误就把他们的位置交换过来，直到没有需要再交换的元素，表明该列表已经排序完成。">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本篇主要学习一下Python几种基本算法排序，冒泡排序，选择排序，插入排序，希尔排序，快速排序，堆排序等等。用博客记录一下，方便后面需要的时候过来复习，有新的思路也会慢慢过来修改更新！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-19T08:26:19.996Z">
+<meta property="og:updated_time" content="2019-09-20T12:47:39.246Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python冒泡法排序">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;冒泡法排序是一种简单的排序算法，它的思想是，重复的遍历要排序的列表，一次比较2个元素，如果他们的排序错误就把他们的位置交换过来，直到没有需要再交换的元素，表明该列表已经排序完成。">
+<meta name="twitter:title" content="Python基本排序算法">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本篇主要学习一下Python几种基本算法排序，冒泡排序，选择排序，插入排序，希尔排序，快速排序，堆排序等等。用博客记录一下，方便后面需要的时候过来复习，有新的思路也会慢慢过来修改更新！">
 
 
 
@@ -110,13 +110,13 @@
 
 
 
-  <link rel="canonical" href="http://zhuwenbing.top/2019/08/27/Python冒泡法/"/>
+  <link rel="canonical" href="http://zhuwenbing.top/2019/08/27/Python简单排序算法/"/>
 
 
 
 
 
-  <title>Python冒泡法排序 | Wenbing's  Blog</title>
+  <title>Python基本排序算法 | Wenbing's  Blog</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhuwenbing.top/2019/08/27/Python冒泡法/">
+    <link itemprop="mainEntityOfPage" href="http://zhuwenbing.top/2019/08/27/Python简单排序算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wenbing">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python冒泡法排序</h1>
+          <h1 class="post-title" itemprop="name headline">Python基本排序算法</h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
                   </a>
                 </span>
 
@@ -381,24 +381,15 @@
       
 
       
-        <p>&emsp;&emsp;冒泡法排序是一种简单的排序算法，它的思想是，重复的遍历要排序的列表，一次比较2个元素，如果他们的排序错误就把他们的位置交换过来，直到没有需要再交换的元素，表明该列表已经排序完成。<a id="more"></a></p>
-<p>例子：<br> 有下面这样一个列表，利用冒泡法实现排序:<br> li=[10,6,4,5,7,9,2,1,3,8]</p>
+        <p>&emsp;&emsp;本篇主要学习一下Python几种基本算法排序，冒泡排序，选择排序，插入排序，希尔排序，快速排序，堆排序等等。用博客记录一下，方便后面需要的时候过来复习，有新的思路也会慢慢过来修改更新！<br><a id="more"></a></p>
+<h2 id="冒泡法排序"><a href="#冒泡法排序" class="headerlink" title="冒泡法排序"></a><strong>冒泡法排序</strong></h2><p>&emsp;&emsp;冒泡法排序是一种简单的排序算法，它的原理是，重复的遍历要排序的列表，一次比较2个元素，如果他们的排序错误就把他们的位置交换过来，直到没有需要再交换的元素，表明该列表已经排序完成。</p>
 <pre><code>代码如下：
 li=[10,6,4,5,7,9,2,1,3,8]
-for i in range(len(li)-1):
-#列表中一共有10个数，两两比较，因此实际次数为9
-
-    for j in range(len(li)-1-i):
-    #每次冒泡确认一个最大值，因此只需要n-1冒泡
-
-        if li[j] &gt; li[j+1]:
-        #判断前面的数是否大于后面的数
-
-           li[j],li[j+1] = li[j+1],li[j]
-           #如果大于则交换位置
-
-print(li)
-#打印排序后的列表
+for i in range(len(li)-1):        #列表中一共有10个数，两两比较，因此实际次数为9
+    for j in range(len(li)-1-i):  #每次冒泡确认一个最大值，因此只需要n-1冒泡
+        if li[j] &gt; li[j+1]:       #判断前面的数是否大于后面的数
+           li[j],li[j+1] = li[j+1],li[j]  #如果大于则交换位置
+print(li)                                 
 
 处理过程：
 [6, 10, 4, 5, 7, 9, 2, 1, 3, 8]
@@ -434,6 +425,41 @@ print(li)
 PS D:\Software\python_object&gt;  
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 PS D:\Software\python_object&gt;
+</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a><strong>选择排序</strong></h2><p>&emsp;&emsp;选择排序也是简单排序的一种，它的原理是将序列中按最小的元素一个个取出来然后进行排序，直到所有元素排序完毕。结果分为“升序”和“降序”。</p>
+<pre><code>”降序“ ：
+for  i in range(n):
+    max = i
+    for j in range(i+1,n):
+        if list[max] &lt; list[j]:
+            max = j
+
+    if i != max:
+        tmp = list[i]
+        list[i] = list[max]
+        list[max] = tmp
+print(list)
+
+结果如下：
+PS D:\Software\python_object&gt;
+[9, 8, 7, 6, 5, 4, 3, 2, 1]
+PS D:\Software\python_object&gt;
+
+
+“升序” ：
+list= [1,7,3,9,2,4,5,6,8]
+n = len(list)
+for i in range(0, n):
+    min = i
+    for j in range(i + 1, n):
+        if list[j] &lt; list[min]:
+            min = j
+            list[min], list[i] = list[i], list[min]
+print(list)
+
+结果如下：
+PS D:\Software\python_object&gt;
+[1, 2, 4, 5, 6, 3, 8, 7, 9]
+PS D:\Software\python_object&gt;
 </code></pre>
       
     </div>
@@ -456,7 +482,7 @@ PS D:\Software\python_object&gt;
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://zhuwenbing.top/2019/08/27/Python冒泡法/" title="Python冒泡法排序">http://zhuwenbing.top/2019/08/27/Python冒泡法/</a>
+    <a href="http://zhuwenbing.top/2019/08/27/Python简单排序算法/" title="Python基本排序算法">http://zhuwenbing.top/2019/08/27/Python简单排序算法/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -568,8 +594,17 @@ PS D:\Software\python_object&gt;
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -598,7 +633,7 @@ PS D:\Software\python_object&gt;
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -668,6 +703,22 @@ PS D:\Software\python_object&gt;
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#冒泡法排序"><span class="nav-number">1.</span> <span class="nav-text">冒泡法排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">2.</span> <span class="nav-text">选择排序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
