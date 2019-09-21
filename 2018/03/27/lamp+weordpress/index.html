@@ -550,7 +550,7 @@ MariaDB [mysql]&gt; service  mariadb restart
           
   <div class="comments" id="comments">
     
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTI4Ni8xMTgyMg=="></div>
+      <div id="vcomments"></div>
     
   </div>
 
@@ -870,22 +870,26 @@ MariaDB [mysql]&gt; service  mariadb restart
 
 
   
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
+
+
+
+
+
+
   
-
-
-
-
-
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        app_id: '9u0U61koAOuQNSHK0ARuFB63-MdYXbMMI',
+        app_key: 'uJmiqzKJI8zpD4tXCREfXJS8',
+        placeholder: '欢迎畅所欲言'
+    });
+  </script>
 
 
 
