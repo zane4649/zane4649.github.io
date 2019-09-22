@@ -57,18 +57,19 @@
   };
 </script>
 
-  <meta name="description" content="&amp;emsp;&amp;emsp;简介：OpenResty® 是由国人“章亦春”基于 Nginx 与 Lua 开源的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将">
+  <meta name="description" content="&amp;emsp;&amp;emsp;简介：OpenResty® 是由“章亦春”基于 Nginx 与 Lua 开源的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Ng">
+<meta name="keywords" content="openresty">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Centos7安装 OpenResty">
 <meta property="og:url" content="http://zhuwenbing.top/2019/09/08/安装Openresty/index.html">
 <meta property="og:site_name" content="WenBing&#39;s  Blog">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;简介：OpenResty® 是由国人“章亦春”基于 Nginx 与 Lua 开源的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;简介：OpenResty® 是由“章亦春”基于 Nginx 与 Lua 开源的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Ng">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.imgur.com/RGDJtyd.jpg">
-<meta property="og:updated_time" content="2019-09-20T12:03:02.651Z">
+<meta property="og:updated_time" content="2019-09-22T05:28:20.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Centos7安装 OpenResty">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;简介：OpenResty® 是由国人“章亦春”基于 Nginx 与 Lua 开源的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;简介：OpenResty® 是由“章亦春”基于 Nginx 与 Lua 开源的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Ng">
 <meta name="twitter:image" content="https://i.imgur.com/RGDJtyd.jpg">
   <link rel="alternate" href="/atom.xml" title="WenBing's  Blog" type="application/atom+xml">
   <link rel="canonical" href="http://zhuwenbing.top/2019/09/08/安装Openresty/">
@@ -304,7 +305,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-20 20:03:02" itemprop="dateModified" datetime="2019-09-20T20:03:02+08:00">2019-09-20</time>
+                <time title="修改时间：2019-09-22 13:28:20" itemprop="dateModified" datetime="2019-09-22T13:28:20+08:00">2019-09-22</time>
               </span>
             
           
@@ -314,7 +315,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
 
                 
                 
@@ -359,7 +360,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p> &emsp;&emsp;<strong>简介</strong>：OpenResty® 是由国人“章亦春”基于 Nginx 与 Lua 开源的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强大的通用 Web 应用平台。这样，Web 开发人员和系统工程师可以使用 Lua 脚本语言调动 Nginx 支持的各种 C 以及 Lua 模块，快速构造出足以胜任 10K 乃至 1000K 以上单机并发连接的高性能 Web 应用系统。<a id="more"></a><br>OpenResty® 的目标是让你的Web服务直接跑在 Nginx 服务内部，充分利用 Nginx 的非阻塞 I/O 模型，不仅仅对 HTTP 客户端请求,甚至于对远程后端诸如 MySQL、PostgreSQL、Memcached 以及 Redis 等都进行一致的高性能响应。</p>
+        <p> &emsp;&emsp;<strong>简介</strong>：OpenResty® 是由“章亦春”基于 Nginx 与 Lua 开源的高性能 Web 平台，其内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关。OpenResty® 通过汇聚各种设计精良的 Nginx 模块（主要由 OpenResty 团队自主开发），从而将 Nginx 有效地变成一个强大的通用 Web 应用平台。这样，Web 开发人员和系统工程师可以使用 Lua 脚本语言调动 Nginx 支持的各种 C 以及 Lua 模块，快速构造出足以胜任 10K 乃至 1000K 以上单机并发连接的高性能 Web 应用系统。<a id="more"></a><br>OpenResty® 的目标是让你的Web服务直接跑在 Nginx 服务内部，充分利用 Nginx 的非阻塞 I/O 模型，不仅仅对 HTTP 客户端请求,甚至于对远程后端诸如 MySQL、PostgreSQL、Memcached 以及 Redis 等都进行一致的高性能响应。</p>
 <h2 id="1、基于centos7安装步骤如下："><a href="#1、基于centos7安装步骤如下：" class="headerlink" title="1、基于centos7安装步骤如下："></a>1、基于centos7安装步骤如下：</h2><p><strong>相关依赖</strong><br>[root@master wls]# yum -y install pcre-devel openssl-devel gcc curl perl wget</p>
 <h2 id="2、下载openresty"><a href="#2、下载openresty" class="headerlink" title="2、下载openresty"></a><strong>2、下载openresty</strong></h2><pre><code>[root@master wls]# wget https://openresty.org/download/openresty-1.15.8.1.tar.gz
 [root@master wls]# tar -xf openresty-1.15.8.1.tar.gz
@@ -454,6 +455,15 @@ Percentage of the requests served within a certain time (ms)
 		</div>
 
       <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/openresty/" <i class="fa fa-tag"></i>># openresty</a>
+            
+          </div>
+        
 
         
 
@@ -555,7 +565,9 @@ Percentage of the requests served within a certain time (ms)
         
           
         
-        <span class="site-state-item-count">4</span>
+          
+        
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -598,7 +610,11 @@ Percentage of the requests served within a certain time (ms)
         
           
         
-        <span class="site-state-item-count">14</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
