@@ -637,7 +637,7 @@
 
 <!-- <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共25.8k字</span>
+  <span class="post-count">博客全站共26k字</span>
 </div>
 -->
         
@@ -740,7 +740,7 @@
     
 
 <script>
-NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
+NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js', function() {
   var GUEST = ['nick', 'mail', 'link'];
   var guest = 'nick,mail,link';
   guest = guest.split(',').filter(function(item) {
@@ -753,10 +753,10 @@ NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', function() {
     appId: 'cJOLYyT1OtcpzOgQG9qGja83-9Nh9j0Va',
     appKey: 'vYKSA2rG02hpKQtWEgzNa0go',
     placeholder: 'Just go go',
-    avatar: 'mm',
+    avatar: 'mp',
     meta: guest,
     pageSize: '10' || 10,
-    visitor: false,
+    visitor: true,
     lang: '' || 'zh-cn',
     path: location.pathname
   });
