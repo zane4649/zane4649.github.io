@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="WenBing&#39;s  Blog">
 <meta property="og:description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-26T09:23:09.812Z">
+<meta property="og:updated_time" content="2020-05-26T09:33:12.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Psutil模块用法">
 <meta name="twitter:description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
@@ -291,7 +291,7 @@
                 
               
 
-              <time title="创建时间：2020-05-26 17:04:36 / 修改时间：17:23:09" itemprop="dateCreated datePublished" datetime="2020-05-26T17:04:36+08:00">2020-05-26</time>
+              <time title="创建时间：2020-05-26 17:04:36 / 修改时间：17:33:12" itemprop="dateCreated datePublished" datetime="2020-05-26T17:04:36+08:00">2020-05-26</time>
             </span>
           
             
@@ -375,10 +375,13 @@ Windows安装： D:\&gt; pip install psutil
 615329792  字节显示看着不舒服
 &gt;&gt;&gt;
 
-换成&apos;m&apos;显示
-&gt;&gt;&gt; mem_info = psutil.virtual_memory().total
-&gt;&gt;&gt; mem_info/1024/1024
-586.82421875
+&gt;&gt;&gt; mem_info = psutil.virtual_memory()
+&gt;&gt;&gt; mem_info.total
+615329792
+&gt;&gt;&gt; mem_info.used
+178503680
+&gt;&gt;&gt; mem_info.free
+278347776
 &gt;&gt;&gt;
 </code></pre><h2 id="五、查看swap空间"><a href="#五、查看swap空间" class="headerlink" title="五、查看swap空间"></a><strong>五、查看swap空间</strong></h2><pre><code>&gt;&gt;&gt; psutil.swap_memory()
 sswap(total=0, used=0, free=0, percent=0.0, sin=0, sout=0)
@@ -673,7 +676,7 @@ print(p.wait(timeout=2))
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装"><span class="nav-number">1.</span> <span class="nav-text">一、安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、查看当前用户相关信息"><span class="nav-number">2.</span> <span class="nav-text">二、查看当前用户相关信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、当前系统启动时间"><span class="nav-number">3.</span> <span class="nav-text">三、当前系统启动时间 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、查看内存大小"><span class="nav-number">4.</span> <span class="nav-text">四、查看内存大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、查看swap空间"><span class="nav-number">5.</span> <span class="nav-text">五、查看swap空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、获取cpu核心数"><span class="nav-number">6.</span> <span class="nav-text">六、获取cpu核心数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、获取cpu物理核心数"><span class="nav-number">7.</span> <span class="nav-text">七、获取cpu物理核心数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、查看cpu使用率"><span class="nav-number">8.</span> <span class="nav-text">八、查看cpu使用率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、查看cpu空闲情况"><span class="nav-number">9.</span> <span class="nav-text">九、查看cpu空闲情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、查看cpu平均使用率"><span class="nav-number">10.</span> <span class="nav-text">十、查看cpu平均使用率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、查看磁盘分区"><span class="nav-number">11.</span> <span class="nav-text">十一、查看磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二、查看磁盘使用率"><span class="nav-number">12.</span> <span class="nav-text">十二、查看磁盘使用率 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、查看IO使用率"><span class="nav-number">13.</span> <span class="nav-text">十三、查看IO使用率 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、获取网络读写字节个数"><span class="nav-number">14.</span> <span class="nav-text">十三、获取网络读写字节个数 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十四、查看网络接口状态"><span class="nav-number">15.</span> <span class="nav-text">十四、查看网络接口状态 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十五、查看网络接口信息"><span class="nav-number">16.</span> <span class="nav-text">十五、查看网络接口信息 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十六、查看网络连接信息"><span class="nav-number">17.</span> <span class="nav-text">十六、查看网络连接信息 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十八、查看pid相关"><span class="nav-number">18.</span> <span class="nav-text">十八、查看pid相关 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十九、列出所有进程"><span class="nav-number">19.</span> <span class="nav-text">十九、列出所有进程 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二十、其他"><span class="nav-number">20.</span> <span class="nav-text">二十、其他 </span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装"><span class="nav-text">一、安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、查看当前用户相关信息"><span class="nav-text">二、查看当前用户相关信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、当前系统启动时间"><span class="nav-text">三、当前系统启动时间 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、查看内存大小"><span class="nav-text">四、查看内存大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、查看swap空间"><span class="nav-text">五、查看swap空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、获取cpu核心数"><span class="nav-text">六、获取cpu核心数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、获取cpu物理核心数"><span class="nav-text">七、获取cpu物理核心数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、查看cpu使用率"><span class="nav-text">八、查看cpu使用率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、查看cpu空闲情况"><span class="nav-text">九、查看cpu空闲情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、查看cpu平均使用率"><span class="nav-text">十、查看cpu平均使用率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、查看磁盘分区"><span class="nav-text">十一、查看磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二、查看磁盘使用率"><span class="nav-text">十二、查看磁盘使用率 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、查看IO使用率"><span class="nav-text">十三、查看IO使用率 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、获取网络读写字节个数"><span class="nav-text">十三、获取网络读写字节个数 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十四、查看网络接口状态"><span class="nav-text">十四、查看网络接口状态 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十五、查看网络接口信息"><span class="nav-text">十五、查看网络接口信息 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十六、查看网络连接信息"><span class="nav-text">十六、查看网络连接信息 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十八、查看pid相关"><span class="nav-text">十八、查看pid相关 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十九、列出所有进程"><span class="nav-text">十九、列出所有进程 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二十、其他"><span class="nav-text">二十、其他 </span></a></li></ol></div>
             
 
           </div>
