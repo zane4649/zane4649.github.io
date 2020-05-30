@@ -2,88 +2,132 @@
 
 
 
+  
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.3.9">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
-
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
-  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
 
 
-<script id="hexo-configurations">
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="文兵的个人站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Psutil模块用法">
+<meta property="og:url" content="http://zhuwenbing.top/2020/05/26/psutil模块/index.html">
+<meta property="og:site_name" content="文兵的个人站">
+<meta property="og:description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-30T14:47:43.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python Psutil模块用法">
+<meta name="twitter:description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    version: '7.3.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    save_scroll: false,
-    copycode: {"enable":false,"show_result":false,"style":null},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: '复制',
-      copy_success: '复制成功',
-      copy_failure: '复制失败'
     }
   };
 </script>
 
-  <meta name="description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Python Psutil模块用法">
-<meta property="og:url" content="http://zhuwenbing.top/2020/05/26/psutil模块/index.html">
-<meta property="og:site_name" content="WenBing&#39;s  Blog">
-<meta property="og:description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-26T09:33:12.391Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Psutil模块用法">
-<meta name="twitter:description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
-  <link rel="alternate" href="/atom.xml" title="WenBing's  Blog" type="application/atom+xml">
-  <link rel="canonical" href="http://zhuwenbing.top/2020/05/26/psutil模块/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
-  };
-</script>
+  <link rel="canonical" href="http://zhuwenbing.top/2020/05/26/psutil模块/"/>
 
-  <title>Python Psutil模块用法 | WenBing's  Blog</title>
+
+
+
+
+  <title>Python Psutil模块用法 | 文兵的个人站</title>
   
 
 
@@ -93,55 +137,37 @@
 
 
 
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <div class="container sidebar-position-left">
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
+  <div class="site-meta ">
+    
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">WenBing's  Blog</span>
+        <span class="site-title">文兵的个人站</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+      
         <p class="site-subtitle">人生一世，勤学须早</p>
       
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
+    <button>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -149,78 +175,81 @@
   </div>
 </div>
 
-
 <nav class="site-nav">
   
-  <ul id="menu" class="menu">
-      
-      
+
+  
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
-      
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
-
-  </li>
-      
-      
-      
-        
-        <li class="menu-item menu-item-categories">
-      
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
-
-  </li>
-      
-      
-      
-        
-        <li class="menu-item menu-item-archives">
-      
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
-
-  </li>
-      
-      
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
       
         
         <li class="menu-item menu-item-tags">
-      
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
-
-  </li>
-      
-      
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
       
         
-        <li class="menu-item menu-item-about">
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
       
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a href="javascript:;" class="popup-trigger">
         
-          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
-      </li>
-    
-  </ul>
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
 
-    
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
 
-</nav>
-  <div class="site-search">
-    
+  
+    <div class="site-search">
+      
   <div class="popup search-popup local-search-popup">
   <div class="local-search-header clearfix">
     <span class="search-icon">
@@ -239,23 +268,32 @@
 </div>
 
 
-  </div>
-</div>
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
     </header>
-
-    
-
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content page-post-detail">
+          <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+
+  
+  
+  
+
+  <article class="post post-type-tags" itemscope itemtype="http://schema.org/Article">
   
   
   
@@ -264,47 +302,58 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="WenBing">
-      <meta itemprop="description" content="zane4649@gmail.com">
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WenBing's  Blog">
+      <meta itemprop="name" content="文兵的个人站">
     </span>
+
+    
       <header class="post-header">
 
         
-          <h1 class="post-title" itemprop="name headline">Python Psutil模块用法
-
-            
-          </h1>
+        
+          <h1 class="post-title" itemprop="name headline">Python Psutil模块用法</h1>
         
 
         <div class="post-meta">
-            <span class="post-meta-item">
+          <span class="post-time">
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-
               
-                
+                <span class="post-meta-item-text">发表于</span>
               
-
-              <time title="创建时间：2020-05-26 17:04:36 / 修改时间：17:33:12" itemprop="dateCreated datePublished" datetime="2020-05-26T17:04:36+08:00">2020-05-26</time>
-            </span>
-          
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-26T17:04:36+08:00">
+                2020-05-26
+              </time>
             
 
             
+
+            
+          </span>
+
           
-            <span class="post-meta-item">
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
 
                 
                 
@@ -312,44 +361,37 @@
             </span>
           
 
-          
-            <span id="/2020/05/26/psutil模块/" class="post-meta-item leancloud_visitors" data-flag-title="Python Psutil模块用法" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
           
             
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/26/psutil模块/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/26/psutil模块/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/05/26/psutil模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/05/26/psutil模块/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
           
 
         </div>
       </header>
+    
 
     
     
@@ -357,166 +399,98 @@
     <div class="post-body" itemprop="articleBody">
 
       
+      
+
+      
         <p>psutil是一个跨平台库(<a href="https://psutil.readthedocs.io/en/latest/" target="_blank" rel="external">https://psutil.readthedocs.io/en/latest/</a>) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat、iotop、uptime、pidof、tty、taskset、pmap等。目前支持32位和64位的Linux、Windows、OS X、FreeBSD和Sun Solaris <a id="more"></a> 等操作系统.</p>
-<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a><strong>一、安装</strong></h2><pre><code>Linux安装:
-[root@instance-9 ~]# install gcc python3-dev
-[root@instance-9 ~]# pip3 install psutil
-
-Windows安装： D:\&gt; pip install psutil
-</code></pre><h2 id="二、查看当前用户相关信息"><a href="#二、查看当前用户相关信息" class="headerlink" title="二、查看当前用户相关信息"></a><strong>二、查看当前用户相关信息</strong></h2><pre><code>&gt;&gt;&gt; import psutil
-
-&gt;&gt;&gt; psutil.users()
-[suser(name=&apos;zane4649&apos;, terminal=&apos;pts/6&apos;, host=&apos;192.168.31.101&apos;, started=1590479232.0, pid=15216)]
-&gt;&gt;&gt;   
-</code></pre><h2 id="三、当前系统启动时间"><a href="#三、当前系统启动时间" class="headerlink" title="三、当前系统启动时间 "></a><strong>三、当前系统启动时间 </strong></h2><pre><code>&gt;&gt;&gt; psutil.boot_time()
-1581935267.0
-&gt;&gt;&gt;
-</code></pre><h2 id="四、查看内存大小"><a href="#四、查看内存大小" class="headerlink" title="四、查看内存大小"></a><strong>四、查看内存大小</strong></h2><pre><code>&gt;&gt;&gt; psutil.virtual_memory().total
-615329792  字节显示看着不舒服
-&gt;&gt;&gt;
-
-&gt;&gt;&gt; mem_info = psutil.virtual_memory()
-&gt;&gt;&gt; mem_info.total
-615329792
-&gt;&gt;&gt; mem_info.used
-178503680
-&gt;&gt;&gt; mem_info.free
-278347776
-&gt;&gt;&gt;
-</code></pre><h2 id="五、查看swap空间"><a href="#五、查看swap空间" class="headerlink" title="五、查看swap空间"></a><strong>五、查看swap空间</strong></h2><pre><code>&gt;&gt;&gt; psutil.swap_memory()
-sswap(total=0, used=0, free=0, percent=0.0, sin=0, sout=0)
-&gt;&gt;&gt;
-</code></pre><h2 id="六、获取cpu核心数"><a href="#六、获取cpu核心数" class="headerlink" title="六、获取cpu核心数"></a><strong>六、获取cpu核心数</strong></h2><pre><code>&gt;&gt;&gt; psutil.cpu_count()
-1
-&gt;&gt;&gt;
-</code></pre><h2 id="七、获取cpu物理核心数"><a href="#七、获取cpu物理核心数" class="headerlink" title="七、获取cpu物理核心数"></a><strong>七、获取cpu物理核心数</strong></h2><pre><code>&gt;&gt;&gt; psutil.cpu_count(logical=False)
-1
-&gt;&gt;&gt;
-</code></pre><h2 id="八、查看cpu使用率"><a href="#八、查看cpu使用率" class="headerlink" title="八、查看cpu使用率"></a><strong>八、查看cpu使用率</strong></h2><pre><code>&gt;&gt;&gt; psutil.cpu_percent(interval=1, percpu=True)
-0.4
-&gt;&gt;&gt;
-</code></pre><h2 id="九、查看cpu空闲情况"><a href="#九、查看cpu空闲情况" class="headerlink" title="九、查看cpu空闲情况"></a><strong>九、查看cpu空闲情况</strong></h2><pre><code>&gt;&gt;&gt; psutil.cpu_times()
-scputimes(user=110763.46, nice=294.71, system=171144.99, idle=7235852.97, iowait=1103.63, irq=0.0, softirq=173.03, steal=0.0, guest=0.0, guest_nice=0.0)
-&gt;&gt;&gt;
-</code></pre><h2 id="十、查看cpu平均使用率"><a href="#十、查看cpu平均使用率" class="headerlink" title="十、查看cpu平均使用率"></a><strong>十、查看cpu平均使用率</strong></h2><pre><code>for i in range(10):
-    stats = psutil.cpu_percent(interval = 1, percpu = True)
-    print(stats)
-</code></pre><h2 id="十一、查看磁盘分区"><a href="#十一、查看磁盘分区" class="headerlink" title="十一、查看磁盘分区"></a><strong>十一、查看磁盘分区</strong></h2><pre><code>&gt;&gt;&gt; len(psutil.disk_partitions())
-1
-&gt;&gt;&gt;  
-</code></pre><h2 id="十二、查看磁盘使用率"><a href="#十二、查看磁盘使用率" class="headerlink" title="十二、查看磁盘使用率 "></a><strong>十二、查看磁盘使用率 </strong></h2><pre><code>&gt;&gt;&gt; psutil.disk_usage(&apos;/&apos;)
-sdiskusage(total=10725883904, used=3042398208, free=7683485696, percent=28.4)
-&gt;&gt;&gt;
-</code></pre><h2 id="十三、查看IO使用率"><a href="#十三、查看IO使用率" class="headerlink" title="十三、查看IO使用率 "></a><strong>十三、查看IO使用率 </strong></h2><pre><code>&gt;&gt;&gt; psutil.disk_io_counters()
-sdiskio(read_count=1267423, write_count=2259240, read_bytes=43593847296, write_bytes=32287985664, read_time=12220244, write_time=22429833, read_merged_count=6235, write_merged_count=439942, busy_time=5365109
-&gt;&gt;&gt;    
-</code></pre><h2 id="十三、获取网络读写字节个数"><a href="#十三、获取网络读写字节个数" class="headerlink" title="十三、获取网络读写字节个数 "></a><strong>十三、获取网络读写字节个数 </strong></h2><pre><code>&gt;&gt;&gt; psutil.net_io_counters()
-snetio(bytes_sent=75090284050, bytes_recv=60619202739, packets_sent=53111418, packets_recv=65103399, errin=0, errout=0, dropin=0, dropout=0)
-&gt;&gt;&gt;
-</code></pre><h2 id="十四、查看网络接口状态"><a href="#十四、查看网络接口状态" class="headerlink" title="十四、查看网络接口状态 "></a><strong>十四、查看网络接口状态 </strong></h2><pre><code>&gt;&gt;&gt; psutil.net_if_stats()
-{&apos;eth0&apos;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: 0&gt;, speed=65535, mtu=1460), &apos;lo&apos;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: 0&gt;, speed=0, mtu=65536)}
-&gt;&gt;&gt;
-</code></pre><h2 id="十五、查看网络接口信息"><a href="#十五、查看网络接口信息" class="headerlink" title="十五、查看网络接口信息 "></a><strong>十五、查看网络接口信息 </strong></h2><pre><code>&gt;&gt;&gt; psutil.net_if_addrs()
-{&apos;lo&apos;: [snicaddr(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&apos;127.0.0.1&apos;, netmask=&apos;255.0.0.0&apos;, broadcast=None, ptp=None), snicaddr(family=&lt;AddressFamily.AF_INET6: 10&gt;, address=&apos;::1&apos;, netmask=&apos;ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff&apos;, broadcast=None, ptp=None), snicaddr(family=&lt;AddressFamily.AF_PACKET: 17&gt;, address=&apos;00:00:00:00:00:00&apos;, netmask=None, broadcast=None, ptp=None)], &apos;eth0&apos;: [snicaddr(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&apos;10.170.0.3&apos;, netmask=&apos;255.255.255.255&apos;, 
-&gt;&gt;&gt;
-</code></pre><h2 id="十六、查看网络连接信息"><a href="#十六、查看网络连接信息" class="headerlink" title="十六、查看网络连接信息 "></a><strong>十六、查看网络连接信息 </strong></h2><pre><code>&gt;&gt;&gt; psutil.net_connections()
-[sconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;, type=&lt;SocketKind.SOCK_DGRAM: 2&gt;, laddr=addr(ip=&apos;0.0.0.0&apos;, port=5050), raddr=(), status=&apos;NONE&apos;, pid=7288), sconn(fd=-1, family=&lt;AddressFamily.AF_INET6: 23&gt;, type=&lt;SocketKind.SOCK_DGRAM: 2&gt;, laddr=addr(ip=&apos;::&apos;, port=5353), raddr=(), status=&apos;NONE&apos;, pid=12872), sconn(fd=-1, family=&lt;AddressFamily.AF_INET6: 23&gt;, type=&lt;SocketKind.SOCK_DGRAM: 2&gt;, laddr=addr(ip=&apos;::&apos;, port=3702), raddr=(), status=&apos;NONE&apos;, pid=2308), sconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;
-</code></pre><h2 id="十八、查看pid相关"><a href="#十八、查看pid相关" class="headerlink" title="十八、查看pid相关 "></a><strong>十八、查看pid相关 </strong></h2><pre><code>psutil.pids() #获取所有进程PID
-psutil.test() #列出所有进程信息，类似top命令
-psutil.pid_exists(29306) #判断进程是否存在
-
-p = psutil.Process(1160) #查看1160进程的信息
-print(p.name())  #查看进程的名称
-print(p.exe())   #查看exe进程的路径
-print(p.cwd())   #进程工作目录
-print(p.cmdline()) #进程启动的命令行
-print(p.ppid()) #父进程ID
-print(p.parent())   #查看父进程
-print(p.children())   #查看子进程列表
-print(p.status())#查看进程的状态
-print(p.username())  #查看进程运行的用户
-print(p.create_time()) #查看进程运行的时间
-print(p.cpu_times())   #查看进程使用cpu信息
-print(p.memory_info()) #进程使用内存信息
-print(p.open_files())  #进程打开的文件
-print(p.connections()) #进程的网络连接
-print(p.num_threads()) #进程的线程数量
-print(p.threads())  #进程的所有线程信息
-print(p.environ())  #进程的环境变量
-print(p.kill())    #kill当前进程
-</code></pre><h2 id="十九、列出所有进程"><a href="#十九、列出所有进程" class="headerlink" title="十九、列出所有进程 "></a><strong>十九、列出所有进程 </strong></h2><pre><code>for pids in psutil.process_iter([&apos;pid&apos;, &apos;name&apos;]):
-    print(pids.info)
-</code></pre><h2 id="二十、其他"><a href="#二十、其他" class="headerlink" title="二十、其他 "></a><strong>二十、其他 </strong></h2><pre><code>from subprocess import PIPE
-
-p = psutil.Popen([&apos;D:/Software/python3.7/python.exe&apos;, &apos;-c&apos;, &quot;print(&apos;hello Python.&apos;)&quot; ], stdout = PIPE)
-print(p.name())
-print(p.status())
-print(p.username())
-print(p.cpu_times)
-print(p.wait(timeout=2))
-</code></pre>
+<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a><strong>1、安装</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Linux安装:</div><div class="line">[root@instance-9 ~]# yum -y install gcc python3-dev</div><div class="line">[root@instance-9 ~]# pip3 install psutil</div><div class="line">    </div><div class="line">Windows安装： D:\&gt; pip install psutil</div></pre></td></tr></table></figure></div>
+<h2 id="2、查看当前用户相关信息"><a href="#2、查看当前用户相关信息" class="headerlink" title="2、查看当前用户相关信息"></a><strong>2、查看当前用户相关信息</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> psutil</div><div class="line">	</div><div class="line">psutil.users()</div><div class="line">[suser(name=<span class="string">'zane4649'</span>, terminal=<span class="string">'pts/6'</span>, host=<span class="string">'192.168.31.101'</span>, started=<span class="number">1590479232.0</span>, pid=<span class="number">15216</span>)]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="3、当前系统启动时间"><a href="#3、当前系统启动时间" class="headerlink" title="3、当前系统启动时间 "></a><strong>3、当前系统启动时间 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.boot_time()</div><div class="line"><span class="number">1581935267.0</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="4、查看内存大小"><a href="#4、查看内存大小" class="headerlink" title="4、查看内存大小"></a><strong>4、查看内存大小</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.virtual_memory().total</div><div class="line"><span class="number">615329792</span> </div><div class="line">&gt;&gt;&gt;</div><div class="line">	</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mem_info = psutil.virtual_memory()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mem_info.total</div><div class="line"><span class="number">615329792</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mem_info.used</div><div class="line"><span class="number">178503680</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mem_info.free</div><div class="line"><span class="number">278347776</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="5、查看swap空间"><a href="#5、查看swap空间" class="headerlink" title="5、查看swap空间"></a><strong>5、查看swap空间</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.swap_memory()</div><div class="line">sswap(total=<span class="number">0</span>, used=<span class="number">0</span>, free=<span class="number">0</span>, percent=<span class="number">0.0</span>, sin=<span class="number">0</span>, sout=<span class="number">0</span>)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="6、获取cpu核心数"><a href="#6、获取cpu核心数" class="headerlink" title="6、获取cpu核心数"></a><strong>6、获取cpu核心数</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_count()</div><div class="line"><span class="number">1</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="7、获取cpu物理核心数"><a href="#7、获取cpu物理核心数" class="headerlink" title="7、获取cpu物理核心数"></a><strong>7、获取cpu物理核心数</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_count(logical=<span class="keyword">False</span>)</div><div class="line"><span class="number">1</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="8、查看cpu使用率"><a href="#8、查看cpu使用率" class="headerlink" title="8、查看cpu使用率"></a><strong>8、查看cpu使用率</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_percent(interval=<span class="number">1</span>, percpu=<span class="keyword">True</span>)</div><div class="line"><span class="number">0.4</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="9、查看cpu空闲情况"><a href="#9、查看cpu空闲情况" class="headerlink" title="9、查看cpu空闲情况"></a><strong>9、查看cpu空闲情况</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.cpu_times()</div><div class="line">scputimes(user=<span class="number">110763.46</span>, nice=<span class="number">294.71</span>, system=<span class="number">171144.99</span>, idle=<span class="number">7235852.97</span>, iowait=<span class="number">1103.63</span>, irq=<span class="number">0.0</span>, softirq=<span class="number">173.03</span>, steal=<span class="number">0.0</span>, guest=<span class="number">0.0</span>, guest_nice=<span class="number">0.0</span>)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="10、查看cpu平均使用率"><a href="#10、查看cpu平均使用率" class="headerlink" title="10、查看cpu平均使用率"></a><strong>10、查看cpu平均使用率</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">	stats = psutil.cpu_percent(interval = <span class="number">1</span>, percpu = <span class="keyword">True</span>)</div><div class="line">	print(stats)</div></pre></td></tr></table></figure></div>
+<h2 id="11、查看磁盘分区"><a href="#11、查看磁盘分区" class="headerlink" title="11、查看磁盘分区"></a><strong>11、查看磁盘分区</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(psutil.disk_partitions())</div><div class="line"><span class="number">1</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="12、查看磁盘使用率"><a href="#12、查看磁盘使用率" class="headerlink" title="12、查看磁盘使用率 "></a><strong>12、查看磁盘使用率 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.disk_usage(<span class="string">'/'</span>)</div><div class="line">sdiskusage(total=<span class="number">10725883904</span>, used=<span class="number">3042398208</span>, free=<span class="number">7683485696</span>, percent=<span class="number">28.4</span>)</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="13、查看IO使用率"><a href="#13、查看IO使用率" class="headerlink" title="13、查看IO使用率 "></a><strong>13、查看IO使用率 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.disk_io_counters()</div><div class="line">sdiskio(read_count=<span class="number">1267423</span>, write_count=<span class="number">2259240</span>, read_bytes=<span class="number">43593847296</span>, write_bytes=<span class="number">32287985664</span>, read_time=<span class="number">12220244</span>, write_time=<span class="number">22429833</span>, read_merged_count=<span class="number">6235</span>, write_merged_count=<span class="number">439942</span>, busy_time=<span class="number">5365109</span></div><div class="line">&gt;&gt;&gt;</div><div class="line">```    </div><div class="line"></div><div class="line"><span class="comment">##  **14、获取网络读写字节个数 **</span></div><div class="line">```Python</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_io_counters()</div><div class="line">snetio(bytes_sent=<span class="number">75090284050</span>, bytes_recv=<span class="number">60619202739</span>, packets_sent=<span class="number">53111418</span>, packets_recv=<span class="number">65103399</span>, errin=<span class="number">0</span>, errout=<span class="number">0</span>, dropin=<span class="number">0</span>, dropout=<span class="number">0</span>)</div></pre></td></tr></table></figure></div>
+<h2 id="15、查看网络接口状态"><a href="#15、查看网络接口状态" class="headerlink" title="15、查看网络接口状态 "></a><strong>15、查看网络接口状态 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_if_stats()</div><div class="line">&#123;<span class="string">'eth0'</span>: snicstats(isup=<span class="keyword">True</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: <span class="number">0</span>&gt;, speed=<span class="number">65535</span>, mtu=<span class="number">1460</span>), <span class="string">'lo'</span>: snicstats(isup=<span class="keyword">True</span>, duplex=&lt;NicDuplex.NIC_DUPLEX_UNKNOWN: <span class="number">0</span>&gt;, speed=<span class="number">0</span>, mtu=<span class="number">65536</span>)&#125;</div></pre></td></tr></table></figure></div>
+<h2 id="16、查看网络接口信息"><a href="#16、查看网络接口信息" class="headerlink" title="16、查看网络接口信息 "></a><strong>16、查看网络接口信息 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_if_addrs()</div><div class="line">&#123;<span class="string">'lo'</span>: [snicaddr(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'127.0.0.1'</span>, netmask=<span class="string">'255.0.0.0'</span>, broadcast=<span class="keyword">None</span>, ptp=<span class="keyword">None</span>), snicaddr(family=&lt;AddressFamily.AF_INET6: <span class="number">10</span>&gt;, address=<span class="string">'::1'</span>, netmask=<span class="string">'ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff'</span>, broadcast=<span class="keyword">None</span>, ptp=<span class="keyword">None</span>), snicaddr(family=&lt;AddressFamily.AF_PACKET: <span class="number">17</span>&gt;, address=<span class="string">'00:00:00:00:00:00'</span>, netmask=<span class="keyword">None</span>, broadcast=<span class="keyword">None</span>, ptp=<span class="keyword">None</span>)], <span class="string">'eth0'</span>: [snicaddr(family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, address=<span class="string">'10.170.0.3'</span>, netmask=<span class="string">'255.255.255.255'</span>,</div></pre></td></tr></table></figure></div>
+<h2 id="17、查看网络连接信息"><a href="#17、查看网络连接信息" class="headerlink" title="17、查看网络连接信息 "></a><strong>17、查看网络连接信息 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.net_connections()</div><div class="line">[sconn(fd=<span class="number">-1</span>, family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;, type=&lt;SocketKind.SOCK_DGRAM: <span class="number">2</span>&gt;, laddr=addr(ip=<span class="string">'0.0.0.0'</span>, port=<span class="number">5050</span>), raddr=(), status=<span class="string">'NONE'</span>, pid=<span class="number">7288</span>), sconn(fd=<span class="number">-1</span>, family=&lt;AddressFamily.AF_INET6: <span class="number">23</span>&gt;, type=&lt;SocketKind.SOCK_DGRAM: <span class="number">2</span>&gt;, laddr=addr(ip=<span class="string">'::'</span>, port=<span class="number">5353</span>), raddr=(), status=<span class="string">'NONE'</span>, pid=<span class="number">12872</span>), sconn(fd=<span class="number">-1</span>, family=&lt;AddressFamily.AF_INET6: <span class="number">23</span>&gt;, type=&lt;SocketKind.SOCK_DGRAM: <span class="number">2</span>&gt;, laddr=addr(ip=<span class="string">'::'</span>, port=<span class="number">3702</span>), raddr=(), status=<span class="string">'NONE'</span>, pid=<span class="number">2308</span>), sconn(fd=<span class="number">-1</span>, family=&lt;AddressFamily.AF_INET: <span class="number">2</span>&gt;</div></pre></td></tr></table></figure></div>
+<h2 id="18、查看pid相关"><a href="#18、查看pid相关" class="headerlink" title="18、查看pid相关 "></a><strong>18、查看pid相关 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">psutil.pids() <span class="comment">#获取所有进程PID</span></div><div class="line">psutil.test() <span class="comment">#列出所有进程信息，类似top命令</span></div><div class="line">psutil.pid_exists(<span class="number">29306</span>) <span class="comment">#判断进程是否存在</span></div><div class="line">    </div><div class="line">p = psutil.Process(<span class="number">1160</span>) <span class="comment">#查看1160进程的信息</span></div><div class="line">print(p.name())  <span class="comment">#查看进程的名称</span></div><div class="line">print(p.exe())   <span class="comment">#查看exe进程的路径</span></div><div class="line">print(p.cwd())   <span class="comment">#进程工作目录</span></div><div class="line">print(p.cmdline()) <span class="comment">#进程启动的命令行</span></div><div class="line">print(p.ppid()) <span class="comment">#父进程ID</span></div><div class="line">print(p.parent())   <span class="comment">#查看父进程</span></div><div class="line">print(p.children())   <span class="comment">#查看子进程列表</span></div><div class="line">print(p.status())<span class="comment">#查看进程的状态</span></div><div class="line">print(p.username())  <span class="comment">#查看进程运行的用户</span></div><div class="line">print(p.create_time()) <span class="comment">#查看进程运行的时间</span></div><div class="line">print(p.cpu_times())   <span class="comment">#查看进程使用cpu信息</span></div><div class="line">print(p.memory_info()) <span class="comment">#进程使用内存信息</span></div><div class="line">print(p.open_files())  <span class="comment">#进程打开的文件</span></div><div class="line">print(p.connections()) <span class="comment">#进程的网络连接</span></div><div class="line">print(p.num_threads()) <span class="comment">#进程的线程数量</span></div><div class="line">print(p.threads())  <span class="comment">#进程的所有线程信息</span></div><div class="line">print(p.environ())  <span class="comment">#进程的环境变量</span></div><div class="line">print(p.kill())    <span class="comment">#kill当前进程</span></div></pre></td></tr></table></figure></div>
+<h2 id="19、列出所有进程"><a href="#19、列出所有进程" class="headerlink" title="19、列出所有进程 "></a><strong>19、列出所有进程 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> pids <span class="keyword">in</span> psutil.process_iter([<span class="string">'pid'</span>, <span class="string">'name'</span>]):</div><div class="line">	print(pids.info)</div></pre></td></tr></table></figure></div>
+<h2 id="20、其他"><a href="#20、其他" class="headerlink" title="20、其他 "></a><strong>20、其他 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> PIPE</div><div class="line">   </div><div class="line">p = psutil.Popen([<span class="string">'D:/Software/python3.7/python.exe'</span>, <span class="string">'-c'</span>, <span class="string">"print('hello Python.')"</span> ], stdout = PIPE)</div><div class="line">print(p.name())</div><div class="line">print(p.status())</div><div class="line">print(p.username())</div><div class="line">print(p.cpu_times)</div><div class="line">print(p.wait(timeout=<span class="number">2</span>))</div></pre></td></tr></table></figure></div>
+      
     </div>
-
     
     
     
-        
-      
-        
 
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>WenBing</li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="http://zhuwenbing.top/2020/05/26/psutil模块/" title="Python Psutil模块用法">http://zhuwenbing.top/2020/05/26/psutil模块/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 4.0 许可协议。转载请注明出处！</li>
-</ul>
-</div>
+    
 
+    
+
+    
+
+    <footer class="post-footer">
       
 
-      <footer class="post-footer">
+      
+      
+      
 
-        
-
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-              
-                <a href="/2019/09/25/Python生成器和迭代器/" rel="next" title="Python"生成器"和"迭代器"">
-                  <i class="fa fa-chevron-left"></i> Python"生成器"和"迭代器"
-                </a>
-              
-            </div>
-
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-              
-            </div>
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/25/Python生成器和迭代器/" rel="next" title="Python"生成器"和"迭代器"">
+                <i class="fa fa-chevron-left"></i> Python"生成器"和"迭代器"
+              </a>
+            
           </div>
-        
-      </footer>
-    
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
   </article>
 
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
           </div>
           
-    
-    <div class="comments" id="comments"></div>
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
   
 
+
+
         </div>
+        
           
   
   <div class="sidebar-toggle">
@@ -528,7 +502,12 @@ print(p.wait(timeout=2))
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
+
+      
+
+      
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
@@ -539,194 +518,150 @@ print(p.wait(timeout=2))
         </ul>
       
 
-      <div class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image"
-      src="/images/avatar.jpg"
-      alt="WenBing">
-  <p class="site-author-name" itemprop="name">WenBing</p>
-  <div class="site-description motion-element" itemprop="description">zane4649@gmail.com</div>
-</div>
-  <nav class="site-state motion-element">
-      <div class="site-state-item site-state-posts">
-        
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">25</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-    
-      
-      
-      <div class="site-state-item site-state-categories">
-        
-          
-            <a href="/categories/">
-          
-        
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">5</span>
-        <span class="site-state-item-name">分类</span>
-        </a>
-      </div>
-    
-      
-      
-      <div class="site-state-item site-state-tags">
-        
-          
-            <a href="/tags/">
-          
-        
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">16</span>
-        <span class="site-state-item-name">标签</span>
-        </a>
-      </div>
-    
-  </nav>
-  <div class="feed-link motion-element">
-    <a href="/atom.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="WenBing" />
+            
+              <p class="site-author-name" itemprop="name">WenBing</p>
+              <p class="site-description motion-element" itemprop="description">zane4649@gmail.com</p>
+          </div>
 
+          <nav class="site-state motion-element">
 
-  <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-    <div class="links-of-blogroll-title">
-      <i class="fa  fa-fw fa-link"></i>
-      友情链接
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="http://leeyom.top/" title="http://leeyom.top/" rel="noopener" target="_blank">Leeyom</a>
-        </li>
-      
-        <li class="links-of-blogroll-item">
-          <a href="http://www.vpsdu.com/" title="http://www.vpsdu.com/" rel="noopener" target="_blank">SimonSong</a>
-        </li>
-      
-        <li class="links-of-blogroll-item">
-          <a href="http://www.axugege.com/" title="http://www.axugege.com/" rel="noopener" target="_blank">Axu</a>
-        </li>
-      
-        <li class="links-of-blogroll-item">
-          <a href="https://http://zy17105022.icoc.bz/col.jsp?id=102" title="https://http://zy17105022.icoc.bz/col.jsp?id=102" rel="noopener" target="_blank">BossDai</a>
-        </li>
-      
-    </ul>
-  </div>
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
 
         </div>
-      </div>
+      </section>
+
+      
       <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
 
             
-            
-            
+              
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装"><span class="nav-text">一、安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、查看当前用户相关信息"><span class="nav-text">二、查看当前用户相关信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、当前系统启动时间"><span class="nav-text">三、当前系统启动时间 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、查看内存大小"><span class="nav-text">四、查看内存大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、查看swap空间"><span class="nav-text">五、查看swap空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、获取cpu核心数"><span class="nav-text">六、获取cpu核心数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、获取cpu物理核心数"><span class="nav-text">七、获取cpu物理核心数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、查看cpu使用率"><span class="nav-text">八、查看cpu使用率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、查看cpu空闲情况"><span class="nav-text">九、查看cpu空闲情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、查看cpu平均使用率"><span class="nav-text">十、查看cpu平均使用率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、查看磁盘分区"><span class="nav-text">十一、查看磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二、查看磁盘使用率"><span class="nav-text">十二、查看磁盘使用率 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、查看IO使用率"><span class="nav-text">十三、查看IO使用率 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、获取网络读写字节个数"><span class="nav-text">十三、获取网络读写字节个数 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十四、查看网络接口状态"><span class="nav-text">十四、查看网络接口状态 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十五、查看网络接口信息"><span class="nav-text">十五、查看网络接口信息 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十六、查看网络连接信息"><span class="nav-text">十六、查看网络连接信息 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十八、查看pid相关"><span class="nav-text">十八、查看pid相关 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十九、列出所有进程"><span class="nav-text">十九、列出所有进程 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二十、其他"><span class="nav-text">二十、其他 </span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、安装"><span class="nav-text">1、安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、查看当前用户相关信息"><span class="nav-text">2、查看当前用户相关信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、当前系统启动时间"><span class="nav-text">3、当前系统启动时间 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、查看内存大小"><span class="nav-text">4、查看内存大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、查看swap空间"><span class="nav-text">5、查看swap空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、获取cpu核心数"><span class="nav-text">6、获取cpu核心数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、获取cpu物理核心数"><span class="nav-text">7、获取cpu物理核心数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、查看cpu使用率"><span class="nav-text">8、查看cpu使用率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、查看cpu空闲情况"><span class="nav-text">9、查看cpu空闲情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、查看cpu平均使用率"><span class="nav-text">10、查看cpu平均使用率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11、查看磁盘分区"><span class="nav-text">11、查看磁盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12、查看磁盘使用率"><span class="nav-text">12、查看磁盘使用率 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13、查看IO使用率"><span class="nav-text">13、查看IO使用率 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15、查看网络接口状态"><span class="nav-text">15、查看网络接口状态 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16、查看网络接口信息"><span class="nav-text">16、查看网络接口信息 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17、查看网络连接信息"><span class="nav-text">17、查看网络连接信息 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18、查看pid相关"><span class="nav-text">18、查看pid相关 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19、列出所有进程"><span class="nav-text">19、列出所有进程 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20、其他"><span class="nav-text">20、其他 </span></a></li></ol></div>
             
 
           </div>
-        </div>
+        </section>
       <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
       
 
     </div>
   </aside>
-  <div id="sidebar-dimmer"></div>
 
 
+        
       </div>
     </main>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2020</span>
-  <span class="with-love" id="animate">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">WenBing</span>
-</div>
-<!--  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.3.9</div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
--->
 
-<!-- <div class="theme-info">
-  <div class="powered-by"></div>
-  <span class="post-count">博客全站共27.1k字</span>
+  
 </div>
--->
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
         
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item-icon">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
       <i class="fa fa-user"></i>
-    </span>
-    <span class="site-uv" title="总访客量">
       <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
     </span>
   
-    <span class="post-meta-divider">|</span>
+
   
-    <span class="post-meta-item-icon">
+    <span class="site-pv">
       <i class="fa fa-eye"></i>
-    </span>
-    <span class="site-pv" title="总访问量">
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
     </span>
   
 </div>
@@ -741,101 +676,490 @@ print(p.wait(timeout=2))
         
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
+
+    
 
     
 
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-<script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
-
-
-  <script src="/js/schemes/muse.js?v=7.3.0"></script>
-
-
-<script src="/js/next-boot.js?v=7.3.0"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <script src="/js/local-search.js?v=7.3.0"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-
-  
-  <script src="/js/scrollspy.js?v=7.3.0"></script>
-<script src="/js/post-details.js?v=7.3.0"></script>
-
-
-    
-
-<script>
-NexT.utils.getScript('https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js', function() {
-  var GUEST = ['nick', 'mail', 'link'];
-  var guest = 'nick,mail,link';
-  guest = guest.split(',').filter(function(item) {
-    return GUEST.indexOf(item) > -1;
-  });
-  new Valine({
-    el: '#comments',
-    verify: false,
-    notify: false,
-    appId: 'cJOLYyT1OtcpzOgQG9qGja83-9Nh9j0Va',
-    appKey: 'vYKSA2rG02hpKQtWEgzNa0go',
-    placeholder: 'Just go go',
-    avatar: 'mp',
-    meta: guest,
-    pageSize: '10' || 10,
-    visitor: true,
-    lang: '' || 'zh-cn',
-    path: location.pathname
-  });
-}, window.Valine);
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cJOLYyT1OtcpzOgQG9qGja83-9Nh9j0Va',
+        appKey: 'vYKSA2rG02hpKQtWEgzNa0go',
+        placeholder: '有想说的欢迎留言哦！',
+        avatar:'mp',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
 </html>
