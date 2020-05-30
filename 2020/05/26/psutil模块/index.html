@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="文兵的个人站">
 <meta property="og:description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-30T14:47:43.280Z">
+<meta property="og:updated_time" content="2020-05-30T14:48:16.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Psutil模块用法">
 <meta name="twitter:description" content="psutil是一个跨平台库(https://psutil.readthedocs.io/en/latest/) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat">
@@ -403,7 +403,7 @@
 
       
         <p>psutil是一个跨平台库(<a href="https://psutil.readthedocs.io/en/latest/" target="_blank" rel="external">https://psutil.readthedocs.io/en/latest/</a>) 能够轻松实现获取系统运行的进程和系统利用率（包括CPU、内存、磁盘、网络等）信息。它主要用来做系统监控，性能分析，进程管理。它实现了同等命令行工具提供的功能，如ps、top、lsof、netstat、ifconfig、who、df、kill、free、nice、ionice、iostat、iotop、uptime、pidof、tty、taskset、pmap等。目前支持32位和64位的Linux、Windows、OS X、FreeBSD和Sun Solaris <a id="more"></a> 等操作系统.</p>
-<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a><strong>1、安装</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Linux安装:</div><div class="line">[root@instance-9 ~]# yum -y install gcc python3-dev</div><div class="line">[root@instance-9 ~]# pip3 install psutil</div><div class="line">    </div><div class="line">Windows安装： D:\&gt; pip install psutil</div></pre></td></tr></table></figure></div>
+<h2 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a><strong>1、安装</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Linux安装:</div><div class="line">[root@instance<span class="number">-9</span> ~]<span class="comment"># yum -y install gcc python3-dev</span></div><div class="line">[root@instance<span class="number">-9</span> ~]<span class="comment"># pip3 install psutil</span></div><div class="line">    </div><div class="line">Windows安装： D:\&gt; pip install psutil</div></pre></td></tr></table></figure></div>
 <h2 id="2、查看当前用户相关信息"><a href="#2、查看当前用户相关信息" class="headerlink" title="2、查看当前用户相关信息"></a><strong>2、查看当前用户相关信息</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> psutil</div><div class="line">	</div><div class="line">psutil.users()</div><div class="line">[suser(name=<span class="string">'zane4649'</span>, terminal=<span class="string">'pts/6'</span>, host=<span class="string">'192.168.31.101'</span>, started=<span class="number">1590479232.0</span>, pid=<span class="number">15216</span>)]</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
 <h2 id="3、当前系统启动时间"><a href="#3、当前系统启动时间" class="headerlink" title="3、当前系统启动时间 "></a><strong>3、当前系统启动时间 </strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.boot_time()</div><div class="line"><span class="number">1581935267.0</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
 <h2 id="4、查看内存大小"><a href="#4、查看内存大小" class="headerlink" title="4、查看内存大小"></a><strong>4、查看内存大小</strong></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PYTHON"><figure class="iseeu highlight /python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>psutil.virtual_memory().total</div><div class="line"><span class="number">615329792</span> </div><div class="line">&gt;&gt;&gt;</div><div class="line">	</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mem_info = psutil.virtual_memory()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mem_info.total</div><div class="line"><span class="number">615329792</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mem_info.used</div><div class="line"><span class="number">178503680</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mem_info.free</div><div class="line"><span class="number">278347776</span></div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></div>
@@ -454,6 +454,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/30/mac Panle代码块特效/" rel="prev" title="Next主题mac Panel代码块特效">
+                Next主题mac Panel代码块特效 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -537,7 +541,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -548,7 +552,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

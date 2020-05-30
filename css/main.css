@@ -667,7 +667,7 @@ pre .javascript .function {
   content: attr(data-rel);
   height: 38px;
   line-height: 38px;
-  background: #000;
+  background: #21252b;
   color: #fff;
   font-size: 0px;
   position: absolute;
@@ -1869,7 +1869,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #adc4ac;
+  background: #628bc6;
 }
 .links-of-blogroll {
   font-size: 13px;
