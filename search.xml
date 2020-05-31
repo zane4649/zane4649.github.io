@@ -262,85 +262,6 @@ mysql开启了bin日志功能，到数据库根目录查看该文件是存在的
       </tags>
   </entry>
   <entry>
-    <title>Centos7  Nginx利用“反向代理”实现“动静分离”</title>
-    <url>/2018/03/27/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<p><strong>Nginx</strong>是一款免费的，开源的，高性能的HTTP服务软件，它不仅能够支持反向代理服务器，而且也可以当作IMAP/POP3代理服务。<br>nginx不采用每客户机一线程的设计模型，而是充分使用异步逻辑，削减了上下文调度开销，所以并发服务能力更强。整体采用模块化设计，有丰富的模块库和第三方模块库，配置灵活。在Linux操作系统下，nginx使用epoll事件模型，得益于此，nginx在Linux操作系统下效率相当高。同时Nginx在OpenBSD或FreeBSD操作系统上采用类似于epoll的高效事件模型kqueue。<br>而且它稳定，配置丰富，设置简单，支持热部署<a id="more"></a>，而且占用系统资源少，10000个keep-alive模式下connection仅需要2.5MB内存！！！（俄罗斯的产品果然是简单粗暴）</p>
-<p><strong>Nginx工作模式</strong>：Master/worker<br>          一个主进程master生成一个或者多个work线程<br>          master:负责加载和分析配置文件<br>          work:处理并响应用户请求</p>
-<p><strong>特性</strong>：<br>         异步，非阻塞，事件驱动<br>         文件IO: sendfile ，mmap</p>
-<p><strong>核心模块</strong>：<br>          main: 主要用户配置错误日志，进程管理，权限控制<br>          event: 配置epoll,kqueue,select,poll</p>
-<p><strong>rewrite模块</strong>：<br>          把用户请求的URL基于regex做检查，匹配时将替换为replacement指定的字符串<br>          如果replacement是以http：//开头，则替换结果会直接重定向返回客户端<br>          在同一个localtion中存在多个rewrite规则会自上而下逐个检查，可以使用flag控制此循环功能</p>
-<p>last：提前结束本轮循环，进入下一轮，continue<br>break：终止了，不再循环<br>redirect：重定向，临时重定向，302<br>permanent：永久重定向，301，重写后生成的新url给客户端，由客户端对新url进行请求</p>
-<p>例如：<br>  localtion / {<br>        rewrite (.<em>）.txt$ $1.html;<br>         }<br>请求的txt文件都变成html，重写，变成了一个新的url，然后被匹配<br>    再加上：<br>  location ~</em>.html\$ {<br>        rewrite (.*).html $1.txt;<br>        }<br>后，html又转化为txt了，就形成一个死循环，所以要在两个后面加上条件，break。</p>
-<p>然后再加上个redirect，临时重定向<br>    location / {<br>         rewrite (.*).txt$ $1.html redirect;<br>        }</p>
-<p><strong>upstream 模块</strong>：<br>           负载均衡，必须定义在http段落</p>
-<p><strong>实验目的</strong>：利用Nginx反向代理，将用户请求的动态资源反代到Web1,静态资源反代到Web2</p>
-<p>架构图：</p>
-<p><img src="http://i.imgur.com/09Eqfpl.jpg" alt=""></p>
-<h2 id="虚拟机实验环境"><a href="#虚拟机实验环境" class="headerlink" title="虚拟机实验环境"></a>虚拟机实验环境</h2><pre><code>1.关闭selinux和清空iptables
-2.所有主机同步时间
-3.Nginx反向代理服务器内网网卡选择VMNET8虚拟网络连接
-4.Web1部署LAMP平台，Web2部署httpd
-</code></pre><h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><pre><code>  客户端IP：192.168.1.158
-  Nginx反向代理服务器IP：
-                外网：192.168.1.51
-                内网：192.168.42.130
-后端Web服务器IP：
-                Web1：192.168.42.128
-                Web2：192.168.42.129
-</code></pre><h2 id="服务安装"><a href="#服务安装" class="headerlink" title="服务安装"></a>服务安装</h2><pre><code>Nginx服务器安装nginx软件包：    
-  [root@nginx /]# yum -y install nginx   ##需要配置好epel源
-
-Web1服务器配置搭建LAMP平台：
-[root@Web1 /]# yum -y install httpd mariadb-server php php-mysql php-gd libjpeg* 
-php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-bcmath php-mhash
-
-新建测试页
-vim /var/www/html/index.php
-&lt;?php
-phpinfo();
-?&gt;
-
-[root@Web1 /]# curl http://192.168.42.128
-能看到php测试页表示ok
-
-   Web2服务器配置httpd服务
-[root@Web2 /]# yum -y install httpd
-
-安装完后新建测试页
-curl http://192.168.42.129
-能看到表示ok
-</code></pre><h2 id="nginx配置反向代理"><a href="#nginx配置反向代理" class="headerlink" title="nginx配置反向代理"></a>nginx配置反向代理</h2><pre><code>[root@nginx nginx]# cp nginx.conf{,.bak}  ##先做备份
-
-主要配置： 
-proxy_set_header NWC_TEST $remote_addr;  ##定义日志首部
-location / {
-        root /usr/share/nginx/html;
-        index   index.html index.htm;
-        proxy_pass http://192.168.42.129;
-}
-
-location ~ \.php$ {
-        proxy_pass http://192.168.42.128;
-        index   index.php index.html index.htm;
-}
-</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre><code>http://192.168.1.51/index.php|index.html 能看到.php页面和.html页面的内容和WEB1,WEB2相同表明OK
-</code></pre><h2 id="设置RS的请求报文首部"><a href="#设置RS的请求报文首部" class="headerlink" title="设置RS的请求报文首部"></a>设置RS的请求报文首部</h2><pre><code>在nginx主机上添加
-proxy_set_header NWC_TEST $remote_addr;
-
-利用proxy_set_header指令，设置nginx反代用户请求到后端主机上时，为请求报文添加一个首部，
-首部名称为NWC_TEST,首部对应的值为$remote-addr对应的值，也就是真是客户端IP地址
-
-修改完nginx服务器，再到后端主机修改日志格式
-LogFormat &quot;%{NWC_TEST}i %h %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%{Referer}i\&quot; \&quot;%{User-Agent}i\&quot;&quot; combined
-</code></pre>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python&quot;生成器&quot;和&quot;迭代器&quot;</title>
     <url>/2019/09/25/Python%E7%94%9F%E6%88%90%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
     <content><![CDATA[<p>&emsp;&emsp;Python生成器和迭代器的相关概念好像挺不好理解的，相关的资料写的都挺模糊的，最根本的概念都没说清楚….什么是生成器？ 什么是迭代器？ 带着这两个疑问，结合自己的理解，来总结一下，暂时的理解是这样，后面学习深入了，有了新的理解再回来更新！<a id="more"></a></p>
@@ -419,97 +340,82 @@ StopIteration
       </categories>
   </entry>
   <entry>
-    <title>Python基本排序算法</title>
-    <url>/2019/08/27/Python%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>&emsp;&emsp;本篇主要学习一下Python几种基本算法排序，冒泡排序，选择排序，插入排序，希尔排序，快速排序，堆排序等等。用博客记录一下，方便后面需要的时候过来复习，有新的思路也会慢慢过来修改更新！<br><a id="more"></a></p>
-<h2 id="冒泡法排序"><a href="#冒泡法排序" class="headerlink" title="冒泡法排序"></a><strong>冒泡法排序</strong></h2><p>&emsp;&emsp;冒泡法排序是一种简单的排序算法，它的原理是，重复的遍历要排序的列表，一次比较2个元素，如果他们的排序错误就把他们的位置交换过来，直到没有需要再交换的元素，表明该列表已经排序完成。</p>
-<pre><code>代码如下：
-li=[10,6,4,5,7,9,2,1,3,8]
-for i in range(len(li)-1):        #列表中一共有10个数，两两比较，因此实际次数为9
-    for j in range(len(li)-1-i):  #每次冒泡确认一个最大值，因此只需要n-1冒泡
-        if li[j] &gt; li[j+1]:       #判断前面的数是否大于后面的数
-           li[j],li[j+1] = li[j+1],li[j]  #如果大于则交换位置
-print(li)                                 
+    <title>Centos7  Nginx利用“反向代理”实现“动静分离”</title>
+    <url>/2018/03/27/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p><strong>Nginx</strong>是一款免费的，开源的，高性能的HTTP服务软件，它不仅能够支持反向代理服务器，而且也可以当作IMAP/POP3代理服务。<br>nginx不采用每客户机一线程的设计模型，而是充分使用异步逻辑，削减了上下文调度开销，所以并发服务能力更强。整体采用模块化设计，有丰富的模块库和第三方模块库，配置灵活。在Linux操作系统下，nginx使用epoll事件模型，得益于此，nginx在Linux操作系统下效率相当高。同时Nginx在OpenBSD或FreeBSD操作系统上采用类似于epoll的高效事件模型kqueue。<br>而且它稳定，配置丰富，设置简单，支持热部署<a id="more"></a>，而且占用系统资源少，10000个keep-alive模式下connection仅需要2.5MB内存！！！（俄罗斯的产品果然是简单粗暴）</p>
+<p><strong>Nginx工作模式</strong>：Master/worker<br>          一个主进程master生成一个或者多个work线程<br>          master:负责加载和分析配置文件<br>          work:处理并响应用户请求</p>
+<p><strong>特性</strong>：<br>         异步，非阻塞，事件驱动<br>         文件IO: sendfile ，mmap</p>
+<p><strong>核心模块</strong>：<br>          main: 主要用户配置错误日志，进程管理，权限控制<br>          event: 配置epoll,kqueue,select,poll</p>
+<p><strong>rewrite模块</strong>：<br>          把用户请求的URL基于regex做检查，匹配时将替换为replacement指定的字符串<br>          如果replacement是以http：//开头，则替换结果会直接重定向返回客户端<br>          在同一个localtion中存在多个rewrite规则会自上而下逐个检查，可以使用flag控制此循环功能</p>
+<p>last：提前结束本轮循环，进入下一轮，continue<br>break：终止了，不再循环<br>redirect：重定向，临时重定向，302<br>permanent：永久重定向，301，重写后生成的新url给客户端，由客户端对新url进行请求</p>
+<p>例如：<br>  localtion / {<br>        rewrite (.<em>）.txt$ $1.html;<br>         }<br>请求的txt文件都变成html，重写，变成了一个新的url，然后被匹配<br>    再加上：<br>  location ~</em>.html\$ {<br>        rewrite (.*).html $1.txt;<br>        }<br>后，html又转化为txt了，就形成一个死循环，所以要在两个后面加上条件，break。</p>
+<p>然后再加上个redirect，临时重定向<br>    location / {<br>         rewrite (.*).txt$ $1.html redirect;<br>        }</p>
+<p><strong>upstream 模块</strong>：<br>           负载均衡，必须定义在http段落</p>
+<p><strong>实验目的</strong>：利用Nginx反向代理，将用户请求的动态资源反代到Web1,静态资源反代到Web2</p>
+<p>架构图：</p>
+<p><img src="http://i.imgur.com/09Eqfpl.jpg" alt=""></p>
+<h2 id="虚拟机实验环境"><a href="#虚拟机实验环境" class="headerlink" title="虚拟机实验环境"></a>虚拟机实验环境</h2><pre><code>1.关闭selinux和清空iptables
+2.所有主机同步时间
+3.Nginx反向代理服务器内网网卡选择VMNET8虚拟网络连接
+4.Web1部署LAMP平台，Web2部署httpd
+</code></pre><h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><pre><code>  客户端IP：192.168.1.158
+  Nginx反向代理服务器IP：
+                外网：192.168.1.51
+                内网：192.168.42.130
+后端Web服务器IP：
+                Web1：192.168.42.128
+                Web2：192.168.42.129
+</code></pre><h2 id="服务安装"><a href="#服务安装" class="headerlink" title="服务安装"></a>服务安装</h2><pre><code>Nginx服务器安装nginx软件包：    
+  [root@nginx /]# yum -y install nginx   ##需要配置好epel源
 
-处理过程：
-[6, 10, 4, 5, 7, 9, 2, 1, 3, 8]
-[6, 4, 10, 5, 7, 9, 2, 1, 3, 8]
-[6, 4, 5, 10, 7, 9, 2, 1, 3, 8]
-[6, 4, 5, 7, 10, 9, 2, 1, 3, 8]
-[6, 4, 5, 7, 9, 10, 2, 1, 3, 8]
-[6, 4, 5, 7, 9, 2, 10, 1, 3, 8]
-[6, 4, 5, 7, 9, 2, 1, 10, 3, 8]
-[6, 4, 5, 7, 9, 2, 1, 3, 10, 8]
-[6, 4, 5, 7, 9, 2, 1, 3, 8, 10]
-[4, 6, 5, 7, 9, 2, 1, 3, 8, 10]
-[4, 5, 6, 7, 9, 2, 1, 3, 8, 10]
-[4, 5, 6, 7, 2, 9, 1, 3, 8, 10]
-[4, 5, 6, 7, 2, 1, 9, 3, 8, 10]
-[4, 5, 6, 7, 2, 1, 3, 9, 8, 10]
-[4, 5, 6, 7, 2, 1, 3, 8, 9, 10]
-[4, 5, 6, 2, 7, 1, 3, 8, 9, 10]
-[4, 5, 6, 2, 1, 7, 3, 8, 9, 10]
-[4, 5, 6, 2, 1, 3, 7, 8, 9, 10]
-[4, 5, 2, 6, 1, 3, 7, 8, 9, 10]
-[4, 5, 2, 1, 6, 3, 7, 8, 9, 10]
-[4, 5, 2, 1, 3, 6, 7, 8, 9, 10]
-[4, 2, 5, 1, 3, 6, 7, 8, 9, 10]
-[4, 2, 1, 5, 3, 6, 7, 8, 9, 10]
-[4, 2, 1, 3, 5, 6, 7, 8, 9, 10]
-[2, 4, 1, 3, 5, 6, 7, 8, 9, 10]
-[2, 1, 4, 3, 5, 6, 7, 8, 9, 10]
-[2, 1, 3, 4, 5, 6, 7, 8, 9, 10]
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Web1服务器配置搭建LAMP平台：
+[root@Web1 /]# yum -y install httpd mariadb-server php php-mysql php-gd libjpeg* 
+php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-bcmath php-mhash
 
-最后结果：
-PS D:\Software\python_object&gt;  
-[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-PS D:\Software\python_object&gt;
-</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a><strong>选择排序</strong></h2><p>&emsp;&emsp;选择排序也是简单排序的一种，它的原理是将序列中按最小的元素一个个取出来然后进行排序，直到所有元素排序完毕。结果分为“升序”和“降序”。</p>
-<pre><code>”降序“ ：
-list= [1,7,3,9,2,4,5,6,8]
-n = len(list)
+新建测试页
+vim /var/www/html/index.php
+&lt;?php
+phpinfo();
+?&gt;
 
-for  i in range(n):
-    max = i
-    for j in range(i+1,n):
-        if list[max] &lt; list[j]:
-            max = j
+[root@Web1 /]# curl http://192.168.42.128
+能看到php测试页表示ok
 
-    if i != max:
-        tmp = list[i]
-        list[i] = list[max]
-        list[max] = tmp
-print(list)
+   Web2服务器配置httpd服务
+[root@Web2 /]# yum -y install httpd
 
-结果如下：
-PS D:\Software\python_object&gt;
-[9, 8, 7, 6, 5, 4, 3, 2, 1]
-PS D:\Software\python_object&gt;
+安装完后新建测试页
+curl http://192.168.42.129
+能看到表示ok
+</code></pre><h2 id="nginx配置反向代理"><a href="#nginx配置反向代理" class="headerlink" title="nginx配置反向代理"></a>nginx配置反向代理</h2><pre><code>[root@nginx nginx]# cp nginx.conf{,.bak}  ##先做备份
 
+主要配置： 
+proxy_set_header NWC_TEST $remote_addr;  ##定义日志首部
+location / {
+        root /usr/share/nginx/html;
+        index   index.html index.htm;
+        proxy_pass http://192.168.42.129;
+}
 
-“升序” ：
-list= [1,7,3,9,2,4,5,6,8]
-n = len(list)
+location ~ \.php$ {
+        proxy_pass http://192.168.42.128;
+        index   index.php index.html index.htm;
+}
+</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre><code>http://192.168.1.51/index.php|index.html 能看到.php页面和.html页面的内容和WEB1,WEB2相同表明OK
+</code></pre><h2 id="设置RS的请求报文首部"><a href="#设置RS的请求报文首部" class="headerlink" title="设置RS的请求报文首部"></a>设置RS的请求报文首部</h2><pre><code>在nginx主机上添加
+proxy_set_header NWC_TEST $remote_addr;
 
-for i in range(0, n):
-    min = i
-    for j in range(i + 1, n):
-        if list[j] &lt; list[min]:
-            min = j
-            list[min], list[i] = list[i], list[min]
-print(list)
+利用proxy_set_header指令，设置nginx反代用户请求到后端主机上时，为请求报文添加一个首部，
+首部名称为NWC_TEST,首部对应的值为$remote-addr对应的值，也就是真是客户端IP地址
 
-结果如下：
-PS D:\Software\python_object&gt;
-[1, 2, 4, 5, 6, 3, 8, 7, 9]
-PS D:\Software\python_object&gt;
+修改完nginx服务器，再到后端主机修改日志格式
+LogFormat &quot;%{NWC_TEST}i %h %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%{Referer}i\&quot; \&quot;%{User-Agent}i\&quot;&quot; combined
 </code></pre>]]></content>
       <categories>
-        <category>编程</category>
+        <category>linux</category>
       </categories>
       <tags>
-        <tag>Python</tag>
+        <tag>Nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -731,6 +637,100 @@ root@ubuntu:~#
       <categories>
         <category>Docker</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Python基本排序算法</title>
+    <url>/2019/08/27/Python%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>&emsp;&emsp;本篇主要学习一下Python几种基本算法排序，冒泡排序，选择排序，插入排序，希尔排序，快速排序，堆排序等等。用博客记录一下，方便后面需要的时候过来复习，有新的思路也会慢慢过来修改更新！<br><a id="more"></a></p>
+<h2 id="冒泡法排序"><a href="#冒泡法排序" class="headerlink" title="冒泡法排序"></a><strong>冒泡法排序</strong></h2><p>&emsp;&emsp;冒泡法排序是一种简单的排序算法，它的原理是，重复的遍历要排序的列表，一次比较2个元素，如果他们的排序错误就把他们的位置交换过来，直到没有需要再交换的元素，表明该列表已经排序完成。</p>
+<pre><code>代码如下：
+li=[10,6,4,5,7,9,2,1,3,8]
+for i in range(len(li)-1):        #列表中一共有10个数，两两比较，因此实际次数为9
+    for j in range(len(li)-1-i):  #每次冒泡确认一个最大值，因此只需要n-1冒泡
+        if li[j] &gt; li[j+1]:       #判断前面的数是否大于后面的数
+           li[j],li[j+1] = li[j+1],li[j]  #如果大于则交换位置
+print(li)                                 
+
+处理过程：
+[6, 10, 4, 5, 7, 9, 2, 1, 3, 8]
+[6, 4, 10, 5, 7, 9, 2, 1, 3, 8]
+[6, 4, 5, 10, 7, 9, 2, 1, 3, 8]
+[6, 4, 5, 7, 10, 9, 2, 1, 3, 8]
+[6, 4, 5, 7, 9, 10, 2, 1, 3, 8]
+[6, 4, 5, 7, 9, 2, 10, 1, 3, 8]
+[6, 4, 5, 7, 9, 2, 1, 10, 3, 8]
+[6, 4, 5, 7, 9, 2, 1, 3, 10, 8]
+[6, 4, 5, 7, 9, 2, 1, 3, 8, 10]
+[4, 6, 5, 7, 9, 2, 1, 3, 8, 10]
+[4, 5, 6, 7, 9, 2, 1, 3, 8, 10]
+[4, 5, 6, 7, 2, 9, 1, 3, 8, 10]
+[4, 5, 6, 7, 2, 1, 9, 3, 8, 10]
+[4, 5, 6, 7, 2, 1, 3, 9, 8, 10]
+[4, 5, 6, 7, 2, 1, 3, 8, 9, 10]
+[4, 5, 6, 2, 7, 1, 3, 8, 9, 10]
+[4, 5, 6, 2, 1, 7, 3, 8, 9, 10]
+[4, 5, 6, 2, 1, 3, 7, 8, 9, 10]
+[4, 5, 2, 6, 1, 3, 7, 8, 9, 10]
+[4, 5, 2, 1, 6, 3, 7, 8, 9, 10]
+[4, 5, 2, 1, 3, 6, 7, 8, 9, 10]
+[4, 2, 5, 1, 3, 6, 7, 8, 9, 10]
+[4, 2, 1, 5, 3, 6, 7, 8, 9, 10]
+[4, 2, 1, 3, 5, 6, 7, 8, 9, 10]
+[2, 4, 1, 3, 5, 6, 7, 8, 9, 10]
+[2, 1, 4, 3, 5, 6, 7, 8, 9, 10]
+[2, 1, 3, 4, 5, 6, 7, 8, 9, 10]
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+最后结果：
+PS D:\Software\python_object&gt;  
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+PS D:\Software\python_object&gt;
+</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a><strong>选择排序</strong></h2><p>&emsp;&emsp;选择排序也是简单排序的一种，它的原理是将序列中按最小的元素一个个取出来然后进行排序，直到所有元素排序完毕。结果分为“升序”和“降序”。</p>
+<pre><code>”降序“ ：
+list= [1,7,3,9,2,4,5,6,8]
+n = len(list)
+
+for  i in range(n):
+    max = i
+    for j in range(i+1,n):
+        if list[max] &lt; list[j]:
+            max = j
+
+    if i != max:
+        tmp = list[i]
+        list[i] = list[max]
+        list[max] = tmp
+print(list)
+
+结果如下：
+PS D:\Software\python_object&gt;
+[9, 8, 7, 6, 5, 4, 3, 2, 1]
+PS D:\Software\python_object&gt;
+
+
+“升序” ：
+list= [1,7,3,9,2,4,5,6,8]
+n = len(list)
+
+for i in range(0, n):
+    min = i
+    for j in range(i + 1, n):
+        if list[j] &lt; list[min]:
+            min = j
+            list[min], list[i] = list[i], list[min]
+print(list)
+
+结果如下：
+PS D:\Software\python_object&gt;
+[1, 2, 4, 5, 6, 3, 8, 7, 9]
+PS D:\Software\python_object&gt;
+</code></pre>]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
   </entry>
   <entry>
     <title>创建Docker私有仓库</title>
@@ -1020,6 +1020,23 @@ MariaDB [mysql]&gt; service  mariadb restart
       </tags>
   </entry>
   <entry>
+    <title>Next主题mac Panel代码块特效</title>
+    <url>/2020/05/30/mac%20Panle%E4%BB%A3%E7%A0%81%E5%9D%97%E7%89%B9%E6%95%88/</url>
+    <content><![CDATA[<p>Next自带的几款代码块，感觉不是很好看，查了一下发现了一款Mac Panel代码块特效，听名字就知道和Mac有关。安装完后代码块很像Mac terminal的风格，这个代码块特效很酷，比自带的几款确实要好看太多。。。</p>
+<a id="more"></a>
+<p>在Next主题的Script目录下创建events.js和codeblock.js文件</p>
+<p> events.js添加以下内容：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVASCRIPT"><figure class="iseeu highlight /javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> exec = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec;</div><div class="line"></div><div class="line">hexo.on(<span class="string">'new'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    exec(<span class="string">'open -a MacDown '</span> + data.path);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></div>
+<p>codeblock.js文件添加以下内容：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVASCRIPT"><figure class="iseeu highlight /javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> attributes = [</div><div class="line">  <span class="string">'autocomplete="off"'</span>,</div><div class="line">  <span class="string">'autocorrect="off"'</span>,</div><div class="line">  <span class="string">'autocapitalize="off"'</span>,</div><div class="line">  <span class="string">'spellcheck="false"'</span>,</div><div class="line">  <span class="string">'contenteditable="true"'</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">var</span> attributesStr = attributes.join(<span class="string">' '</span>)</div><div class="line"></div><div class="line">hexo.extend.filter.register(<span class="string">'after_post_render'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">while</span> (<span class="regexp">/&lt;figure class="highlight ([a-zA-Z]+)"&gt;.*?&lt;\/figure&gt;/</span>.test(data.content)) &#123;</div><div class="line">    data.content = data.content.replace(<span class="regexp">/&lt;figure class="highlight ([a-zA-Z]+)"&gt;.*?&lt;\/figure&gt;/</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> language = <span class="built_in">RegExp</span>.$<span class="number">1</span> || <span class="string">'plain'</span></div><div class="line">      <span class="keyword">var</span> lastMatch = <span class="built_in">RegExp</span>.lastMatch</div><div class="line">      lastMatch = lastMatch.replace(<span class="regexp">/&lt;figure class="highlight /</span>, <span class="string">'&lt;figure class="iseeu highlight /'</span>)</div><div class="line">      <span class="keyword">return</span> <span class="string">'&lt;div class="highlight-wrap"'</span> + attributesStr + <span class="string">'data-rel="'</span> + language.toUpperCase() + <span class="string">'"&gt;'</span> + lastMatch + <span class="string">'&lt;/div&gt;'</span></div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> data</div><div class="line">&#125;)</div></pre></td></tr></table></figure></div>
+<p>在next\source\css_common\components\highlight\highlight.styl添加以下内容：<br><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CSS"><figure class="iseeu highlight /css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.highlight-wrap</span><span class="selector-attr">[data-rel]</span> &#123;</div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</div><div class="line">  <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">10px</span> <span class="number">30px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(0,0,0,0.4);</div><div class="line">  <span class="attribute">margin</span>: <span class="number">35px</span> <span class="number">0</span>;</div><div class="line">  ::-webkit-scrollbar &#123;</div><div class="line">    <span class="selector-tag">height</span>: 10<span class="selector-tag">px</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="selector-pseudo">::-webkit-scrollbar-track</span> &#123;</div><div class="line">      <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.3);</div><div class="line">      <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="selector-pseudo">::-webkit-scrollbar-thumb</span> &#123;</div><div class="line">      <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">      <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.5);</div><div class="line">  &#125;</div><div class="line">  &amp;<span class="selector-pseudo">::before</span> &#123;</div><div class="line">    <span class="attribute">color</span>: white;</div><div class="line">    <span class="attribute">content</span>: <span class="built_in">attr</span>(data-rel);</div><div class="line">    <span class="attribute">height</span>: <span class="number">38px</span>;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">38px</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="number">#21252b</span>;</div><div class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">font-family</span>: <span class="string">'Source Sans Pro'</span>, sans-serif;</div><div class="line">    <span class="attribute">font-weight</span>: bold;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">0px</span> <span class="number">80px</span>;</div><div class="line">    <span class="attribute">text-indent</span>: <span class="number">15px</span>;</div><div class="line">    <span class="attribute">float</span>: left;</div><div class="line">  &#125;</div><div class="line">  &amp;<span class="selector-pseudo">::after</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">" "</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">-webkit-border-radius</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="number">#fc625d</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">20px</span>;</div><div class="line">    <span class="attribute">margin-top</span>: <span class="number">13px</span>;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: <span class="number">20px</span> <span class="number">0px</span> <span class="number">#fdbc40</span>, <span class="number">40px</span> <span class="number">0px</span> <span class="number">#35cd4b</span>;</div><div class="line">    <span class="attribute">box-shadow</span>: <span class="number">20px</span> <span class="number">0px</span> <span class="number">#fdbc40</span>, <span class="number">40px</span> <span class="number">0px</span> <span class="number">#35cd4b</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">3</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></div></p>
+<p>修改主题的_config.yml文件，代码高亮为：night eighties<br><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span> cat _config.yml |grep high</div><div class="line">highlight_theme: night eighties</div></pre></td></tr></table></figure></div></p>
+]]></content>
+      <categories>
+        <category>Next</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Centos7 Mysql双主模型</title>
     <url>/2018/03/27/mysql%E5%8F%8C%E4%B8%BB%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<p><strong>Mysql</strong>双主模型可以在一定程度上保证主库的高可用,在一台主库down掉之后,可以在极短的时间内切换到另一台主库上（尽可能减少主库宕机对业务造成的影响），减少了主从同步给线上主库带来的压力；<a id="more"></a></p>
@@ -1104,19 +1121,6 @@ Slave_SQL_Running:YES
       <tags>
         <tag>Mysql双主模型</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Next主题mac Panel代码块特效</title>
-    <url>/2020/05/30/mac%20Panle%E4%BB%A3%E7%A0%81%E5%9D%97%E7%89%B9%E6%95%88/</url>
-    <content><![CDATA[<h2 id="在Next主题的Script目录下创建events-js和codeblock-js文件"><a href="#在Next主题的Script目录下创建events-js和codeblock-js文件" class="headerlink" title="在Next主题的Script目录下创建events.js和codeblock.js文件"></a>在Next主题的Script目录下创建events.js和codeblock.js文件</h2><h2 id="events-js添加以下内容："><a href="#events-js添加以下内容：" class="headerlink" title="events.js添加以下内容："></a>events.js添加以下内容：</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVASCRIPT"><figure class="iseeu highlight /javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> exec = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec;</div><div class="line"></div><div class="line">hexo.on(<span class="string">'new'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    exec(<span class="string">'open -a MacDown '</span> + data.path);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></div>
-<a id="more"></a>
-<h2 id="codeblock-js文件添加以下内容："><a href="#codeblock-js文件添加以下内容：" class="headerlink" title="codeblock.js文件添加以下内容："></a>codeblock.js文件添加以下内容：</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVASCRIPT"><figure class="iseeu highlight /javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> attributes = [</div><div class="line">  <span class="string">'autocomplete="off"'</span>,</div><div class="line">  <span class="string">'autocorrect="off"'</span>,</div><div class="line">  <span class="string">'autocapitalize="off"'</span>,</div><div class="line">  <span class="string">'spellcheck="false"'</span>,</div><div class="line">  <span class="string">'contenteditable="true"'</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">var</span> attributesStr = attributes.join(<span class="string">' '</span>)</div><div class="line"></div><div class="line">hexo.extend.filter.register(<span class="string">'after_post_render'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">  <span class="keyword">while</span> (<span class="regexp">/&lt;figure class="highlight ([a-zA-Z]+)"&gt;.*?&lt;\/figure&gt;/</span>.test(data.content)) &#123;</div><div class="line">    data.content = data.content.replace(<span class="regexp">/&lt;figure class="highlight ([a-zA-Z]+)"&gt;.*?&lt;\/figure&gt;/</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> language = <span class="built_in">RegExp</span>.$<span class="number">1</span> || <span class="string">'plain'</span></div><div class="line">      <span class="keyword">var</span> lastMatch = <span class="built_in">RegExp</span>.lastMatch</div><div class="line">      lastMatch = lastMatch.replace(<span class="regexp">/&lt;figure class="highlight /</span>, <span class="string">'&lt;figure class="iseeu highlight /'</span>)</div><div class="line">      <span class="keyword">return</span> <span class="string">'&lt;div class="highlight-wrap"'</span> + attributesStr + <span class="string">'data-rel="'</span> + language.toUpperCase() + <span class="string">'"&gt;'</span> + lastMatch + <span class="string">'&lt;/div&gt;'</span></div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> data</div><div class="line">&#125;)</div></pre></td></tr></table></figure></div>
-<h2 id="在next-source-css-common-components-highlight-highlight-styl添加以下内容："><a href="#在next-source-css-common-components-highlight-highlight-styl添加以下内容：" class="headerlink" title="在next\source\css_common\components\highlight\highlight.styl添加以下内容："></a>在next\source\css_common\components\highlight\highlight.styl添加以下内容：</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CSS"><figure class="iseeu highlight /css"><table><tr><td class="code"><pre><div class="line"><span class="selector-class">.highlight-wrap</span><span class="selector-attr">[data-rel]</span> &#123;</div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</div><div class="line">  <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">10px</span> <span class="number">30px</span> <span class="number">0px</span> <span class="built_in">rgba</span>(0,0,0,0.4);</div><div class="line">  <span class="attribute">margin</span>: <span class="number">35px</span> <span class="number">0</span>;</div><div class="line">  ::-webkit-scrollbar &#123;</div><div class="line">    <span class="selector-tag">height</span>: 10<span class="selector-tag">px</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="selector-pseudo">::-webkit-scrollbar-track</span> &#123;</div><div class="line">      <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.3);</div><div class="line">      <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="selector-pseudo">::-webkit-scrollbar-thumb</span> &#123;</div><div class="line">      <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">      <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.5);</div><div class="line">  &#125;</div><div class="line">  &amp;<span class="selector-pseudo">::before</span> &#123;</div><div class="line">    <span class="attribute">color</span>: white;</div><div class="line">    <span class="attribute">content</span>: <span class="built_in">attr</span>(data-rel);</div><div class="line">    <span class="attribute">height</span>: <span class="number">38px</span>;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">38px</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="number">#21252b</span>;</div><div class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">font-family</span>: <span class="string">'Source Sans Pro'</span>, sans-serif;</div><div class="line">    <span class="attribute">font-weight</span>: bold;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">0px</span> <span class="number">80px</span>;</div><div class="line">    <span class="attribute">text-indent</span>: <span class="number">15px</span>;</div><div class="line">    <span class="attribute">float</span>: left;</div><div class="line">  &#125;</div><div class="line">  &amp;<span class="selector-pseudo">::after</span> &#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">" "</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">-webkit-border-radius</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="number">#fc625d</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">20px</span>;</div><div class="line">    <span class="attribute">margin-top</span>: <span class="number">13px</span>;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: <span class="number">20px</span> <span class="number">0px</span> <span class="number">#fdbc40</span>, <span class="number">40px</span> <span class="number">0px</span> <span class="number">#35cd4b</span>;</div><div class="line">    <span class="attribute">box-shadow</span>: <span class="number">20px</span> <span class="number">0px</span> <span class="number">#fdbc40</span>, <span class="number">40px</span> <span class="number">0px</span> <span class="number">#35cd4b</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">3</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></div>
-<h2 id="修改主题的-config-yml文件，代码高亮为：night-eighties"><a href="#修改主题的-config-yml文件，代码高亮为：night-eighties" class="headerlink" title="修改主题的_config.yml文件，代码高亮为：night eighties"></a>修改主题的_config.yml文件，代码高亮为：night eighties</h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">$</span> cat _config.yml |grep high</div><div class="line">highlight_theme: night eighties</div></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Next</category>
-      </categories>
   </entry>
   <entry>
     <title>Next主题 Pisces Scheme更改内容区域的宽度</title>
@@ -1880,217 +1884,6 @@ PS D:\Software\python_object&gt; trangles(10)
       </categories>
   </entry>
   <entry>
-    <title>Python学习之第五天</title>
-    <url>/2018/03/27/python%E7%AC%AC%E4%BA%94%E5%A4%A9/</url>
-    <content><![CDATA[<p>最近这段时间，利用业余时间学习了一下Python,写篇博客算是记录一下相关的知识点，方便以后查询，也算做个小总结！</p>
-<p><img src="https://i.imgur.com/RYTHJeH.jpg" alt=""><br><a id="more"></a><br><strong>第五天学习主要类容：模块定义，导入，正则表达式等</strong></p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h2><pre><code>模块：用来从逻辑上组织python代码（变量，函数，类，）
-本质就是.py结尾的python文件（文件名：test.py,对应的模块名：test）
-
-包：用来从逻辑上组织模块的，本质就是一个目录（必须要有一个__init__.py文件）
-</code></pre><h2 id="导入方法"><a href="#导入方法" class="headerlink" title="导入方法"></a><strong>导入方法</strong></h2><pre><code>import module_name
-import module1_name,module2_name
-
-#import module1_name 相当于把整个模块的代码复制给当前一个变量，然后调用
-
-from module_zane frome * #导入module_zane模块的所有，一般不建议这么用 
-from module_zane import m1,m2 #导入module_zane模块的方法
-from module_zane import name as new_name #从module_zane模块下导入一个模块（赋给另一个变量）
-
-#from 相当于只打开了module_name的一个方法
-</code></pre><h2 id="import本质"><a href="#import本质" class="headerlink" title="import本质"></a><strong>import本质</strong></h2><pre><code>导入&quot;模块&quot;的本质就是把python文件解释一遍
-导入&quot;包&quot;的本质就是执行该包下的__init__.py文件）
-
-import sys,os
-print(sys.path)
-
-#print(os.path.abspath(__file__)) #abspath：获取当前文件的绝对路径
-#此时的路径E:/pycharm/s14/day5/module_test/main.py&quot;
-
-x = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#os.path.dirname:获取路径名，这里因为module_test文件在day5路径下，所以要上找两层
-
-sys.path.append(x)  #把获取的路径sys.path
-import module_test
-</code></pre><h2 id="time和datetime模块"><a href="#time和datetime模块" class="headerlink" title="time和datetime模块"></a><strong>time和datetime模块</strong></h2><pre><code>import time     #导入time模块
-time.time()          #获取时间戳
-time.timezone()    #获取时区，中国在东8区
-time.altzone()    #夏令时和UTC(标准时)的差值
-time.daylight()    #是否使用了夏令时
-time.sleep()    #沉睡几秒
-time.gmtime()    #把时间戳转换成元祖，结果是UTC时区
-time.localtime()#把时间戳转换成元祖，结果是本地时区
-time.mktime()   #将元祖转换成时间戳
-time.strftime() #将元祖转换成字符串格式显示（例：time.strftime(&quot;%Y-%m:%d %H:%M:%S&quot;,x)）
-time.strptime() #将字符串转换成元祖形式（time.strptime(&apos;2017-09:06 22:19:00&apos;,&quot;%Y-%m:%d %H:%M:%S&quot;））
-time.astime()   #将元祖转换成字符转形式
-time.ctime()    #将时间戳转换成字符串形式
-
-时间加减：
-import datatime
-print(datetime.datetime.now()) #返回当前时间
-print(datetime.datetime.now() + datetime.timedelta(3)) #当前时间+3天
-print(datetime.datetime.now() + datetime.timedelta(-3)) #当前时间-3天
-print(datetime.datetime.now() + datetime.timedelta(hours=3)) #当前时间+3小时
-print(datetime.datetime.now() + datetime.timedelta(hours+30)) #当前时间+30分钟
-
-c_time = datetime.datetime.now() #当前时间：2017-09-06 22:53:53.191920
-print(c_time.replace(minute=3,hour=2)) #时间替换为：2017-09-06 02:03:53.191920
-</code></pre><h2 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a><strong>random模块</strong></h2><pre><code>import random
-random.random() #0到1之间的随机数
-random.randit(1,3) #生成一个指定范围的整数 
-random.shuffle() #洗牌（例如：i=[1,2,3,4] random.shuffle(i) 输入为：[2,1,4,3）
-random.choice(&apos;afsdsgfd&apos;) #随机字符
-random.sample(&apos;afgagradf&apos;,3) #选取特定数量的字符
-
-练习：生成4位随机数
-import random
-checkcode=&apos;&apos;
-for i in range(4):
-    current=random.randint(1,9)
-        if current ==i:
-                tmp = chr(random.randint(65,90))
-           else:
-    tmp = random.randint(0,9)
-checkcode+=str(tmp)\
-print(checkcode)
-</code></pre><h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a><strong>os模块</strong></h2><pre><code>&quot;os&quot;模块是提供对操作系统进行调用的接口
-import os
-os.getcwd() #获取当前工作目录
-os.chdir(r&quot;C:\User&quot;) #切换目录
-os.curdir  #返回当前目录
-os.pardir  #获取当前目录的父目录
-os.makedirs(r&quot;C:\a\b\c&quot;) #递归创建目录
-os.removedirs(r&quot;C:\a\b\c&quot;) #递归删除目录（如果目录为空则删除上级目录）
-os.mkdir() #创建单级目录
-os.rmdir() #删除单级目录
-os.listdir(r&apos;D:&apos;) #列出D盘下所有文件夹
-os.remove() #删除一个文件
-os.rename(&quot;oldname&quot;,&quot;newname&quot;) #修改文件名
-os.stat(path/filename) #获取文件/目录信息
-os.sep #输出系统路径分隔符
-os.environ #输出当前系统的环境变量
-os.pathsep #输出用于分割文件路径的字符串
-os.system(dir,ipconfig) #执行系统命令
-os.path.abspath() #获取文件的绝对路径
-os.path.split() #将path分割成目录，文件名
-os.path.dirname(r&apos;C:\a\b\test.txt&apos;) #只获取路径（输出结果为：&apos;C:\\a\\b&apos;）
-os.path.basename(r&apos;C:\a\b\test.txt&apos;) #只获取文件名(输出结果为：‘test.txt’)
-os.path.exists(r&apos;D:\a&apos;) #判断路径是否存在（存在返回True,不存在返回False）
-os.path.file(path)  #判断是否为文件
-os.path.dir(path)  #判断是否为目录
-os.path.getatime(path) #获取文件或目录最后的存取时间(返回时间戳)
-os.path.getmtime(path) #获取文件或路径最后的修改时间(返回时间戳)
-</code></pre><h2 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a><strong>sys模块</strong></h2><pre><code>import sys
-sys.argv #命令行参数List，第一个元素是程序本身路径
-sys.exit(n) #程序退出，正常返回&apos;0&apos;,其他返回&apos;1-254&apos;
-sys.version #获取Python版本信息
-sys.path    #返回模块搜索路径
-sys.platform #获取操作系统平台信息
-</code></pre><h2 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a><strong>shutil模块</strong></h2><pre><code>高级的文件，文件夹，压缩包处理模块
-shutil.copyfile(&quot;file_name1&quot;,&quot;file_name2&quot;) #复制文件
-shutil.copytree(&quot;source&quot;,&quot;new_name&quot;) #递归复制文件目录
-shutil.rmtree(&quot;file_name&quot;) #递归删除文件
-shutil.make_archive(&quot;压缩文件名&quot;，“type”,&quot;path&quot;) #压缩文件 (例：shutil.make_archive(&quot;shutil_test&quot;,&quot;gzip&quot;,&quot;D:\test.py&quot;))
-
-json &amp; pickle
-json 把python内存中的数据类型转换成字符串（dumps）,调用（loads）
-pickle 把python特有的类型和python的数据类型进行转换
-</code></pre><h2 id="json序列化"><a href="#json序列化" class="headerlink" title="json序列化"></a><strong>json序列化</strong></h2><pre><code>序列化就是把python对象编码转换成json格式的字符串
-import json
-info = {
-    &apos;name&apos;:&apos;zane&apos;,
-    &apos;age&apos;:22
-}
-f = open(&quot;test.txt&quot;,&apos;w&apos;)
-#print(json.dumps(info))
-
-f.write(json.dumps(info)) #dump序列化
-f.close()
-</code></pre><h2 id="json反序列化"><a href="#json反序列化" class="headerlink" title="json反序列化"></a><strong>json反序列化</strong></h2><pre><code>反序列化就是把json字符串解码转换成python数据对象
-import json
-f = open(&quot;test.txt&quot;,&apos;r&apos;)
-data = json.loads(f.read()) #反序列化loads
-print(data[&quot;age&quot;])
-f.close()
-</code></pre><h2 id="configparser模块"><a href="#configparser模块" class="headerlink" title="configparser模块"></a><strong>configparser模块</strong></h2><pre><code>用于生成和修改常见配置文档
-详情：http://www.cnblogs.com/alex3714/articles/5161349.html
-</code></pre><h2 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a><strong>hashlib模块</strong></h2><pre><code>一般用于加密,python3.0里代替了md5模块和sha模块，主要提供了MD5,SHA1,SHA256,SHA512等算法
-
-import hashlib
-
-# f = hashlib.md5()
-f.update(b&apos;hello&apos;) #b表示byte类型
-f.update(b&apos;world&apos;)
-print(f.digest()) #digest:二进制hash
-print(f.hexdigest()) #hexdigest:十六进制hash
-
-#md5
-hash = hashlib.md5()
-hash.update(b&apos;admin&apos;)
-print(hash.hexdigest())
-
-#sha1
-hash = hashlib.sha1()
-hash.update(b&apos;admin&apos;)
-print(hash.hexdigest())
-
-#sha256
-hash = hashlib.sha256()
-hash.update(b&apos;admin&apos;)
-print(hash.hexdigest())
-
-#sha512
-hash = hashlib.sha512()
-hash.update(b&apos;admin&apos;)
-print(hash.hexdigest())
-</code></pre><h2 id="hmac模块"><a href="#hmac模块" class="headerlink" title="hmac模块"></a><strong>hmac模块</strong></h2><pre><code>它内部对我们创建&quot;key&quot;和&quot;内容&quot;再进行处理然后再加密
-import hmac
-
-f = hmac.new(b&apos;123AVC&apos;,&apos;小鸡炖蘑菇&apos;.encode(encoding=&apos;utf-8&apos;))
-print(f.hexdigest())
-</code></pre><h2 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a><strong>re模块</strong></h2><pre><code>&quot;re&quot;模块一般用于正则表达式匹配
-re.match()      #文本从头开始搜索
-re.search()     #从整个文本开始搜索
-re.findall()    #把所有匹配到的字符放到以列表中的元素返回
-re.splitall()  #以匹配到的字符当作列表分隔符
-re.sub()        #匹配字符并替换(例:将数字替换成|并且只替换前面两个,
-                (re.sub(&quot;[0-9]+&quot;,&quot;|&quot;,&quot;abc12de3f45gh&quot;,count=2)) 结果为:&apos;abc|de|f45gh&apos;)
-
-.         #匹配换行符之外的任意字符
-^         #匹配字符开头
-$         #匹配字符结尾
-+         #匹配前一个字符1次或多次
-?         #匹配前1个字符1次或0次(例:re.search(&quot;aa?&quot;,&quot;aaa123&quot;) 结果为:aa)
-{m}      #匹配前一个字符m次(例：re.search(&quot;[0-9]{3}&quot;,&quot;aa1x2d456&quot;) 结果为456)
-{n,m}     #匹配前一个字符n到m次(例：re.findall(&quot;[0-9]{1,3}&quot;,&quot;aa1x2d456&quot;) 结果为:1,2,456)
-|         #匹配左或|右的字符(例:re.search(&quot;abc|ABC&quot;,&quot;ABCxabcDN&quot;) 结果为:ABC)
-...        #分组匹配
-
-\A        #从字符开头匹配 (例：re.search(&quot;\A[0-9]+[a-z]\Z&quot;,&quot;1234a&quot;) 结果为:1234a)
-\Z        #从字符结尾匹配，同$
-\d        #匹配数字0-9
-\D        #匹配非数字意外的字符(包括特殊字符)
-\w        #匹配字母，数字
-\W        #匹配特殊字符
-\s       #匹配空白字符(例:re.search(&quot;\s+&quot;,&quot;a12gdf \r\n  &quot;) 结果为:\r\n\t)
-
-
-例：
-1,匹配R开头，a结尾字符
-ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)
-2,获取#之间的字符
-123#hello#     #re.search(&quot;#.+#&quot;)
-</code></pre><p>文档详细参考：<a href="http://www.cnblogs.com/alex3714/articles/5161349.html" target="_blank" rel="external">http://www.cnblogs.com/alex3714/articles/5161349.html</a></p>
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python基本数据解构</title>
     <url>/2019/09/08/python02%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<p>&emsp;&emsp;文章主要内容是List，Tuple，Bytes，Bytearray的数据结构相关，包括判断数据类型，数据结构的一些基本增删改查，update,remove,insert,clear等,以及 “浅复制” 和 “深复制” 等知识<a id="more"></a></p>
@@ -2434,6 +2227,217 @@ b&apos;\xe4\xb8\xad\xe5\x9b\xbd&apos;  #将中文解码成bytes
       <categories>
         <category>编程</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Python学习之第五天</title>
+    <url>/2018/03/27/python%E7%AC%AC%E4%BA%94%E5%A4%A9/</url>
+    <content><![CDATA[<p>最近这段时间，利用业余时间学习了一下Python,写篇博客算是记录一下相关的知识点，方便以后查询，也算做个小总结！</p>
+<p><img src="https://i.imgur.com/RYTHJeH.jpg" alt=""><br><a id="more"></a><br><strong>第五天学习主要类容：模块定义，导入，正则表达式等</strong></p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a><strong>定义</strong></h2><pre><code>模块：用来从逻辑上组织python代码（变量，函数，类，）
+本质就是.py结尾的python文件（文件名：test.py,对应的模块名：test）
+
+包：用来从逻辑上组织模块的，本质就是一个目录（必须要有一个__init__.py文件）
+</code></pre><h2 id="导入方法"><a href="#导入方法" class="headerlink" title="导入方法"></a><strong>导入方法</strong></h2><pre><code>import module_name
+import module1_name,module2_name
+
+#import module1_name 相当于把整个模块的代码复制给当前一个变量，然后调用
+
+from module_zane frome * #导入module_zane模块的所有，一般不建议这么用 
+from module_zane import m1,m2 #导入module_zane模块的方法
+from module_zane import name as new_name #从module_zane模块下导入一个模块（赋给另一个变量）
+
+#from 相当于只打开了module_name的一个方法
+</code></pre><h2 id="import本质"><a href="#import本质" class="headerlink" title="import本质"></a><strong>import本质</strong></h2><pre><code>导入&quot;模块&quot;的本质就是把python文件解释一遍
+导入&quot;包&quot;的本质就是执行该包下的__init__.py文件）
+
+import sys,os
+print(sys.path)
+
+#print(os.path.abspath(__file__)) #abspath：获取当前文件的绝对路径
+#此时的路径E:/pycharm/s14/day5/module_test/main.py&quot;
+
+x = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#os.path.dirname:获取路径名，这里因为module_test文件在day5路径下，所以要上找两层
+
+sys.path.append(x)  #把获取的路径sys.path
+import module_test
+</code></pre><h2 id="time和datetime模块"><a href="#time和datetime模块" class="headerlink" title="time和datetime模块"></a><strong>time和datetime模块</strong></h2><pre><code>import time     #导入time模块
+time.time()          #获取时间戳
+time.timezone()    #获取时区，中国在东8区
+time.altzone()    #夏令时和UTC(标准时)的差值
+time.daylight()    #是否使用了夏令时
+time.sleep()    #沉睡几秒
+time.gmtime()    #把时间戳转换成元祖，结果是UTC时区
+time.localtime()#把时间戳转换成元祖，结果是本地时区
+time.mktime()   #将元祖转换成时间戳
+time.strftime() #将元祖转换成字符串格式显示（例：time.strftime(&quot;%Y-%m:%d %H:%M:%S&quot;,x)）
+time.strptime() #将字符串转换成元祖形式（time.strptime(&apos;2017-09:06 22:19:00&apos;,&quot;%Y-%m:%d %H:%M:%S&quot;））
+time.astime()   #将元祖转换成字符转形式
+time.ctime()    #将时间戳转换成字符串形式
+
+时间加减：
+import datatime
+print(datetime.datetime.now()) #返回当前时间
+print(datetime.datetime.now() + datetime.timedelta(3)) #当前时间+3天
+print(datetime.datetime.now() + datetime.timedelta(-3)) #当前时间-3天
+print(datetime.datetime.now() + datetime.timedelta(hours=3)) #当前时间+3小时
+print(datetime.datetime.now() + datetime.timedelta(hours+30)) #当前时间+30分钟
+
+c_time = datetime.datetime.now() #当前时间：2017-09-06 22:53:53.191920
+print(c_time.replace(minute=3,hour=2)) #时间替换为：2017-09-06 02:03:53.191920
+</code></pre><h2 id="random模块"><a href="#random模块" class="headerlink" title="random模块"></a><strong>random模块</strong></h2><pre><code>import random
+random.random() #0到1之间的随机数
+random.randit(1,3) #生成一个指定范围的整数 
+random.shuffle() #洗牌（例如：i=[1,2,3,4] random.shuffle(i) 输入为：[2,1,4,3）
+random.choice(&apos;afsdsgfd&apos;) #随机字符
+random.sample(&apos;afgagradf&apos;,3) #选取特定数量的字符
+
+练习：生成4位随机数
+import random
+checkcode=&apos;&apos;
+for i in range(4):
+    current=random.randint(1,9)
+        if current ==i:
+                tmp = chr(random.randint(65,90))
+           else:
+    tmp = random.randint(0,9)
+checkcode+=str(tmp)\
+print(checkcode)
+</code></pre><h2 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a><strong>os模块</strong></h2><pre><code>&quot;os&quot;模块是提供对操作系统进行调用的接口
+import os
+os.getcwd() #获取当前工作目录
+os.chdir(r&quot;C:\User&quot;) #切换目录
+os.curdir  #返回当前目录
+os.pardir  #获取当前目录的父目录
+os.makedirs(r&quot;C:\a\b\c&quot;) #递归创建目录
+os.removedirs(r&quot;C:\a\b\c&quot;) #递归删除目录（如果目录为空则删除上级目录）
+os.mkdir() #创建单级目录
+os.rmdir() #删除单级目录
+os.listdir(r&apos;D:&apos;) #列出D盘下所有文件夹
+os.remove() #删除一个文件
+os.rename(&quot;oldname&quot;,&quot;newname&quot;) #修改文件名
+os.stat(path/filename) #获取文件/目录信息
+os.sep #输出系统路径分隔符
+os.environ #输出当前系统的环境变量
+os.pathsep #输出用于分割文件路径的字符串
+os.system(dir,ipconfig) #执行系统命令
+os.path.abspath() #获取文件的绝对路径
+os.path.split() #将path分割成目录，文件名
+os.path.dirname(r&apos;C:\a\b\test.txt&apos;) #只获取路径（输出结果为：&apos;C:\\a\\b&apos;）
+os.path.basename(r&apos;C:\a\b\test.txt&apos;) #只获取文件名(输出结果为：‘test.txt’)
+os.path.exists(r&apos;D:\a&apos;) #判断路径是否存在（存在返回True,不存在返回False）
+os.path.file(path)  #判断是否为文件
+os.path.dir(path)  #判断是否为目录
+os.path.getatime(path) #获取文件或目录最后的存取时间(返回时间戳)
+os.path.getmtime(path) #获取文件或路径最后的修改时间(返回时间戳)
+</code></pre><h2 id="sys模块"><a href="#sys模块" class="headerlink" title="sys模块"></a><strong>sys模块</strong></h2><pre><code>import sys
+sys.argv #命令行参数List，第一个元素是程序本身路径
+sys.exit(n) #程序退出，正常返回&apos;0&apos;,其他返回&apos;1-254&apos;
+sys.version #获取Python版本信息
+sys.path    #返回模块搜索路径
+sys.platform #获取操作系统平台信息
+</code></pre><h2 id="shutil模块"><a href="#shutil模块" class="headerlink" title="shutil模块"></a><strong>shutil模块</strong></h2><pre><code>高级的文件，文件夹，压缩包处理模块
+shutil.copyfile(&quot;file_name1&quot;,&quot;file_name2&quot;) #复制文件
+shutil.copytree(&quot;source&quot;,&quot;new_name&quot;) #递归复制文件目录
+shutil.rmtree(&quot;file_name&quot;) #递归删除文件
+shutil.make_archive(&quot;压缩文件名&quot;，“type”,&quot;path&quot;) #压缩文件 (例：shutil.make_archive(&quot;shutil_test&quot;,&quot;gzip&quot;,&quot;D:\test.py&quot;))
+
+json &amp; pickle
+json 把python内存中的数据类型转换成字符串（dumps）,调用（loads）
+pickle 把python特有的类型和python的数据类型进行转换
+</code></pre><h2 id="json序列化"><a href="#json序列化" class="headerlink" title="json序列化"></a><strong>json序列化</strong></h2><pre><code>序列化就是把python对象编码转换成json格式的字符串
+import json
+info = {
+    &apos;name&apos;:&apos;zane&apos;,
+    &apos;age&apos;:22
+}
+f = open(&quot;test.txt&quot;,&apos;w&apos;)
+#print(json.dumps(info))
+
+f.write(json.dumps(info)) #dump序列化
+f.close()
+</code></pre><h2 id="json反序列化"><a href="#json反序列化" class="headerlink" title="json反序列化"></a><strong>json反序列化</strong></h2><pre><code>反序列化就是把json字符串解码转换成python数据对象
+import json
+f = open(&quot;test.txt&quot;,&apos;r&apos;)
+data = json.loads(f.read()) #反序列化loads
+print(data[&quot;age&quot;])
+f.close()
+</code></pre><h2 id="configparser模块"><a href="#configparser模块" class="headerlink" title="configparser模块"></a><strong>configparser模块</strong></h2><pre><code>用于生成和修改常见配置文档
+详情：http://www.cnblogs.com/alex3714/articles/5161349.html
+</code></pre><h2 id="hashlib模块"><a href="#hashlib模块" class="headerlink" title="hashlib模块"></a><strong>hashlib模块</strong></h2><pre><code>一般用于加密,python3.0里代替了md5模块和sha模块，主要提供了MD5,SHA1,SHA256,SHA512等算法
+
+import hashlib
+
+# f = hashlib.md5()
+f.update(b&apos;hello&apos;) #b表示byte类型
+f.update(b&apos;world&apos;)
+print(f.digest()) #digest:二进制hash
+print(f.hexdigest()) #hexdigest:十六进制hash
+
+#md5
+hash = hashlib.md5()
+hash.update(b&apos;admin&apos;)
+print(hash.hexdigest())
+
+#sha1
+hash = hashlib.sha1()
+hash.update(b&apos;admin&apos;)
+print(hash.hexdigest())
+
+#sha256
+hash = hashlib.sha256()
+hash.update(b&apos;admin&apos;)
+print(hash.hexdigest())
+
+#sha512
+hash = hashlib.sha512()
+hash.update(b&apos;admin&apos;)
+print(hash.hexdigest())
+</code></pre><h2 id="hmac模块"><a href="#hmac模块" class="headerlink" title="hmac模块"></a><strong>hmac模块</strong></h2><pre><code>它内部对我们创建&quot;key&quot;和&quot;内容&quot;再进行处理然后再加密
+import hmac
+
+f = hmac.new(b&apos;123AVC&apos;,&apos;小鸡炖蘑菇&apos;.encode(encoding=&apos;utf-8&apos;))
+print(f.hexdigest())
+</code></pre><h2 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a><strong>re模块</strong></h2><pre><code>&quot;re&quot;模块一般用于正则表达式匹配
+re.match()      #文本从头开始搜索
+re.search()     #从整个文本开始搜索
+re.findall()    #把所有匹配到的字符放到以列表中的元素返回
+re.splitall()  #以匹配到的字符当作列表分隔符
+re.sub()        #匹配字符并替换(例:将数字替换成|并且只替换前面两个,
+                (re.sub(&quot;[0-9]+&quot;,&quot;|&quot;,&quot;abc12de3f45gh&quot;,count=2)) 结果为:&apos;abc|de|f45gh&apos;)
+
+.         #匹配换行符之外的任意字符
+^         #匹配字符开头
+$         #匹配字符结尾
++         #匹配前一个字符1次或多次
+?         #匹配前1个字符1次或0次(例:re.search(&quot;aa?&quot;,&quot;aaa123&quot;) 结果为:aa)
+{m}      #匹配前一个字符m次(例：re.search(&quot;[0-9]{3}&quot;,&quot;aa1x2d456&quot;) 结果为456)
+{n,m}     #匹配前一个字符n到m次(例：re.findall(&quot;[0-9]{1,3}&quot;,&quot;aa1x2d456&quot;) 结果为:1,2,456)
+|         #匹配左或|右的字符(例:re.search(&quot;abc|ABC&quot;,&quot;ABCxabcDN&quot;) 结果为:ABC)
+...        #分组匹配
+
+\A        #从字符开头匹配 (例：re.search(&quot;\A[0-9]+[a-z]\Z&quot;,&quot;1234a&quot;) 结果为:1234a)
+\Z        #从字符结尾匹配，同$
+\d        #匹配数字0-9
+\D        #匹配非数字意外的字符(包括特殊字符)
+\w        #匹配字母，数字
+\W        #匹配特殊字符
+\s       #匹配空白字符(例:re.search(&quot;\s+&quot;,&quot;a12gdf \r\n  &quot;) 结果为:\r\n\t)
+
+
+例：
+1,匹配R开头，a结尾字符
+ChenRonghua123  #re.search(&quot;R[a-z]+a&quot;)
+2,获取#之间的字符
+123#hello#     #re.search(&quot;#.+#&quot;)
+</code></pre><p>文档详细参考：<a href="http://www.cnblogs.com/alex3714/articles/5161349.html" target="_blank" rel="external">http://www.cnblogs.com/alex3714/articles/5161349.html</a></p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
   </entry>
   <entry>
     <title>Centos7 Jdk+Tomcat的安装</title>
